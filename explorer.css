@@ -1,0 +1,22 @@
+
+
+.field_label {
+	font-weight: bold
+
+}
+
+.row {
+	/* border: 1px solid #000000; */
+}
+
+.col-md-4 {
+	/*border: 1px solid #aacc00;	*/
+}
+
+header {
+	font-size: 16pt;
+}
+
+section {
+	margin-top: 10px;
+}

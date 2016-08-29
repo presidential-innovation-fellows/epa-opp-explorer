@@ -1,0 +1,14 @@
+Writing PID to tmp/pids/thin.0.pid
+Changing process privilege to www-data:www-data
+Exiting!
+/usr/local/lib/ruby/gems/2.3.0/gems/thin-1.6.4/lib/thin/daemonizing.rb:70:in `getpwnam': can't find user for www-data (ArgumentError)
+	from /usr/local/lib/ruby/gems/2.3.0/gems/thin-1.6.4/lib/thin/daemonizing.rb:70:in `change_privilege'
+	from /usr/local/lib/ruby/gems/2.3.0/gems/thin-1.6.4/lib/thin/controllers/controller.rb:67:in `start'
+	from /usr/local/lib/ruby/gems/2.3.0/gems/thin-1.6.4/lib/thin/runner.rb:200:in `run_command'
+	from /usr/local/lib/ruby/gems/2.3.0/gems/thin-1.6.4/lib/thin/runner.rb:156:in `run!'
+	from /usr/local/lib/ruby/gems/2.3.0/gems/thin-1.6.4/bin/thin:6:in `<top (required)>'
+	from /usr/local/bin/thin:23:in `load'
+	from /usr/local/bin/thin:23:in `<main>'
+Writing PID to tmp/pids/thin.0.pid
+No adapter found for /Users/ben/pif/opp-explorer
+Exiting!
