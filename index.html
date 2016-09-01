@@ -51,30 +51,40 @@ console. log ("title:" + documentResults.entries["0"].content.properties.object_
 
 $( document ).ready(function() {
     
+    function loadSearch(){
+    	//clear out search results
+    	$("#study_tiles").empty();
 
-	console.log (documentResults);
-	console.log("begin iteration");
-
-	$.each( documentResults.entries, function( index, value ) {
+    	console.log('hi');
+		$.each( documentResults.entries, function( index, value ) {
 	  	//console.log("object name: " + value.content.properties["object_name"]);
 	  	//console.log("title: " + value.content.properties["title"]);
 
-		var ul = document.getElementById("study_tiles");
-	    var li = document.createElement("li");
-	    var div = $("<div>Object Name:" + value.content.properties["object_name"] + "</div>");
-	   	$(li).append(div);
-	    div = $("<div>Object ID:" + value.content.properties["r_object_id"] + "</div>");
-	   	$(li).append(div);
+			var ul = document.getElementById("study_tiles");
+		    var li = document.createElement("li");
+		    var div = $("<div>Object Name:" + value.content.properties["object_name"] + "</div>");
+		   	$(li).append(div);
+		    div = $("<div>Object ID:" + value.content.properties["r_object_id"] + "</div>");
+		   	$(li).append(div);
+		   	$(li).toggle("highlight");
+			$(li).toggle("highlight");
+
+		    //var children = ul.children.length + 1
+		    li.setAttribute("id", "item_" + value.content.properties["r_object_id"]);
+
+	 	    ul.appendChild(li);
+
+		});    
+
+    	console.log (documentResults);
+    };
+
+	
 
 
-	    //var children = ul.children.length + 1
-	    li.setAttribute("id", "item_" + value.content.properties["r_object_id"]);
 
-	    //li.appendChild(document.createTextNode("Object ID:" + value.content.properties["r_object_id"]));
-	    ul.appendChild(li);
 
-	  //console.log( index + ": " + value );
-	});    
+	$("#search_click").click(loadSearch);  
 
 });
 
@@ -157,10 +167,11 @@ $( document ).ready(function() {
 		</header>
 		<div class="row">
 			<div class="col-md-12">
-				<form class="form-inline">
+				<form class="form-inline" id="study_search">
   					<div class="form-group">
     					<label for="exampleInputName2">MRID</label><br>
     					<input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+  						<input id="search_click" type="button" class="btn btn-default" value="search">
   					</div>
   				</form>
 			</div>
