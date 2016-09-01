@@ -4,18 +4,30 @@
 <html>
 <head>
 
+<!-- 
+
+0. Create ui with input box for MRID
+1. create javascript include file with object for dsql query results
+2. instantiate that as a load object, into the page - like from API. 
+3. based restful results - display result
+
+-->
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Latest compiled and minified CSS
 <link rel="stylesheet" href="bootstrap-3.3.6-dist/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-<link rel="stylesheet" href="explorer.css">
+
 
 <link rel="stylesheet" href="bootstrap-3.3.6-dist/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
 
 <script src="bootstrap-3.3.6-dist/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 -->
+<link rel="stylesheet" href="explorer.css">
+
+<script   src="https://code.jquery.com/jquery-3.1.0.js"   integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk="   crossorigin="anonymous"></script>
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -25,6 +37,50 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="search_result.js" type="text/javascript">
+
+</script>
+
+
+<script type="text/javascript">
+
+
+
+console. log ("title:" + documentResults.entries["0"].content.properties.object_name)
+
+$( document ).ready(function() {
+    
+
+	console.log (documentResults);
+	console.log("begin iteration");
+
+	$.each( documentResults.entries, function( index, value ) {
+	  	//console.log("object name: " + value.content.properties["object_name"]);
+	  	//console.log("title: " + value.content.properties["title"]);
+
+		var ul = document.getElementById("study_tiles");
+	    var li = document.createElement("li");
+	    var div = $("<div>Object Name:" + value.content.properties["object_name"] + "</div>");
+	   	$(li).append(div);
+	    div = $("<div>Object ID:" + value.content.properties["r_object_id"] + "</div>");
+	   	$(li).append(div);
+
+
+	    //var children = ul.children.length + 1
+	    li.setAttribute("id", "item_" + value.content.properties["r_object_id"]);
+
+	    //li.appendChild(document.createTextNode("Object ID:" + value.content.properties["r_object_id"]));
+	    ul.appendChild(li);
+
+	  //console.log( index + ": " + value );
+	});    
+
+});
+
+</script>
+
+
 </head>
 
 
@@ -32,71 +88,99 @@
 
 <div class="container">
 
-<section id="product_header">
- <div class="row">
- 	<div class="col-md-4 field_label">
- 		Registration Name:
- 	</div>
- 	<div class="col-md-8">
- 		<div>
- 			Formula Batman Herbicide
- 		</div>
- 	</div>
- </div>
+	<section id="product_header">
+	 <div class="row">
+	 	<div class="col-md-12 h2">
+	 		Formula Batman Herbicide
 
- <div class="row">
- 	<div class="col-md-4 field_label">
- 		Registration #:
- 	</div>
- 	<div class="col-md-8">
- 		<div>
- 			60019-1
- 		</div>
- 	</div>
- </div>
 
- <div class="row">
- 	<div class="col-md-4 field_label">
- 		Company:
- 	</div>
- 	<div class="col-md-8">
- 		<div>
- 			73446 - Marvel Industries
- 		</div>
- 	</div>
- </div>
- <div class="row">
- 	<div class="col-md-4 field_label">
- 		Current Status:
- 	</div>
- 	<div class="col-md-8">
- 		<div>
- 			xxxx
- 		</div>
- 	</div>
- </div>
- <div class="row">
- 	<div class="col-md-4 field_label">
- 		Restricted Use:
- 	</div>
- 	<div class="col-md-8">
- 		<div>
- 			xxx
- 		</div>
- 	</div>
- </div>
+	 	</div>
+	 </div>
 
-</section> 
+	 <div class="row">
+	 	<div class="col-md-4 field_label">
+	 		Registration #:
+	 	</div>
+	 	<div class="col-md-8">
+	 		<div>
+	 			60019-1
+	 		</div>
+	 	</div>
+	 </div>
 
-<section id="active_ingredients">
-	<header>
-		Active Ingredients
-	</header>
-</section>
+	 <div class="row">
+	 	<div class="col-md-4 field_label">
+	 		Company:
+	 	</div>
+	 	<div class="col-md-8">
+	 		<div>
+	 			73446 - Marvel Industries
+	 		</div>
+	 	</div>
+	 </div>
+	 <div class="row">
+	 	<div class="col-md-4 field_label">
+	 		Current Status:
+	 	</div>
+	 	<div class="col-md-8">
+	 		<div>
+	 			xxxx
+	 		</div>
+	 	</div>
+	 </div>
+	 <div class="row">
+	 	<div class="col-md-4 field_label">
+	 		Restricted Use:
+	 	</div>
+	 	<div class="col-md-8">
+	 		<div>
+	 			xxx
+	 		</div>
+	 	</div>
+	 </div>
+
+	</section> 
+
+	<section id="active_ingredients">
+		<header>
+			<h2>
+			Active Ingredients
+			</h2>
+		</header>
+	</section>
+
+	<section id="studies">
+		<header>
+			<h2>
+			Studies
+		</h2>
+		</header>
+		<div class="row">
+			<div class="col-md-12">
+				<form class="form-inline">
+  					<div class="form-group">
+    					<label for="exampleInputName2">MRID</label><br>
+    					<input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+  					</div>
+  				</form>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<ul id="study_tiles">
+
+				</ul>
+			<div>
+		</div>
+	</section>
+
+
+
 
 </div>
 
-
+<!-- Studies -->
 
 
 

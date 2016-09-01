@@ -13,10 +13,26 @@
 	/*border: 1px solid #aacc00;	*/
 }
 
-header {
-	font-size: 16pt;
-}
-
 section {
 	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+.study-result {
+	
+}
+
+#study_tiles {
+	list-style-type: none;
+	display: inline-block;
+
+}
+
+#study_tiles li {
+	border: 4px solid #cccccc;
+	border-radius: 4px;
+	margin-left: 15px;
+	float: left;
+	width: 200px;
+	margin-bottom: 10px;
 }
