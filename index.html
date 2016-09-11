@@ -1,20 +1,20 @@
 
-
+<!DOCTYPE html>
 
 <html>
 <head>
 
 <!-- 
 
-0. Create ui with input box for MRID
-1. create javascript include file with object for dsql query results
-2. instantiate that as a load object, into the page - like from API. 
-3. based restful results - display result
+NEXT TODO:
+
+1) For each object, fetch and return primary contents link and display the actual download link. Need to look at DQL way to do this in 1 query, or iteratively do separate AJAX calls to get the collection.  
+2) 
 
 -->
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Latest compiled and minified CSS
 <link rel="stylesheet" href="bootstrap-3.3.6-dist/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
@@ -38,25 +38,31 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-<script src="search_result.js" type="text/javascript">
+<script src="api_search.js" type="text/javascript">
 
 </script>
 
 
 <script type="text/javascript">
 
+	docRes = null; 	
 
 
-console. log ("title:" + documentResults.entries["0"].content.properties.object_name)
 
 $( document ).ready(function() {
     
+
+
     function loadSearch(){
+
+
     	//clear out search results
     	$("#study_tiles").empty();
 
-    	console.log('hi');
-		$.each( documentResults.entries, function( index, value ) {
+    	fetchAPI();
+
+
+		$.each( docRes.entries, function( index, value ) {
 	  	//console.log("object name: " + value.content.properties["object_name"]);
 	  	//console.log("title: " + value.content.properties["title"]);
 
@@ -170,8 +176,8 @@ $( document ).ready(function() {
 			<div class="col-md-12">
 				<form class="form-inline" id="study_search">
   					<div class="form-group">
-    					<label for="exampleInputName2">MRID</label><br>
-    					<input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+    					<label for="mrid">MRID</label><br>
+    					<input type="text" class="form-control" id="mrid" placeholder="47464600" value="47464600">
   						<input id="search_click" type="button" class="btn btn-default" value="search">
   					</div>
   				</form>
