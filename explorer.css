@@ -5,6 +5,9 @@
 
 }
 
+#product_header {
+	display:none;
+}
 .row {
 	/* border: 1px solid #000000; */
 }
@@ -25,6 +28,8 @@ section {
 #study_tiles {
 	list-style-type: none;
 	display: inline-block;
+	padding-left: 0px;
+	margin-top: 20px;
 
 }
 
@@ -35,6 +40,31 @@ section {
 	float: left;
 	width: 200px;
 	margin-bottom: 10px;
+	padding: 10px;
+	width: 250px;
+	height: 170px;
 
 
+}
+
+.reg_num {
+
+	color: #2222aa;
+}
+
+.minor_text {
+
+	color: #cacaca;
+}
+
+.download {
+	vertical-align: bottom;
+	font-size: 16pt;
+	color: #cccccc;
+	margin-top: 10px;
+
+}
+
+.doc_name {
+	height: 50px;
 }

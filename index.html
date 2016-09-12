@@ -5,7 +5,7 @@
 <head>
 
 <!-- 
-
+	
 NEXT TODO:
 
 1) For each object, fetch and return primary contents link and display the actual download link. Need to look at DQL way to do this in 1 query, or iteratively do separate AJAX calls to get the collection.  
@@ -46,6 +46,7 @@ NEXT TODO:
 <script type="text/javascript">
 
 	docRes = null; 	
+	docArray = [];
 
 
 
@@ -61,29 +62,13 @@ $( document ).ready(function() {
 
     	fetchAPI();
 
+  
 
-		$.each( docRes.entries, function( index, value ) {
-	  	//console.log("object name: " + value.content.properties["object_name"]);
-	  	//console.log("title: " + value.content.properties["title"]);
 
-			var ul = document.getElementById("study_tiles");
-		    var li = document.createElement("li");
-		    var div = $("<div>Object Name:" + value.content.properties["object_name"] + "</div>");
-		   	$(li).append(div);
-		    div = $("<div>Object ID:" + value.content.properties["r_object_id"] + "</div>");
-		   	$(li).append(div);
-		   	$(li).hide();
-		   	
-			$(li).toggle("highlight");
 
-		    //var children = ul.children.length + 1
-		    li.setAttribute("id", "item_" + value.content.properties["r_object_id"]);
+    	console.log (docRes);
+    	console.log(docArray);
 
-	 	    ul.appendChild(li);
-
-		});    
-
-    	console.log (documentResults);
     };
 
 	
@@ -158,26 +143,19 @@ $( document ).ready(function() {
 
 	</section> 
 
-	<section id="active_ingredients">
-		<header>
-			<h2>
-			Active Ingredients
-			</h2>
-		</header>
-	</section>
 
-	<section id="studies">
+	<section id="documents">
 		<header>
 			<h2>
-			Studies
+			Document Library 
 		</h2>
 		</header>
 		<div class="row">
 			<div class="col-md-12">
 				<form class="form-inline" id="study_search">
   					<div class="form-group">
-    					<label for="mrid">MRID</label><br>
-    					<input type="text" class="form-control" id="mrid" placeholder="47464600" value="47464600">
+    					<label for="mrid">Registration # / Admin #</label><br>
+    					<input type="text" class="form-control" id="admin_num">
   						<input id="search_click" type="button" class="btn btn-default" value="search">
   					</div>
   				</form>
