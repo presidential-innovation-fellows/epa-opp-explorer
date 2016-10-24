@@ -6,8 +6,8 @@ function fetchAPI() {
 
 	var admin_num_value = $('#admin_num').val();
 	
-	//var url = "https://w2032pcctr584.aa.ad.epa.gov/dctm-rest/repositories/prismenvdev6.json";
-	var url = "https://dcoppdoctstw01.epa.gov/dctm-rest/repositories/prismtest.json";
+	var url = "https://w2032pcctr584.aa.ad.epa.gov/dctm-rest/repositories/prismenvdev6.json";
+	//var url = "https://dcoppdoctstw01.epa.gov/dctm-rest/repositories/prismtest.json";
 
 	//var dql_string_1 = "select r_object_id,object_name,title,r_creator_name,r_object_type from opp_study WHERE r_object_type='opp_study' and ANY mrid in ('" + mrid_value + "')";
 
@@ -24,7 +24,8 @@ function fetchAPI() {
       	withCredentials: true
       },
       success: function (data, status, jqXHR){
-    	
+
+		temp = 1;    	
     	console.log ("title:" + data.entries["0"].content.properties.object_name);
     	docRes = data;
     	console.log(docRes);
