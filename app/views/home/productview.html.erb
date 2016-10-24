@@ -31,6 +31,7 @@
 <script type="text/javascript">
 
     api_url = "<%= ENV['OPP_API_URL'] %>";
+    product_data = 1;
 
     $( document ).ready(function() {
 
@@ -65,7 +66,7 @@
 
     <div class="container">
 
-    <section id="documents">
+    <section id="reg_search">
         <header>
             <h2>
             Product View 
@@ -92,9 +93,9 @@
         </div>
     </section>
 
-    <section id="product_header">
+    <section id="product_header1">
      <div class="row">
-        <div class="col-md-12 h2">
+        <div class="col-md-12 h3" id="ri_name">
             Formula Batman Herbicide
        </div>
      </div>
@@ -104,7 +105,7 @@
             Registration #:
         </div>
         <div class="col-md-8">
-            <div>
+            <div id="ri_number">
                 60019-1
             </div>
         </div>
@@ -112,11 +113,11 @@
 
      <div class="row">
         <div class="col-md-4 field_label">
-            Company:
+            Registration Type:
         </div>
         <div class="col-md-8">
-            <div>
-                73446 - Marvel Industries
+            <div id="ri_type">
+                blah
             </div>
         </div>
      </div>
@@ -125,21 +126,55 @@
             Current Status:
         </div>
         <div class="col-md-8">
-            <div>
+            <div id="ri_status">
                 xxxx
             </div>
         </div>
      </div>
+
      <div class="row">
         <div class="col-md-4 field_label">
-            Restricted Use:
+            Company:
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8" id="co_name">
             <div>
-                xxx
+                73446 - Marvel Industries
             </div>
         </div>
      </div>
-    </div>
+     </section>
+
+     <section id="decisions">
+         <div class="row">
+            <table id="decision_history">
+                <tr>
+                    ***** NEXT - do this table as a table *****
+                </tr>
+            </table>
+            <div class="col-md-2">
+                Decision #                
+            </div>
+            <div class="col-md-2">
+                Action Code
+            </div>
+            <div class="col-md-2">
+                Reviewed By
+            </div>
+            <div class="col-md-2">
+                Response Code
+            </div>
+            <div class="col-md-2">
+                Date
+            </div>
+            <div class="col-md-2">
+                Response Code
+            </div>
+
+
+         </div>
+
+     </section>
+
+    </div><!-- container -->
 
 </body>

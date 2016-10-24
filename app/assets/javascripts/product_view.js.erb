@@ -12,15 +12,11 @@ function get_product() {
 	  type: "get",
 	  url: url,
       crossDomain: true,
-      //xhrFields: {
-      	//withCredentials: true
-      //},
-      success: function (data, status, jqXHR){
+      success: function (data){
     	
-    	var i = 1;
-
-    	loadProduct(data);
-    	}
+    	product_data = data[0];
+    	loadProduct();
+      }
 
 	});
 
@@ -28,8 +24,16 @@ function get_product() {
 	
 
   
-function loadTiles() {
+function loadProduct() {
 
+	var tempData = product_data;
+	$('#ri_name').html(tempData.rin_name);
+	$('#ri_number').html(tempData.ri_num);
+	//$('#ri_type').html(tempData.rist_name);
+	$('#co_name').html(tempData.co_name);
+	$('#ri_status').html(tempData.rist_name);
+
+	return;
 	$.each( docRes.entries, function( index, value ) {
   	//console.log("object name: " + value.content.properties["object_name"]);
   	//console.log("title: " + value.content.properties["title"]);
