@@ -16,7 +16,6 @@
 
 <script src="bootstrap-3.3.6-dist/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 -->
-<link rel="stylesheet" href="explorer.css">
 
 <script   src="https://code.jquery.com/jquery-3.1.0.js"   integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk="   crossorigin="anonymous"></script>
 
@@ -29,14 +28,30 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-</script>
-
-
 <script type="text/javascript">
 
-
+    api_url = "<%= ENV['OPP_API_URL'] %>";
 
     $( document ).ready(function() {
+
+        //search on products hits  /products/:puid (or reg num)
+        //returns JSON of product endpoint
+        //updates the UI with fields
+        //same time, hits /decisions/:puid (or reg num)
+        //returns JSON of all decisions
+        //update UI
+
+        function loadSearch(){
+
+            //clear out search results
+            //$("#study_tiles").empty();
+
+            get_product();
+
+        };
+
+        $("#search_click").click(loadSearch);  
+
 
     });
 
@@ -50,13 +65,81 @@
 
     <div class="container">
 
-    	<section id="prototypes">
-           <ul>
-                <li><%= link_to("Document Library",home_documentlibrary_path )%></li>
-                <li><a href="">RD: Product View</a></li>
-            
-           </ul>
-        </section>
+    <section id="documents">
+        <header>
+            <h2>
+            Product View 
+            </h2>
+        </header>
+        <div class="row">
+            <div class="col-md-12">
+                <form class="form-inline" id="product_search">
+                    <div class="form-group">
+                        <label for="mrid">Registration #</label><br>
+                        <input type="text" class="form-control" id="ri_num">
+                        <input id="search_click" type="button" class="btn btn-default" value="search">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <ul id="study_tiles">
+
+                </ul>
+            <div>
+        </div>
+    </section>
+
+    <section id="product_header">
+     <div class="row">
+        <div class="col-md-12 h2">
+            Formula Batman Herbicide
+       </div>
+     </div>
+
+     <div class="row">
+        <div class="col-md-4 field_label">
+            Registration #:
+        </div>
+        <div class="col-md-8">
+            <div>
+                60019-1
+            </div>
+        </div>
+     </div>
+
+     <div class="row">
+        <div class="col-md-4 field_label">
+            Company:
+        </div>
+        <div class="col-md-8">
+            <div>
+                73446 - Marvel Industries
+            </div>
+        </div>
+     </div>
+     <div class="row">
+        <div class="col-md-4 field_label">
+            Current Status:
+        </div>
+        <div class="col-md-8">
+            <div>
+                xxxx
+            </div>
+        </div>
+     </div>
+     <div class="row">
+        <div class="col-md-4 field_label">
+            Restricted Use:
+        </div>
+        <div class="col-md-8">
+            <div>
+                xxx
+            </div>
+        </div>
+     </div>
     </div>
 
 </body>
