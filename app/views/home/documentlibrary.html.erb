@@ -25,7 +25,11 @@ NEXT TODO:
 
 <script src="bootstrap-3.3.6-dist/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 -->
-<link rel="stylesheet" href="explorer.css">
+
+<%= javascript_include_tag "application" %>
+<%= stylesheet_link_tag "application" %>
+
+<!-- <link rel="stylesheet" href="explorer.css"> -->
 
 <script   src="https://code.jquery.com/jquery-3.1.0.js"   integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk="   crossorigin="anonymous"></script>
 
@@ -38,7 +42,9 @@ NEXT TODO:
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-<script src="api_search.js" type="text/javascript">
+<!--
+<script src="/app/assets/javascripts/api_search.js" type="text/javascript">
+-->
 
 </script>
 
@@ -51,30 +57,18 @@ NEXT TODO:
 
 
 $( document ).ready(function() {
-    
-
-
+ 
     function loadSearch(){
-
 
     	//clear out search results
     	$("#study_tiles").empty();
 
     	fetchAPI();
 
-  
-
-
-
     	console.log (docRes);
     	console.log(docArray);
 
     };
-
-	
-
-
-
 
 	$("#search_click").click(loadSearch);  
 
