@@ -6,8 +6,12 @@ function fetchAPI() {
 
 	var admin_num_value = $('#admin_num').val();
 	
-	var url = "https://w2032pcctr584.aa.ad.epa.gov/dctm-rest/repositories/prismenvdev6.json";
-	//var url = "https://dcoppdoctstw01.epa.gov/dctm-rest/repositories/prismtest.json";
+	var url = "<%= ENV['DOCUMENTUM_TEST_URL'] %>" + ".json"
+	//var url = "https://w2032pcctr584.aa.ad.epa.gov/dctm-rest/repositories/prismenvdev6.json";
+
+	//"https:BBw2032pcctr584.aa.ad.epa.gov/dctm-rest/repositories/prismenvdev6.json";
+	
+	//var url = "https:BBdcoppdoctstw01.epa.gov/dctm-rest/repositories/prismtest.json";
 
 	//var dql_string_1 = "select r_object_id,object_name,title,r_creator_name,r_object_type from opp_study WHERE r_object_type='opp_study' and ANY mrid in ('" + mrid_value + "')";
 
@@ -28,7 +32,7 @@ function fetchAPI() {
 		temp = 1;    	
     	console.log ("title:" + data.entries["0"].content.properties.object_name);
     	docRes = data;
-    	console.log(docRes);
+    	console.log("DocRes" + docRes);
     	var i = 1;
     	loadTiles();
     	}
@@ -83,8 +87,12 @@ function fetchDocumentContent(object_id) {
 
 	//var url = "https://w2032pcctr584.aa.ad.epa.gov/dctm-rest/repositories/prismenvdev6/objects/" + object_id + ".json";
 
-	var url = "https://dcoppdoctstw01.epa.gov/dctm-rest/repositories/prismtest/objects/" + object_id + "/contents/content.json"
+	var url = "<%= ENV['DOCUMENTUM_TEST_URL'] %>" + "/objects/" + object_id + "/contents/content.json"
+	//var url = "https://w2032pcctr584.aa.ad.epa.gov/dctm-rest/repositories/prismenvdev6/objects/" + object_id + "/contents/content.json"
 
+	//var url = "https://dcoppdoctstw01.epa.gov/dctm-rest/repositories/prismtest/objects/" + object_id + "/contents/content.json"
+
+	//"https://w2032pcctr584.aa.ad.epa.gov/dctm-rest/repositories/prismenvdev6.json";
 	$.ajax({
 	  type: "get",
 	  url: url,
@@ -100,7 +108,7 @@ function fetchDocumentContent(object_id) {
   			return n.rel == "enclosure";
 		});
 
-    	console.log("#down_" + data.properties.r_object_id);
+    	console.log("#down_" + data.properties.r_object_id + ",link: " + enclosure[0].href);
     	//console.log(enclosure[0].href);
     	$("#down_" + data.properties.parent_id[0]).attr("href",enclosure[0].href);
 

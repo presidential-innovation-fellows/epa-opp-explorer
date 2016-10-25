@@ -72,34 +72,4 @@ function loadProduct() {
 };
 
 
-function fetchDocumentContent(object_id) {
-
-	//var url = "https://w2032pcctr584.aa.ad.epa.gov/dctm-rest/repositories/prismenvdev6/objects/" + object_id + ".json";
-
-	var url = "https://dcoppdoctstw01.epa.gov/dctm-rest/repositories/prismtest/objects/" + object_id + "/contents/content.json"
-
-	$.ajax({
-	  type: "get",
-	  url: url,
-      crossDomain: true,
-      xhrFields: {
-      	withCredentials: true
-      },
-      success: function (data){
-    	
-    	//console.log(data);
-    	//check for and retrieve object with rel='enclosure'
-    	var enclosure = $.grep( data.links, function( n, i ) {
-  			return n.rel == "enclosure";
-		});
-
-    	console.log("#down_" + data.properties.r_object_id);
-    	//console.log(enclosure[0].href);
-    	$("#down_" + data.properties.parent_id[0]).attr("href",enclosure[0].href);
-
-      }
-
-	});//end of .ajax
-
-};
 

@@ -13,4 +13,6 @@
  *= require_tree .
  *= require_self
  *= require explorer
+ *= require bootstrap
+ *= require bootstrap-theme
  */
