@@ -12,7 +12,8 @@
  *
  *= require_tree .
  *= require_self
- *= require explorer
  *= require bootstrap
  *= require bootstrap-theme
+ *= require explorer
+ *= require productview
  */

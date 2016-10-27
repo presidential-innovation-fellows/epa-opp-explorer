@@ -6,30 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<!-- Latest compiled and minified CSS
-<link rel="stylesheet" href="bootstrap-3.3.6-dist/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-
-
-<link rel="stylesheet" href="bootstrap-3.3.6-dist/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-
-
-<script src="bootstrap-3.3.6-dist/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
--->
-<link rel="stylesheet" href="explorer.css">
-
-<script   src="https://code.jquery.com/jquery-3.1.0.js"   integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk="   crossorigin="anonymous"></script>
-
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-</script>
+<%= javascript_include_tag "application" %>
+<%= stylesheet_link_tag "application" %>
 
 
 <script type="text/javascript">
@@ -52,9 +31,13 @@
 
     	<section id="prototypes">
            <ul>
-                <li><%= link_to("Document Library",home_documentlibrary_path )%></li>
-                <li><%= link_to("Product View",home_productview_path )%></li>
-            
+                <li><%= link_to("Document Library",home_documentlibrary_path, target: "_blank" )%></li>
+                <li><%= link_to("Product View",home_productview_path, target: "_blank" )%></li>
+                <li><%= link_to("Decision API",ENV['OPP_API_URL'] + ":3000/decisions/4822-562", target: "_blank")%></li>            
+                <li><%= link_to("Product API",ENV['OPP_API_URL'] + ":3000/products/4822-562", target: "_blank")%></li>            
+                <li>Documentum</li>
+                <li><a href ="https://w2032pcctr584.aa.ad.epa.gov/dctm-rest/repositories/prismenvdev6/cabinets.json" target="_blank">List of cabinets in DEV documentum</a></li>
+                <li><a href="https://dcoppdoctstw01.epa.gov/dctm-rest/repositories/prismtest/objects/0901635b8001a68c/contents/content.json">File contents (enclosure) for a study (doctype opp_study) pass #r_object_id of the actual study object. </a></li>
            </ul>
         </section>
     </div>

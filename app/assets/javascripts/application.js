@@ -10,7 +10,7 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery-3.1.1
+//= require jquery-2.2.4
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
