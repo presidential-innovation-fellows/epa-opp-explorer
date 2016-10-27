@@ -12,24 +12,16 @@
 
 <script type="text/javascript">
 
-    api_url = "<%= ENV['OPP_API_URL'] %>";
-    product_data = 1;
 
     $( document ).ready(function() {
-
-        //search on products hits  /products/:puid (or reg num)
-        //returns JSON of product endpoint
-        //updates the UI with fields
-        //same time, hits /decisions/:puid (or reg num)
-        //returns JSON of all decisions
-        //update UI
 
         function loadSearch(){
 
             //clear out search results
             //$("#study_tiles").empty();
 
-            get_product();
+            fetch_product();
+            fetch_decisions();
 
         };
 
@@ -88,7 +80,7 @@
         </div>
         <div class="col-md-8">
             <div id="ri_number">
-                60019-1
+                 
             </div>
         </div>
      </div>
@@ -99,7 +91,7 @@
         </div>
         <div class="col-md-8">
             <div id="ri_type">
-                blah
+                 
             </div>
         </div>
      </div>
@@ -109,7 +101,7 @@
         </div>
         <div class="col-md-8">
             <div id="ri_status">
-                xxxx
+                 
             </div>
         </div>
      </div>
@@ -120,7 +112,7 @@
         </div>
         <div class="col-md-8" id="co_name">
             <div>
-                73446 - Marvel Industries
+                 
             </div>
         </div>
      </div>
