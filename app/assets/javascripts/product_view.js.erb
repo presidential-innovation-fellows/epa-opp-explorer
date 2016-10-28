@@ -66,12 +66,18 @@ function loadDecisions() {
 	    var row = $("<tr></tr>");
 	    var c1 = $("<td>" + decision.dec_seq + "</td>");
 	    var c2 = $("<td>" + decision.deci_seq + "</td>");
-	    var c3 = $("<td>test</td>");
-	    var c4 = $("<td>test</td>");
-	    var c5 = $("<td>test</td>");
-	    var c6 = $("<td>test</td>");
+	    var c3 = $("<td>" + decision.dir_dt + "</td>");
+	    var c4 = $("<td>" + decision.dir_end_dt + "</td>");
+	    var c5 = $("<td>" + decision.adt_action_cd + "</td>");
+	    var c6 = $("<td>" + decision.rtyp_cd + "</td>");
+	    var c7 = $("<td>" + decision.ri_num + "</td>");
+	    var c8 = $("<td>" + decision.rin_name + "</td>");
+	    var c9 = $("<td>" + decision.sm_uid + "</td>");
 
-	    $(row).append(c1);
+
+	    $(row).append(c1);$(row).append(c2);$(row).append(c3);$(row).append(c4);
+	    $(row).append(c5);$(row).append(c6);$(row).append(c7);$(row).append(c8);$(row).append(c9);
+
 	    $(tbl).append(row);
 
   	});
