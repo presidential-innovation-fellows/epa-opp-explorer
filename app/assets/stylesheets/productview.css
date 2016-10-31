@@ -1,3 +1,8 @@
+
 #decision_history {
-	
+	display: none;
+}
+
+#product_search input {
+	display: inline-block;
 }

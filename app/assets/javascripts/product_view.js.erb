@@ -57,26 +57,38 @@ function fetch_decisions(){
 
 function loadDecisions() {
 
+	//$("#decision_history").empty();
 	var tempDecisions = decisions_data;
 	var tbl = document.getElementById("decision_history");
- 
-	$.each( decisions_data, function( index, decision ) {
-			console.log('dec_seq: ' + decision.dec_seq + ', index: ' + index);
+ 	var tmpDec = null; 
+ 	var tmpRowColor = "#C0C0C0";
+ 	$("#decision_history").css("display","inline-block");
 
+	$.each( decisions_data, function( index, decision ) {
+	    
 	    var row = $("<tr></tr>");
-	    var c1 = $("<td>" + decision.dec_seq + "</td>");
-	    var c2 = $("<td>" + decision.deci_seq + "</td>");
-	    var c3 = $("<td>" + decision.dir_dt + "</td>");
-	    var c4 = $("<td>" + decision.dir_end_dt + "</td>");
-	    var c5 = $("<td>" + decision.adt_action_cd + "</td>");
-	    var c6 = $("<td>" + decision.rtyp_cd + "</td>");
-	    var c7 = $("<td>" + decision.ri_num + "</td>");
-	    var c8 = $("<td>" + decision.rin_name + "</td>");
-	    var c9 = $("<td>" + decision.sm_uid + "</td>");
+        if (decision.dec_seq != tmpDec){//new decision group
+        	tmpDec = decision.dec_seq;
+        	if (tmpRowColor == "#C0C0C0") { tmpRowColor  = "#00FFFF"}
+        	else { tmpRowColor = "#C0C0C0"}
+        	$(row).css("background-color",tmpRowColor);
+        }
+
+	    var c1 = $("<td>" + decision.dec_seq + "</td>").css("background-color",tmpRowColor);
+	    var c2 = $("<td>" + decision.irec_seq + "</td>").css("background-color",tmpRowColor);;
+	    var c3 = $("<td>" + decision.dir_dt + "</td>").css("background-color",tmpRowColor);;
+	    var c4 = $("<td>" + decision.dir_end_dt + "</td>").css("background-color",tmpRowColor);;
+	    var c5 = $("<td>" + decision.adt_action_cd + "</td>").css("background-color",tmpRowColor);;
+	    var c6 = $("<td>" + decision.rtyp_cd + "</td>").css("background-color",tmpRowColor);;
+	    var c65 = $("<td>" + decision.rtyp_desc + "</td>").css("background-color",tmpRowColor);;
+	    
+	    var c7 = $("<td>" + decision.ri_num + "</td>").css("background-color",tmpRowColor);;
+	    var c8 = $("<td>" + decision.rin_name + "</td>").css("background-color",tmpRowColor);;
+	    var c9 = $("<td>" + decision.sm_fname + " " + decision.sm_lname + "</td>").css("background-color",tmpRowColor);;
 
 
 	    $(row).append(c1);$(row).append(c2);$(row).append(c3);$(row).append(c4);
-	    $(row).append(c5);$(row).append(c6);$(row).append(c7);$(row).append(c8);$(row).append(c9);
+	    $(row).append(c5);$(row).append(c6);$(row).append(c65);$(row).append(c7);$(row).append(c8);$(row).append(c9);
 
 	    $(tbl).append(row);
 
