@@ -13,14 +13,14 @@
 
 <script type="text/javascript">
 
-
-
     $( document ).ready(function() {
 
     });
 
 </script>
 
+<%= javascript_include_tag "application" %>
+<%= stylesheet_link_tag "application" %>
 
 </head>
 
@@ -28,17 +28,43 @@
 <body>
 
     <div class="container">
-
+        <section id="header">
+            <div>
+                <h1>OPP Explorer Prototypes / API Endpoints</h1>
+            </div>
+        </section>
     	<section id="prototypes">
            <ul>
-                <li><%= link_to("Document Library",home_documentlibrary_path, target: "_blank" )%></li>
-                <li><%= link_to("Product View",home_productview_path, target: "_blank" )%></li>
-                <li><%= link_to("Decision API",ENV['OPP_API_URL'] + ":3000/decisions/4822-562", target: "_blank")%></li>            
-                <li><%= link_to("Product API",ENV['OPP_API_URL'] + ":3000/products/4822-562", target: "_blank")%></li>            
-                <li>Documentum</li>
+                <li><%= link_to("Document Library",home_documentlibrary_path, target: "_blank" )%> - (TEST environment of documentum)</li>
+                <li><%= link_to("Product View",home_productview_path, target: "_blank" )%> (TEST environment of OPPIN)</li>
+
+           </ul>
+           <h3>API Endpoints</h3>
+           <ul>
+                <li>
+                    <div class="pcol1"><%= link_to("Decision API",ENV['OPP_API_URL'] + ":3000/decisions/4822-562", target: "_blank")%></div>
+                    <div class="pcol2">Returns decisions and associated receipts</div>
+                </li>            
+                <li>
+                    <div class="pcol1"><%= link_to("Product API",ENV['OPP_API_URL'] + ":3000/products/4822-562", target: "_blank")%></div>
+                    <div class="pcol2">Returns product information</div>
+                </li>               
+                <li>
+                    <div class="pcol1"><%= link_to("People API",ENV['OPP_API_URL'] + ":3000/people?first=Reuben&last=Baris", target: "_blank")%></div>
+                    <div class="pcol2">Looks up phone and contact information</div>
+                </li>               
+
+           </ul>
+           <h3>
+               Documentum
+           </h3>
+           <ul>
                 <li><a href ="https://w2032pcctr584.aa.ad.epa.gov/dctm-rest/repositories/prismenvdev6/cabinets.json" target="_blank">List of cabinets in DEV documentum</a></li>
                 <li><a href="https://dcoppdoctstw01.epa.gov/dctm-rest/repositories/prismtest/objects/0901635b8001a68c/contents/content.json">File contents (enclosure) for a study (doctype opp_study) pass #r_object_id of the actual study object. </a></li>
+               
+
            </ul>
+
         </section>
     </div>
 
