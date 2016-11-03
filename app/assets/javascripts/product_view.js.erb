@@ -75,19 +75,19 @@ function loadDecisions() {
         }
 
 	    var c1 = $("<td>" + decision.dec_seq + "</td>").css("background-color",tmpRowColor);
-	    var c2 = $("<td>" + decision.irec_seq + "</td>").css("background-color",tmpRowColor);;
-	    var c3 = $("<td>" + decision.dir_dt + "</td>").css("background-color",tmpRowColor);;
-	    var c4 = $("<td>" + decision.dir_end_dt + "</td>").css("background-color",tmpRowColor);;
-	    var c5 = $("<td>" + decision.adt_action_cd + "</td>").css("background-color",tmpRowColor);;
-	    var c6 = $("<td>" + decision.rtyp_cd + "</td>").css("background-color",tmpRowColor);;
-	    var c65 = $("<td>" + decision.rtyp_desc + "</td>").css("background-color",tmpRowColor);;   
+	    var c2 = $("<td>" + decision.adt_action_cd	 + "</td>").css("background-color",tmpRowColor);;
+
+	    var c3 = $("<td>" + decision.dstty_type + "</td>").css("background-color",tmpRowColor);;
+
+	    var c4 = $("<td>" + decision.org_division_name + "/" + decision.org_branch_name + "</td>").css("background-color",tmpRowColor);;
+	    var c5 = $("<td>" + "xxxxx" + "</td>").css("background-color",tmpRowColor);;
+
+	    var c6 = $("<td>" + decision.ffs_start_date + "</td>").css("background-color",tmpRowColor);;
 	    var c7 = $("<td>" + decision.ri_num + "</td>").css("background-color",tmpRowColor);;
-	    var c8 = $("<td>" + decision.rin_name + "</td>").css("background-color",tmpRowColor);;
-	    var c9 = $("<td>" + decision.sm_fname + " " + decision.sm_lname + "</td>").css("background-color",tmpRowColor);;
 
 
 	    $(row).append(c1);$(row).append(c2);$(row).append(c3);$(row).append(c4);
-	    $(row).append(c5);$(row).append(c6);$(row).append(c65);$(row).append(c7);$(row).append(c8);$(row).append(c9);
+	    $(row).append(c5);$(row).append(c6);$(row).append(c7); 
 
 	    $(tbl).append(row);
 
