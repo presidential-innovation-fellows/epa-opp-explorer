@@ -5,4 +5,13 @@
 
 #product_search input {
 	display: inline-block;
+	width: 100px;
+}
+
+#product_search label {
+	display: inline-block;
+}
+
+#product_header {
+	display:none;
 }
