@@ -15,3 +15,32 @@
 #product_header {
 	display:none;
 }
+
+#decision_table td{
+	border: 1px solid #aaaaaa;
+	padding: 8px;
+}
+
+#current_decision th {
+	border:none;
+}
+
+.detail_pane {
+	border: 1px solid #000000;
+	width: 100%;
+}
+
+.receipt_table {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	display:inline;
+}
+
+.receipt_table td {
+	border: none;
+}
+
+#decision_table{
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
