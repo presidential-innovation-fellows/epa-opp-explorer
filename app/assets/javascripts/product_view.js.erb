@@ -10,15 +10,13 @@ function fetch_product() {
 	var url = api_url + ":3000/products/" + ri_num_value;
 	//show div for spinner
 
-
-
 	$.ajax({
 	  type: "get",
 	  url: url,
       crossDomain: true,
       beforeSend: function(xhr) {
       	$("#current_decision").css("display","block");
-      	var el = $("#current_decision");
+      	var el = $("#current_decision");//WRONG DIV - do decision!
 		var spinner = el.qspin({task:'add',background: 'transparent', spinnerImage: 'Loading_icon.gif'});
       }
       ,
@@ -37,7 +35,8 @@ function fetch_product() {
 function loadProduct() {
 
 	var tempData = product_data;
-	$("#product_header").css("display","block")
+	$("#product_header").css("display","block"); //show product header
+	//load summary fields
 	$('#ri_name').html(tempData.rin_name);
 	$('#ri_number').html(tempData.ri_num);
 	//$('#ri_type').html(tempData.rist_name);
@@ -68,53 +67,89 @@ function fetch_decisions(){
 function loadDecisions() {
 
 	//$("#decision_history").empty();
-	var tempDecisions = decisions_data;
-	var tbl = document.getElementById("decision_table");
- 	var tmpDec = null; 
- 	var tmpRowColor = "#C0C0C0";
- 	$("#current_decision").css("display","inline-block");
+	var tmpDecisions = decisions_data;
 
+ 	//setup current Decision
+ 	var tbl = $("#current_decision .decision_table");
+ 	setupDecision(tmpDecisions, "current", tbl);
+ 	//setup decision history
+ 	var tbl = $("#past_decisions .decision_table");
+ 	setupDecision(tmpDecisions, "past", tbl); 	
 
-
-
-
-	$.each( decisions_data, function( index, decision ) {
-	     var detailPane = $("<tr><td colspan='8' class='detail_pane'><table class='receipt_table'></table></td></tr>");
-	    //create a row for each decision 
-	    var row = $("<tr></tr>");
-        if (decision.dec_seq != tmpDec){//new decision group
-        	tmpDec = decision.dec_seq;
-        	if (tmpRowColor == "#C0C0C0") { tmpRowColor  = "#ffffff"}
-        	else { tmpRowColor = "#C0C0C0"}
-        	$(row).css("background-color",tmpRowColor);
-        }
-
-	    var c1 = $("<td>" + decision.dec_seq + "</td>").css("background-color",tmpRowColor);
-	    var c2 = $("<td>" + decision.adt_action_cd	 + "</td>").css("background-color",tmpRowColor);;
-
-	    var c3 = $("<td>" + decision.dstty_type + "</td>").css("background-color",tmpRowColor);;
-	    var c4 = $("<td>" + decision.org_division_name + "/" + decision.org_branch_name + "</td>").css("background-color",tmpRowColor);;
-	    var c5 = $("<td>" + "xxxxx" + "</td>").css("background-color",tmpRowColor);;
-	    var c6 = $("<td>" + decision.ffs_start_date + "</td>").css("background-color",tmpRowColor);
-	    var c7 = $("<td>" + decision.ri_num + "</td>").css("background-color",tmpRowColor);
-	    var c8 = $("<td><a>Receipts</a></td>").css("background-color",tmpRowColor);
-	    $(c8).find("a").attr("onclick","javascript: showDetail(this);");
-
-	    //add cells to row DOM 
-	    $(row).append(c1);$(row).append(c2);$(row).append(c3);$(row).append(c4);
-	    $(row).append(c5);$(row).append(c6);$(row).append(c7); $(row).append(c8);
-
-	    $(tbl).append(row);
-	    $(tbl).append(detailPane);
-
-	    //Now, set up receipt rows and add to DOM
-	    $.each( decision.items, function(index,item){
-	    	var iRow = $("<tr><td>" + item.subt_desc + "</td><td>(" + item.pin_punch_dt2 + ")</td><td>S#: " + item.irec_seq + "</td></tr>");
-	    	$(detailPane).find(".receipt_table").append(iRow);
-	    })
-
-  	});
+	
 }
+
+function setupDecision(tDecisions, filterText, tTbl){
+	//sets up a whole decisions table for a particular filter, such as current
+
+ 	var tmpDec = null; 
+ 	var tmpRowColor = "rgb(238,238,238)";
+
+	$.each( tDecisions, function( index, decision ) {
+		switch(filterText) {
+	    case "current":
+	    	if (decision.dstty_type == 'PENDING'){
+ 				$("#current_decision").css("display","inline-block");
+ 				buildTable();
+	    	}
+
+	        break;
+	    case "past":
+	    	if (decision.dstty_type != 'PENDING'){
+ 				$("#past_decisions").css("display","inline-block");
+ 				buildTable();
+	    	}
+
+	        break;	        
+	    default:
+	        return;
+	    }
+
+	    function buildTable(){
+		    var detailPane = $("<tr><td colspan='8' class='detail_pane'><table class='receipt_table'></table></td></tr>");
+		    //create a row for each decision 
+		    var row = $("<tr></tr>");
+
+	        //if (decision.dec_seq != tmpDec){//new decision group
+	        	//tmpDec = decision.dec_seq;
+	        	//if (tmpRowColor == "#C0C0C0") { tmpRowColor  = "#ffffff"}
+	        	//else { tmpRowColor = "#C0C0C0"}
+	        	//$(row).css("background-color",tmpRowColor);
+	        //}
+
+		    var c1 = $("<td>" + decision.dec_seq + "</td>").css("background-color",tmpRowColor);
+		    var c2 = $("<td>" + decision.adt_action_cd	 + "</td>").css("background-color",tmpRowColor);;
+
+		    var c3 = $("<td>" + decision.dstty_type + "</td>").css("background-color",tmpRowColor);;
+		    var c4 = $("<td>" + decision.org_division_name + "/" + decision.org_branch_name + "</td>").css("background-color",tmpRowColor);;
+		    var c5 = $("<td>" + "xxxxx" + "</td>").css("background-color",tmpRowColor);;
+		    var c6 = $("<td>" + decision.ffs_start_date + "</td>").css("background-color",tmpRowColor);
+		    var c7 = $("<td>" + decision.ri_num + "</td>").css("background-color",tmpRowColor);
+		    var c8 = $("<td><a>Receipts</a></td>").css("background-color",tmpRowColor);
+		    $(c8).find("a").attr("onclick","javascript: showDetail(this);");
+
+		    //add cells to row detail pane DOM 
+		    $(row).append(c1);$(row).append(c2);$(row).append(c3);$(row).append(c4);
+		    $(row).append(c5);$(row).append(c6);$(row).append(c7); $(row).append(c8);
+
+		    $(tTbl).append(row);
+		    $(tTbl).append(detailPane);
+
+		    //Now, set up receipt rows and add to DOM
+		    $.each( decision.items, function(index,item){
+		    	var iRow = $("<tr><td>" + item.subt_desc + "</td><td>(" + item.pin_punch_dt2 + ")</td><td>S#: " + item.irec_seq + "</td></tr>");
+		    	$(detailPane).find(".receipt_table").append(iRow);
+		    });
+
+	    }
+
+  	});//end decision each loop
+
+} 
+
+
+
+
 
 function showDetail(anchor){
 

@@ -1,4 +1,6 @@
 
+/* body */
+
 
 /* Product Summary */
 
@@ -43,8 +45,9 @@
 }
 
 #decision_table td{
-	border: 1px solid #aaaaaa;
-	padding: 8px;
+	border-top-width: 1px;
+	border-top-color: rgb(238,238,238) ;
+	padding: 5px;
 
 }
 
