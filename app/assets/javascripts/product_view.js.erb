@@ -9,13 +9,19 @@ function fetch_product() {
 	var ri_num_value = $('#ri_num').val();
 	var url = api_url + ":3000/products/" + ri_num_value;
 	//show div for spinner
-	$("#current_decision").css("display","block");
-	$("#current_decision").spin();
+
+
 
 	$.ajax({
 	  type: "get",
 	  url: url,
       crossDomain: true,
+      beforeSend: function(xhr) {
+      	$("#current_decision").css("display","block");
+      	var el = $("#current_decision");
+		var spinner = el.qspin({task:'add',background: 'transparent', spinnerImage: 'Loading_icon.gif'});
+      }
+      ,
       success: function (data){
     	
     	product_data = data[0];
