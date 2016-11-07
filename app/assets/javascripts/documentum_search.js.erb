@@ -59,7 +59,7 @@ function loadTiles() {
 	    //div = $("<div class='minor_text'>Object ID:" + value.content.properties["r_object_id"] + "</div>");
 	   	//$(li).append(div);	   	
 
-	    div = $("<a href='' id='down_" + value.content.properties["r_object_id"] + "' class='download' target='_blank'>Download</a>");
+	    div = $("<a id='down_" + value.content.properties["r_object_id"] + "' class='download' target='_blank'>Preview</a>");
 	   	$(li).append(div);	   	
 
 
@@ -97,14 +97,21 @@ function fetchDocumentContent(object_id) {
     	var enclosure = $.grep( data.links, function( n, i ) {
   			return n.rel == "enclosure";
 		});
+    	var docUrl = enclosure[0].href;
 
     	console.log("#down_" + data.properties.r_object_id + ",link: " + enclosure[0].href);
     	//console.log(enclosure[0].href);
-    	$("#down_" + data.properties.parent_id[0]).attr("href",enclosure[0].href);
-
+    	//$("#down_" + data.properties.parent_id[0]).attr("href",enclosure[0].href);
+    	$("#down_" + data.properties.parent_id[0]).attr("onclick","javascript: previewDoc('" + enclosure[0].href + "')");
       }
 
 	});//end of .ajax
 
 };
 
+function previewDoc(docUrl){
+
+	$("#previewPane").attr("src",docUrl);
+
+
+}

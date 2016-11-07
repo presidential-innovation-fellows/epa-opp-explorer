@@ -16,4 +16,6 @@
 //= require_tree .
 //= require product_view
 //= require bootstrap
+//= spin
+//= jquery.spin
 

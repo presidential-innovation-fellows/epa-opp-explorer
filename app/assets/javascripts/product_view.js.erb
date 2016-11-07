@@ -8,6 +8,9 @@ function fetch_product() {
 
 	var ri_num_value = $('#ri_num').val();
 	var url = api_url + ":3000/products/" + ri_num_value;
+	//show div for spinner
+	$("#current_decision").css("display","block");
+	$("#current_decision").spin();
 
 	$.ajax({
 	  type: "get",
@@ -88,25 +91,30 @@ function loadDecisions() {
 	    var c5 = $("<td>" + "xxxxx" + "</td>").css("background-color",tmpRowColor);;
 	    var c6 = $("<td>" + decision.ffs_start_date + "</td>").css("background-color",tmpRowColor);
 	    var c7 = $("<td>" + decision.ri_num + "</td>").css("background-color",tmpRowColor);
-	    var c8 = $("<td><a href='' >Show Detail</a></td>").css("background-color",tmpRowColor);
+	    var c8 = $("<td><a>Receipts</a></td>").css("background-color",tmpRowColor);
+	    $(c8).find("a").attr("onclick","javascript: showDetail(this);");
 
+	    //add cells to row DOM 
 	    $(row).append(c1);$(row).append(c2);$(row).append(c3);$(row).append(c4);
 	    $(row).append(c5);$(row).append(c6);$(row).append(c7); $(row).append(c8);
 
 	    $(tbl).append(row);
 	    $(tbl).append(detailPane);
 
-	    //Now, set up receipts
+	    //Now, set up receipt rows and add to DOM
 	    $.each( decision.items, function(index,item){
-	    	var iRow = $("<tr><td>" + item.subt_desc + "</td><td>(" + item.pin_punch_dt2 + ")</td><td>S#: " + item.irec_seq + "</td></tr>")
+	    	var iRow = $("<tr><td>" + item.subt_desc + "</td><td>(" + item.pin_punch_dt2 + ")</td><td>S#: " + item.irec_seq + "</td></tr>");
 	    	$(detailPane).find(".receipt_table").append(iRow);
 	    })
-
-
 
   	});
 }
 
-function utilities(){
+function showDetail(anchor){
+
+
+ var currentRow = $(anchor).parent().parent()[0];
+ var detailPane = $($(currentRow).next()[0]).find('.detail_pane')[0];
+ $(detailPane).toggle();
 
 }

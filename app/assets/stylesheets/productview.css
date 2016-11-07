@@ -1,7 +1,6 @@
 
-#current_decision {
-	display: none;
-}
+
+/* Product Summary */
 
 #product_search input {
 	display: inline-block;
@@ -16,19 +15,65 @@
 	display:none;
 }
 
+.field_label {
+	font-weight: 200;
+
+}
+
+.product_summary_label {
+	background-color: rgb(238,238,238);
+	border-top: 1px solid #cccccc;
+}
+
+.product_summary_value {
+	 
+	border-top: 1px solid #cccccc;
+}
+
+#product_header .product_summary_label  {
+	padding-top: 5px;
+}
+
+/* decision tables */ 
+
+#decision_table{
+	margin-top: 0px;
+	margin-bottom: 0px;
+	width: 800px;
+}
+
 #decision_table td{
 	border: 1px solid #aaaaaa;
 	padding: 8px;
+
+}
+
+/* current decision <section>*/
+
+#current_decision {
+	display: none; 
+	border: 1px solid #000000;
+
 }
 
 #current_decision th {
 	border:none;
 }
+/* Past decisions <section> */
+
+#past_decisions {
+	display: none;
+}
+
+/* receipts */
+
 
 .detail_pane {
 	border: 1px solid #000000;
 	width: 100%;
+	display:none;
 }
+
 
 .receipt_table {
 	margin-top: 0px;
@@ -36,11 +81,9 @@
 	display:inline;
 }
 
-.receipt_table td {
+#decision_table .receipt_table td {
 	border: none;
+	padding: 2px;
 }
 
-#decision_table{
-	margin-top: 0px;
-	margin-bottom: 0px;
-}
+
