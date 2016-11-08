@@ -1,7 +1,19 @@
 
 /* body */
 
+/* Header include */
 
+#head ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#head li {
+	display: inline;
+	margin-right: 20px;
+	color: #545454;
+}
 /* Product Summary */
 
 #product_search input {
@@ -11,6 +23,12 @@
 
 #product_search label {
 	display: inline-block;
+	margin-top: 0px;
+	font-weight: 200;
+}
+
+#product_search .form-group {
+	margin-top: 0px;
 }
 
 #product_header {
@@ -38,19 +56,26 @@
 
 /* decision tables */ 
 
-#decision_table{
+.decision_table{
 	margin-top: 0px;
 	margin-bottom: 0px;
 	width: 800px;
 }
 
-#decision_table td{
+/* need to re-evaluate whether we need USWDS */	
+.decision_table td{
+	border: none;
 	border-top-width: 1px;
-	border-top-color: rgb(238,238,238) ;
+	border-top-color: #cccccc;
+	border-top-style: solid;
 	padding: 5px;
 
 }
 
+.decision_table th{
+	border: none;
+
+}
 /* current decision <section>*/
 
 #current_decision {
