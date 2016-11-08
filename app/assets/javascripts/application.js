@@ -16,5 +16,6 @@
 //= require_tree .
 //= require product_view
 //= require bootstrap
+//= require jquery-ui
 
 

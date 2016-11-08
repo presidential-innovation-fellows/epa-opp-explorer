@@ -114,5 +114,14 @@
 	padding: 2px;
 }
 
+/*  Contact Table */
 
+.contact_table td {
+	padding: 0px;
+	border: none;
+}
+
+.contact_table {
+	font-size: 10pt;
+}
 

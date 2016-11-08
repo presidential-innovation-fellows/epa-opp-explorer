@@ -139,7 +139,11 @@ function setupDecision(tDecisions, filterText, tTbl){
 		    $.each( decision.items, function(index,item){
 		    	var iRow = $("<tr><td>" + item.subt_desc + "</td><td>(" + item.pin_punch_dt2 + ")</td><td>S#: " + item.irec_seq + "</td><td> - <a>" + item.sm_fname + " " + item.sm_lname + "<a></td></tr>");
 		    	$(detailPane).find(".receipt_table").append(iRow);
-		    	$(iRow).find('a').click(function(){ alert('hi');})
+		    	var anchor = $(iRow).find('a'); 
+		    	$(anchor).on('click',function(){
+		    		contactDialog(anchor);
+		    	});
+
 		    });
 
 	    }
@@ -169,5 +173,36 @@ function oracleDate(date){
 	var newString = justDate.split("-")[1] + "/" + justDate.split("-")[2] + "/" + justDate.split("-")[0]
 	return newString
 
-
 }
+
+function contactDialog(anchor) {
+	//this funtion handles the click event on a reviewer's name
+	//it creates the dialog on the fly, fetches the results from the /people endpoint and populates it
+
+
+	//create content div, then bind it to dialog
+	var contactDiv = $("<div><table class='contact_table'><tr><td width='70px'>Name:</td><td 'class'='name1'></td></tr><tr><td>Phone:</td><td class='phone'></td></tr><tr><td>Mail Code:</td><td></td></tr><tr><td>Location:</td><td></td></tr><tr><td>Building:</td><td></td></tr><tr><td>Room:</td><td></td></tr></table></div>");
+	$(contactDiv).dialog({"title":"Contact Information"});
+	$(contactDiv).dialog("open");
+
+	//fetch the person's contact information
+	$.ajax({
+	  type: "get",
+	  url: api_url + ":3000/people/",
+      crossDomain: true,
+      data: {"first":"Reuben","last":"Baris"},
+      beforeSend: function(xhr) {
+
+      }
+      ,
+      success: function (data){
+    	
+    	people_data = data[0];
+    	var nameDiv = $(contactDiv).find("td")[1];
+    	$(nameDiv).text(people_data.name);
+    	
+      }
+
+	});	
+}
+
