@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   get 'home' => 'home#prototypes'
   get 'home/productview' => 'home#productview'
+  get 'home/mywork' => 'home#mywork'
   get 'home/documentlibrary' => 'home#documentlibrary'
 
   # Example of regular route:

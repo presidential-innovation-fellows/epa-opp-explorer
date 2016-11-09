@@ -15,7 +15,7 @@
  *= require bootstrap
  *= require bootstrap-theme
  *= require explorer
- *= require uswds
+ *= //require uswds
  *= require productview
  *= require jquery-ui
  *= require jquery-ui.structure

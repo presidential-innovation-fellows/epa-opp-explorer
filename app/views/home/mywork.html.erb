@@ -15,17 +15,7 @@
 
     $( document ).ready(function() {
 
-        function loadSearch(){
-
-            //clear out search results
-            //$("#study_tiles").empty();
-
-            fetch_product();
-            fetch_decisions();
-
-        };
-
-        $("#search_click").click(loadSearch);  
+       loadDecisions();  
 
 
     });
@@ -45,20 +35,9 @@
     <section id="reg_search">
         <header>
             <h2>
-            Product View 
+            My Work
             </h2>
         </header>
-        <div class="row">
-            <div class="col-md-12">
-                <form id="product_search">
-                    <div class="form-group">
-                        <label for="mrid">Enter Registration Number #</label>
-                        <input type="text" class="form-control" id="ri_num">
-                        <input id="search_click" type="button" class="btn btn-default" value="search">
-                    </div>
-                </form>
-            </div>
-        </div>
 
     </section>
 
