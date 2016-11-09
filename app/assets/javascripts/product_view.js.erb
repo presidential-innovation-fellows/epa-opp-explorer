@@ -180,12 +180,15 @@ function contactDialog(anchor) {
 	//it creates the dialog on the fly, fetches the results from the /people endpoint and populates it
 
 
-	//create content div, then bind it to dialog
-	var contactDiv = $("<div><table class='contact_table'><tr><td width='70px'>Name:</td><td 'class'='name1'></td></tr><tr><td>Phone:</td><td class='phone'></td></tr><tr><td>Mail Code:</td><td></td></tr><tr><td>Location:</td><td></td></tr><tr><td>Building:</td><td></td></tr><tr><td>Room:</td><td></td></tr></table></div>");
+	//1. create content div, then bind it to dialog
+	var contactDiv = $("<div><div id='progressbar'></div><div>Loading...</div><table class='contact_table'><tr><td width='70px'>Name:</td><td 'class'='name1'></td></tr><tr><td>Phone:</td><td class='phone'></td></tr><tr><td>Mail Code:</td><td></td></tr><tr><td>Location:</td><td></td></tr><tr><td>Building:</td><td></td></tr><tr><td>Room:</td><td></td></tr></table></div>");
 	$(contactDiv).dialog({"title":"Contact Information"});
-	$(contactDiv).dialog("open");
-
-	//fetch the person's contact information
+	$(contactDiv).dialog("open");//2. open the dialog
+	//2.5 start progress bar
+	var progBar = $(contactDiv).find("#progressbar")[0];
+	$(progBar).progressbar({value: false});
+	var temp = 1;
+	//3. fetch the person's contact information
 	$.ajax({
 	  type: "get",
 	  url: api_url + ":3000/people/",
@@ -196,7 +199,9 @@ function contactDialog(anchor) {
       }
       ,
       success: function (data){
-    	
+    	//4. update the contact table with lookup results
+		$(progBar).progressbar("destroy");    	
+		$(progBar).next().empty();
     	people_data = data[0];
     	var nameDiv = $(contactDiv).find("td")[1];
     	$(nameDiv).text(people_data.name);
