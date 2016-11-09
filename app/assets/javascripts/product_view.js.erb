@@ -16,8 +16,7 @@ function fetch_product() {
       crossDomain: true,
       beforeSend: function(xhr) {
       	$("#current_decision").css("display","block");
-      	var el = $("#current_decision");//WRONG DIV - do decision!
-		var spinner = el.qspin({task:'add',background: 'transparent', spinnerImage: 'Loading_icon.gif'});
+
       }
       ,
       success: function (data){
@@ -45,113 +44,6 @@ function loadProduct() {
  	
 };
 
-function fetch_decisions(){
-
-	var ri_num_value = $('#ri_num').val();
-	var url = api_url + ":3000/decisions/" + ri_num_value;
-
-	$.ajax({
-	  type: "get",
-	  url: url,
-      crossDomain: true,
-      success: function (data){
-    	
-    	decisions_data = data;
-    	loadDecisions();
-      }
-
-	});
-
-}
-
-function loadDecisions() {
-
-	//$("#decision_history").empty();
-	var tmpDecisions = decisions_data;
-
- 	//setup current Decision
- 	var tbl = $("#current_decision .decision_table");
- 	setupDecision(tmpDecisions, "current", tbl);
- 	//setup decision history
- 	var tbl = $("#past_decisions .decision_table");
- 	setupDecision(tmpDecisions, "past", tbl); 	
-
-	
-}
-
-function setupDecision(tDecisions, filterText, tTbl){
-	//sets up a whole decisions table for a particular filter, such as current
-
-	$.each( tDecisions, function( index, decision ) {
-		switch(filterText) {
-	    case "current":
-	    	if (decision.dstty_type == 'PENDING'){
- 				$("#current_decision").css("display","inline-block");
- 				buildTable();
-	    	}
-
-	        break;
-	    case "past":
-	    	if (decision.dstty_type != 'PENDING'){
- 				$("#past_decisions").css("display","inline-block");
- 				buildTable();
-	    	}
-
-	        break;	        
-	    default:
-	        return;
-	    }
-
-	    function buildTable(){
-		    var detailPane = $("<tr><td colspan='8' class='detail_pane'><table class='receipt_table'></table></td></tr>");
-		    //create a row for each decision 
-		    var row = $("<tr></tr>");
-		    $(row).attr("onclick","javascript: showDetail(this);");
-
-		    var c1 = $("<td>" + decision.dec_seq + "</td>");
-		    var c2 = $("<td>" + decision.adt_action_cd	 + "</td>");
-
-		    var c3 = $("<td>" + decision.dstty_type + "</td>");
-		    var c4 = $("<td>" + decision.org_division_name + "/" + decision.org_branch_name + "</td>");
-		    var c5 = $("<td>" + "xxxxx" + "</td>");
-		    var c6 = $("<td>" + oracleDate(decision.ffs_start_dt) + "</td>");
-		    var c7 = $("<td>" + oracleDate(decision.dec_calc_due_dt) + "</td>");
-		    //var c8 = $("<td><a>Receipts</a></td>");
-		    //$(c8).find("a").attr("onclick","javascript: showDetail(this);");
-
-		    //add cells to row detail pane DOM 
-		    $(row).append(c1);$(row).append(c2);$(row).append(c3);$(row).append(c4);
-		    $(row).append(c5);$(row).append(c6);$(row).append(c7); 
-		    //$(row).append(c8);
-
-		    $(tTbl).append(row);
-		    $(tTbl).append(detailPane);
-
-		    //Now, set up receipt rows and add to DOM
-		    $.each( decision.items, function(index,item){
-		    	var iRow = $("<tr><td>" + item.subt_desc + "</td><td>(" + item.pin_punch_dt2 + ")</td><td>S#: " + item.irec_seq + "</td><td> - <a>" + item.sm_fname + " " + item.sm_lname + "<a></td></tr>");
-		    	$(detailPane).find(".receipt_table").append(iRow);
-		    	var anchor = $(iRow).find('a'); 
-		    	$(anchor).on('click',function(){
-		    		contactDialog(anchor);
-		    	});
-
-		    });
-
-	    }
-
-  	});//end decision each loop
-
-} 
-
-
-
-function showDetail(row){
-
- var detailPane = $($(row).next()[0]).find('.detail_pane')[0];
- $(detailPane).toggle();
-
-}
 
 function oracleDate(date){
 	//pass in date as Oracle formats it, return string mm/dd/yyyy

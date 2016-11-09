@@ -21,7 +21,8 @@
             //$("#study_tiles").empty();
 
             fetch_product();
-            fetch_decisions();
+
+            fetch_decisions({"ri_num" : $('#ri_num').val()});
 
         };
 

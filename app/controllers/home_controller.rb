@@ -4,10 +4,6 @@ require 'json'
 class HomeController < ApplicationController
 
 	def productview
-
-		#binding.pry
-		test = 1
-
 		  
 	end
 
@@ -17,6 +13,10 @@ class HomeController < ApplicationController
 
 	def documentlibrary
 	
+	end
+
+	def mywork
+
 	end
 
 
