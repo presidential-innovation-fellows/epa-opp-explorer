@@ -15,7 +15,22 @@
 
     $( document ).ready(function() {
 
-       //loadDecisions();  
+        function loadSearch(){
+
+            //clear out search results
+            //$("#study_tiles").empty();
+
+            fetch_product();
+
+            fetch_decisions({
+                "sm_uid" : "32574",
+                "tables" : ["#my_decisions .decision_table"]
+                });
+
+        };
+
+        loadSearch();
+
 
 
     });
@@ -44,23 +59,13 @@
      <section id="my_decisions">
          <div class="row">
              <div class="col-md-12">
-                    <h3>My Work</h3>
+                    <h3>Pending Decisions</h3>
              </div>
          </div>
          <div class="row">
             <div class="col-md-12">
                 <table class="decision_table">
-                    <tr class="headrow">
-                        <th>Dec#</th>
-                        <th>Action</th>
-                        <th>Status</th>
-                        <th>Division</th>
-                        <th>Person</th>
-                        <th>FFS Start</th>
-                        <th>Due Date</th>
-                        <th></th>
-                                                                                                       
-                    </tr>
+
                 </table>
             </div>
 

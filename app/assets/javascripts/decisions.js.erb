@@ -27,8 +27,13 @@ function setupDecision(tDecisions, filterText, tTbl){
 
 	    function buildTable(){
 		    var detailPane = $("<tr><td colspan='8' class='detail_pane'><table class='receipt_table'></table></td></tr>");
+		    if (index == 0){
+			    var row = "<tr class='headrow'><th>Dec#</th><th>Action</th><th>Status</th><th>Division</th><th>Person</th><th>FFS Start</th><th>Due Date</th><th></th></tr>"
+			    $(tTbl).append(row);
+		    }
+
 		    //create a row for each decision 
-		    var row = $("<tr></tr>");
+		    row = $("<tr></tr>");
 		    $(row).attr("onclick","javascript: showDetail(this);");
 
 		    var c1 = $("<td>" + decision.dec_seq + "</td>");
@@ -74,14 +79,15 @@ function showDetail(row){
 
 }
 
-function fetch_decisions(options){
+function fetch_decisions(searchOptions){
 	var searchType = null;
 
-	if (options.ri_num) {
+	if (searchOptions.ri_num) {
 		searchType = "by_reg_id";
 	}
+	//need to handle errors
 
-	var url = api_url + ":3000/decisions/" + options.ri_num;
+	var url = api_url + ":3000/decisions/" + searchOptions.ri_num;
 
 
 	$.ajax({
@@ -92,13 +98,14 @@ function fetch_decisions(options){
     	
 		var tmpDecisions = data;
 
-	 	//setup current Decision
-	 	var tbl = $("#current_decision .decision_table");
-	 	setupDecision(tmpDecisions, "current", tbl);
+		if(searchOptions.ri_num){
+		 	//setup current Decision
+		 	setupDecision(tmpDecisions, "current", $(searchOptions.tables[0]));
 
-	 	//setup decision history
-	 	var tbl = $("#past_decisions .decision_table");
-	 	setupDecision(tmpDecisions, "past", tbl); 	
+		 	//setup decision history
+		 	setupDecision(tmpDecisions, "past", searchOptions.tables[1]);
+		};
+ 	
       }
 
 	});

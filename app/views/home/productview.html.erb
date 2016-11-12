@@ -22,7 +22,10 @@
 
             fetch_product();
 
-            fetch_decisions({"ri_num" : $('#ri_num').val()});
+            fetch_decisions({
+                "ri_num" : $('#ri_num').val(),
+                "tables" : ["#current_decision .decision_table","#past_decisions .decision_table"]
+                });
 
         };
 
@@ -124,17 +127,7 @@
          <div class="row">
             <div class="col-md-12">
                 <table class="decision_table">
-                    <tr class="headrow">
-                        <th>Dec#</th>
-                        <th>Action</th>
-                        <th>Status</th>
-                        <th>Division</th>
-                        <th>Person</th>
-                        <th>FFS Start</th>
-                        <th>Due Date</th>
-                        <th></th>
-                                                                                                       
-                    </tr>
+
                 </table>
             </div>
 
