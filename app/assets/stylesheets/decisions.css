@@ -84,3 +84,63 @@
 	border: none;
 	padding: 2px;
 }
+
+/* Decision Graph */
+
+.decision_line {
+	background-color: #d1ed8b;
+	height: 20px;
+	width: 100%;
+	position: relative;
+	font-size: 10pt;
+	padding-left: 30px;
+
+}
+
+.submission_line {
+	background-color: #f4b942;
+	height: 20px;
+	position: relative;
+	margin-top:10px;
+	font-size: 10pt;
+	padding-left: 30px;
+
+}
+
+.datapackage_line {
+	background-color: #79a7f2;
+	height: 20px;
+	position: relative;
+	margin-top:10px;
+	font-size: 10pt;
+	padding-left: 30px;
+
+}
+
+.datapackage_line a {
+	color: #ffffff;
+}
+
+.graph_div {
+	border: 1px solid #cccccc;
+	width: 800px;
+	height: auto;
+	position: relative;
+	margin-bottom: 20px;
+}
+
+.graph_circle {
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	z-index: 100;
+}
+
+.ffs_start_circle {
+	background-color: #01630e;
+}
+
+.due_dt_circle {
+	background-color: #01630e;
+}

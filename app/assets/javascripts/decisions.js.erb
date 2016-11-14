@@ -1,16 +1,15 @@
-api_url = "<%= ENV['OPP_API_URL'] %>";
-product_data = null;
-decisions_data = null;
+
 
 function setupDecision(tDecisions, filterText, tTbl){
 	//sets up a whole decisions table for a particular filter, such as current
-
+	$(tTbl).empty();
 	$.each( tDecisions, function( index, decision ) {
 		switch(filterText) {
 	    case "current":
 	    	if (decision.dstty_type == 'PENDING'){
- 				$("#current_decision").css("display","inline-block");
+ 				$("#current_decision").css("display","inline-block");//show current div
  				buildTable();
+ 				decisionGraph(tTbl, decision);
 	    	}
 
 	        break;
@@ -26,6 +25,7 @@ function setupDecision(tDecisions, filterText, tTbl){
 	    }
 
 	    function buildTable(){
+
 		    var detailPane = $("<tr><td colspan='8' class='detail_pane'><table class='receipt_table'></table></td></tr>");
 		    if (index == 0){
 			    var row = "<tr class='headrow'><th>Dec#</th><th>Action</th><th>Status</th><th>Division</th><th>Person</th><th>FFS Start</th><th>Due Date</th><th></th></tr>"
@@ -109,5 +109,94 @@ function fetch_decisions(searchOptions){
       }
 
 	});
+
+}
+
+function decisionGraph(dTable, decision){
+	//dTable is the decision table passed from the setup Decision function
+	
+	$('.graph_div').remove();
+	//graph is 800px long
+	//1. calculate total days between start and finish
+	//2. get the # of pixels per day for this graph
+	//3. draw a line the length of 
+	var graphContainer = $("<div class='row'><div class='graph_div'></div></div>")[0];
+
+	// Decision Line
+	var ffsStartDt = new Date(oracleDate(decision.ffs_start_dt));
+	var dueDt = new Date(oracleDate(decision.dec_calc_due_dt));
+	var totalDays = dateDiff(ffsStartDt,dueDt);
+
+	var decisionLine = $("<div class='decision_line'>Dec #: " + decision.dec_seq + " - Action Code: " + decision.adt_action_cd + ": " + decision.act_desc.substring(0,50) + "...</div>");
+	//Add FFS Start Date , Due date (what about non-PRIA stuff w/out FFS dates?)
+	var ffsStartCircle = $("<div class='graph_circle ffs_start_circle'></div>").css("top","-2px");
+	var dueDtCircle = $("<div class='graph_circle due_dt_circle'></div>").css("top","-2px").css("left","780px");
+	$(graphContainer).find('.graph_div').append(decisionLine);
+	$(graphContainer).find('.graph_div').append(ffsStartCircle).append(dueDtCircle);
+
+
+	//Submission lines - make one per submission
+	$.each( decision.items, function(index,item){	
+
+		//figure out start and finish points of the submission
+		var subStartDate = new Date(oracleDate(item.pin_punch_dt));
+		var subEndDate = new Date(oracleDate(item.deci_calc_due_dt));
+		var subStartX = getDateX(totalDays, ffsStartDt, subStartDate); 	
+		var subEndX = getDateX(totalDays, ffsStartDt, subEndDate);		
+		var subWidth = subEndX - subStartX; 
+
+		var submissionLine = $("<div class='submission_line'>" + item.subt_desc + " - Sub #: " + item.irec_seq + " - " + item.irec_desc + "</div>").css("left",subStartX).css("width",subWidth);		
+		$(graphContainer).find('.graph_div').append(submissionLine);
+
+		//Do data packages
+		$.each (item.data_packages, function(dindex,dp){
+			//figure out start and finish points of the data package
+			var dpStartDate = new Date(oracleDate(dp.ds_in_dt));
+			var dpEndDate = new Date(oracleDate(dp.admin_due_dt));
+			var dpStartX = getDateX(totalDays, ffsStartDt, dpStartDate); 	
+			var dpEndX = getDateX(totalDays, ffsStartDt, dpEndDate);		
+			var dpWidth = dpEndX - dpStartX; 
+
+			var datapackageLine = $("<div class='datapackage_line'>Data Package: " + dp.dpkg_title + " - Sent to: <a>" + dp.sm_fname + " " + dp.sm_lname + "</a></div>").css("left",dpStartX).css("width",dpWidth);	
+			$(graphContainer).find('.graph_div').append(datapackageLine);
+	    	var anchor = $(datapackageLine).find('a'); 
+	    	$(anchor).on('click',function(){
+	    		contactDialog(anchor);
+	    	});			
+		});
+
+	});
+
+
+	//get first row in section
+	$(graphContainer).insertAfter($(dTable).parents(".row").prev());
+
+
+}
+
+function dateDiff(date1,date2){
+	//returns # of dates between two dates
+	var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+	var diffDays = Math.round(Math.abs((date1.getTime() - date2.getTime())/(oneDay)));
+	return diffDays;
+
+
+}
+
+function getDateX(totalDays, decStartDate, eventDate){
+	//this function returns the X value of a particular date for the decision graph
+	//on this graph the decision start date is 0 and the due date is 800px
+	var pixelsPerDay = 800/totalDays;
+	//1. figure out the difference in days between the decisionStartDate and eventDate
+	//2. set the x value appropriately
+	var dateDifference = dateDiff(decStartDate, eventDate);
+	var dateX = null;
+	if (decStartDate > eventDate){//the event is before the decision start date, probably the initial submission punch date
+		dateX = -(pixelsPerDay*dateDifference);
+	}
+	else{
+		dateX = (pixelsPerDay*dateDifference);
+	}
+	return dateX;
 
 }

@@ -18,5 +18,6 @@
 //= require bootstrap
 //= require jquery-ui
 //= require decisions
+//= require utility
 
 
