@@ -69,11 +69,13 @@
 	margin-top: 0px;
 	margin-bottom: 0px;
 	margin-left: 20px;
-	display:inline;
+	display:block;
+	width: 100%;
 }
 
 .decision_table .receipt_table tr {
 	background-color: #ffffff;
+	border-bottom: 1px solid rgb(238,238,238);	
 }
 
 .decision_table .receipt_table tr:hover {
@@ -81,8 +83,14 @@
 }
 
 .decision_table .receipt_table td {
+	/* border-bottom: 1px solid rgb(238,238,238); */
 	border: none;
 	padding: 2px;
+}
+
+.receipt_table tbody {
+	width: 100%;
+	display: block;
 }
 
 /* Decision Graph */
