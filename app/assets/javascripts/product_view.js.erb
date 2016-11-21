@@ -39,6 +39,12 @@ function loadProduct() {
 	//$('#ri_type').html(tempData.rist_name);
 	$('#co_name').html(tempData.co_name);
 	$('#ri_status').html(tempData.rist_name);
+
+	//loop over ingredients array
+	$.each(tempData.ingredients,function(index,ingredient) {
+		tmp_ing = "<div>" + ingredient.ind_name + "</div>"
+		$("#ingredients").append(tmp_ing);
+	});
  	
 };
 
