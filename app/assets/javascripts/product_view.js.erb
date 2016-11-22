@@ -41,6 +41,7 @@ function loadProduct() {
 	$('#ri_status').html(tempData.rist_name);
 
 	//loop over ingredients array
+	$('#ingredients').empty();
 	$.each(tempData.ingredients,function(index,ingredient) {
 		tmp_ing = "<div>" + ingredient.ind_name + "</div>"
 		$("#ingredients").append(tmp_ing);
