@@ -21,27 +21,21 @@ NEXT TODO:
 
 
 <script type="text/javascript">
-
-	docRes = null; 	
-	docArray = [];
-
-
+	var docArray = [];//just keeping track of docs globally
 
 	$( document ).ready(function() {
  
-    	function loadSearch(){
+    	function loadDocuments(){
 
 	    	//clear out search results
-	    	$("#study_tiles").empty();
+	    	$("#document_list").empty();
 
-	    	fetchAPI();
+	    	fetch_documents();
 
-	    	console.log (docRes);
-	    	console.log(docArray);
 
 	    };
 
-		$("#search_click").click(loadSearch);  
+		$("#search_click").click(loadDocuments);  
 
 	});
 
@@ -128,17 +122,20 @@ NEXT TODO:
 		</div>
 
 		<div class="row">
-			<div class="col-md-12">
-				<ul id="study_tiles">
+			<div class="col-md-6">
+				<ul id="document_list">
 
 				</ul>
-			<div>
+
+			</div>
+			<div class="col-md-6">
+				<iframe src="" id="previewPane" frameborder="0"></iframe>			
+			</div>
 		</div>
 	</section>
 	<section>
 		
-		<iframe src="" id="previewPane"
-style="width:600px; height:500px;" frameborder="0"></iframe>
+
 	</section>
 
 

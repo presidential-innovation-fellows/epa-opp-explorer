@@ -2,35 +2,35 @@
 
 
 
-function fetchAPI() {
+function fetch_documents() {
 
 	var admin_num_value = $('#admin_num').val();
-	
-	var url = "<%= ENV['DOCUMENTUM_TEST_URL'] %>" + ".json"
+
+	var url = "<%= ENV['DOCUMENTUM_PROD_URL'] %>" + ".json"
 
 	//var dql_string_1 = "select r_object_id,object_name,title,r_creator_name,r_object_type from opp_study WHERE r_object_type='opp_study' and ANY mrid in ('" + mrid_value + "')";
 
-	var dql_string_2 = "select *,admin_num from opp_study WHERE ANY admin_num LIKE '" + admin_num_value + "%'";
-	console.log(url + "?dql=" + dql_string_2);
+	var type_array = ["opp_doc","opp_assessment","opp_correspondence","opp_csf","opp_endspec","opp_form","opp_label","opp_miscellaneous","opp_regulatory","opp_study"]//all types of docs to searcy for in documentum
 
+	//hack for now - until we can write better DQL query, or use new version of Documentum Restful API which has proper search, we iterate over doc types
+	$.each( type_array, function( index, doc_type ) {
 
-	$.ajax({
-	  type: "post",
-	  url: url,
-	  	  data: { dql: dql_string_2},
-      crossDomain: true,
-      xhrFields: {
-      	withCredentials: true
-      },
-      success: function (data, status, jqXHR){
+		var dql_string = "select *,admin_num from " + doc_type + " WHERE ANY admin_num LIKE '" + admin_num_value + "%'";
 
-		temp = 1;    	
-    	console.log ("title:" + data.entries["0"].content.properties.object_name);
-    	docRes = data;
-    	console.log("DocRes" + docRes);
-    	var i = 1;
-    	loadTiles();
-    	}
+		$.ajax({
+		  type: "post",
+		  url: url,
+		  	  data: { dql: dql_string},
+	      crossDomain: true,
+	      xhrFields: {
+	      	withCredentials: true
+	      },
+	      success: function (data, status, jqXHR){
+
+	    	loadTiles(data,doc_type);
+	    	}
+
+		});
 
 	});
 
@@ -38,23 +38,31 @@ function fetchAPI() {
 	
 
   
-function loadTiles() {
+function loadTiles(data,doc_type) {
 
-	$.each( docRes.entries, function( index, value ) {
-  	//console.log("object name: " + value.content.properties["object_name"]);
-  	//console.log("title: " + value.content.properties["title"]);
+	$.each( data.entries, function( index, value ) {
+		if(docArray.indexOf(value.content.properties["r_object_id"]) == -1){//new document, add it to global array
+			docArray.push(value.content.properties["r_object_id"]);					
+		}
+		else{
+			return;//this doc is being returned for second time, skip it		
+		};
 
-  		docArray.push(value.content.properties["r_object_id"]);
-  
 
-		var ul = document.getElementById("study_tiles");
+  		console.log("loadTiles: " + doc_type + "," + value.content.properties["r_object_id"] + "," + value.content.properties["r_object_id"] );
+
+		var ul = document.getElementById("document_list");
 	    var li = document.createElement("li");
 
-	    var div = $("<div class='h4 doc_name'>" + value.content.properties["object_name"] + "</div>");
+		var div = $("<div class='doc_type'>" + value.content.properties["r_object_type"] + "</div>");
 	   	$(li).append(div);
 
-	    div = $("<div class='reg_num'>Reg #:" + value.content.properties["admin_num"] + "</div>");
+	    div = $("<div class='doc_name'>" + value.content.properties["object_name"] + "</div>");
 	   	$(li).append(div);
+
+	    
+	    //div = $("<div class='reg_num'>Reg #:" + value.content.properties["admin_num"] + "</div>");
+	   	//$(li).append(div);
 
 	    //div = $("<div class='minor_text'>Object ID:" + value.content.properties["r_object_id"] + "</div>");
 	   	//$(li).append(div);	   	
@@ -72,6 +80,7 @@ function loadTiles() {
  	    ul.appendChild(li);
 
  	    //get File Content Link
+ 	    //console.log('fetchDocumentContent for: ' + value.content.properties["r_object_id"]);
  	    fetchDocumentContent(value.content.properties["r_object_id"]);
 
 	}); 	
@@ -81,7 +90,7 @@ function loadTiles() {
 function fetchDocumentContent(object_id) {
 
 
-	var url = "<%= ENV['DOCUMENTUM_TEST_URL'] %>" + "/objects/" + object_id + "/contents/content.json"
+	var url = "<%= ENV['DOCUMENTUM_PROD_URL'] %>" + "/objects/" + object_id + "/contents/content.json"
 
 	$.ajax({
 	  type: "get",
@@ -92,16 +101,14 @@ function fetchDocumentContent(object_id) {
       },
       success: function (data){
     	
-    	//console.log(data);
     	//check for and retrieve object with rel='enclosure'
     	var enclosure = $.grep( data.links, function( n, i ) {
   			return n.rel == "enclosure";
 		});
     	var docUrl = enclosure[0].href;
 
-    	console.log("#down_" + data.properties.r_object_id + ",link: " + enclosure[0].href);
-    	//console.log(enclosure[0].href);
-    	//$("#down_" + data.properties.parent_id[0]).attr("href",enclosure[0].href);
+    	//console.log("#down_" + data.properties.r_object_id + ",link: " + enclosure[0].href);
+
     	$("#down_" + data.properties.parent_id[0]).attr("onclick","javascript: previewDoc('" + enclosure[0].href + "')");
       }
 
