@@ -21,7 +21,7 @@ NEXT TODO:
 
 
 <script type="text/javascript">
-	var docArray = [];//just keeping track of docs globally
+
 
 	$( document ).ready(function() {
  
@@ -30,7 +30,7 @@ NEXT TODO:
 	    	//clear out search results
 	    	$("#document_list").empty();
 
-	    	fetch_documents();
+	    	fetch_documents($('#admin_num').val());
 
 
 	    };

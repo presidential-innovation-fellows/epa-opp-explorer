@@ -1,12 +1,12 @@
 
+var docArray = [];//just keeping track of docs globally
 
 
+function fetch_documents(admin_num) {
 
-function fetch_documents() {
+	//var admin_num_value = $('#admin_num').val();
 
-	var admin_num_value = $('#admin_num').val();
-
-	var url = "<%= ENV['DOCUMENTUM_PROD_URL'] %>" + ".json"
+	var url = "<%= ENV['DOCUMENTUM_PROD_URL'] %>" + ".json";
 
 	//var dql_string_1 = "select r_object_id,object_name,title,r_creator_name,r_object_type from opp_study WHERE r_object_type='opp_study' and ANY mrid in ('" + mrid_value + "')";
 
@@ -15,7 +15,7 @@ function fetch_documents() {
 	//hack for now - until we can write better DQL query, or use new version of Documentum Restful API which has proper search, we iterate over doc types
 	$.each( type_array, function( index, doc_type ) {
 
-		var dql_string = "select *,admin_num from " + doc_type + " WHERE ANY admin_num LIKE '" + admin_num_value + "%'";
+		var dql_string = "select *,admin_num from " + doc_type + " WHERE ANY admin_num LIKE '" + admin_num + "%'";
 
 		$.ajax({
 		  type: "post",
@@ -39,6 +39,8 @@ function fetch_documents() {
 
   
 function loadTiles(data,doc_type) {
+
+	$("#document_library").css("display","inline-block");//show library div
 
 	$.each( data.entries, function( index, value ) {
 		if(docArray.indexOf(value.content.properties["r_object_id"]) == -1){//new document, add it to global array

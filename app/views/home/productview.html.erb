@@ -17,9 +17,6 @@
 
         function loadSearch(){
 
-            //clear out search results
-            //$("#study_tiles").empty();
-
             fetch_product();
 
             fetch_decisions({
@@ -94,6 +91,7 @@
             </div>
         </div>
      </div>
+
      <div class="row">
         <div class="col-md-4 field_label  product_summary_label">
             Current Status:
@@ -142,6 +140,25 @@
 
          </div>
 
+     </section>
+
+     <section id="document_library">
+        <div class="row">
+             <div class="col-md-12">
+                    <h3>Documentum Documents</h3>
+             </div>
+        </div>     
+        <div class="row">
+            <div class="col-md-6">
+                <ul id="document_list">
+
+                </ul>
+
+            </div>
+            <div class="col-md-6">
+                <iframe src="" id="previewPane" frameborder="0"></iframe>           
+            </div>
+        </div>
      </section>
 
      <section id="past_decisions">
