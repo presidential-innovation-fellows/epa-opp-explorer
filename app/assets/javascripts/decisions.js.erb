@@ -96,7 +96,7 @@ function fetch_decisions(searchOptions){
       crossDomain: true,
       success: function (data){
     	
-		var tmpDecisions = data;
+		var tmpDecisions = data.data;
 
 		if(searchOptions.ri_num){
 		 	//setup current Decision
@@ -105,6 +105,14 @@ function fetch_decisions(searchOptions){
 		 	//setup decision history
 		 	setupDecision(tmpDecisions, "past", searchOptions.tables[1]);
 		};
+
+		if(searchOptions.sm_uid){
+		 	//setup current Decision
+		 	setupDecision(tmpDecisions, "current", $(searchOptions.tables[0]));
+
+		 	//setup decision history
+		 	setupDecision(tmpDecisions, "past", searchOptions.tables[1]);
+		};		
  	
       }
 
