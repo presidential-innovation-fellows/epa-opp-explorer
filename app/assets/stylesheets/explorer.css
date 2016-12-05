@@ -87,3 +87,7 @@ section {
 
 	/* border: 1px solid #000000; */
 }
+
+.pagination_link {
+	margin-left: 10px;
+}

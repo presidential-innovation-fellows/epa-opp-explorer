@@ -15,20 +15,28 @@
 
     $( document ).ready(function() {
 
-        function loadSearch(){
-
-            fetch_decisions({
-                "sm_uid" : "32574",
-                "tables" : ["#my_decisions .decision_table"]
-                });
-
-        };
-
-        loadSearch();
-
-
+        loadDecisions();
 
     });
+
+    function loadDecisions(){
+
+        fetch_decisions({
+            "sm_uid" : "32574",
+            "tables" : ["#my_decisions .decision_table"],
+            "page" : 1
+            });
+
+    };
+
+    function loadPage(pageNumber) {
+
+        fetch_decisions({
+            "sm_uid" : "32574",
+            "tables" : ["#my_decisions .decision_table"],
+            "page" : pageNumber
+            });            
+    }    
 
 </script>
 

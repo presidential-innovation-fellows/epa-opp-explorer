@@ -1,4 +1,6 @@
 
+
+
 function fetch_decisions(searchOptions){
 	var searchType = null;
 	var url; 
@@ -8,7 +10,7 @@ function fetch_decisions(searchOptions){
 	}
 	if (searchOptions.sm_uid) {
 		searchType = "by_sm_uid";
-		url = api_url + ":3000/mywork/" + searchOptions.sm_uid;
+		url = api_url + ":3000/mywork/" + searchOptions.sm_uid + "?page[offset]=" + searchOptions.page
 	}	
 	//need to handle errors
 
@@ -19,19 +21,19 @@ function fetch_decisions(searchOptions){
       crossDomain: true,
       success: function (data){
     	
-		var tmpDecisions = data.data;
+		var tmpDecisions = data;
 
 		if(searchOptions.ri_num){
 		 	//setup current Decision
-		 	setupDecision(tmpDecisions, "current", $(searchOptions.tables[0]));
+		 	setupDecision(tmpDecisions, "current", searchOptions.tables[0],searchOptions);
 
 		 	//setup decision history
-		 	setupDecision(tmpDecisions, "past", searchOptions.tables[1]);
+		 	setupDecision(tmpDecisions, "past", searchOptions.tables[1],searchOptions);
 		};
 
 		if(searchOptions.sm_uid){
 		 	//setup current Decision
-		 	setupDecision(tmpDecisions, "mywork", $(searchOptions.tables[0]));
+		 	setupDecision(tmpDecisions, "mywork", searchOptions.tables[0],searchOptions);
 
 		};		
  	
@@ -42,10 +44,10 @@ function fetch_decisions(searchOptions){
 }
 
 
-function setupDecision(tDecisions, filterText, tTbl){
+function setupDecision(tDecisions, filterText, tTbl,searchOptions){
 	//sets up a whole decisions table for a particular filter, such as current
 	$(tTbl).empty();
-	$.each( tDecisions, function( index, decision ) {
+	$.each( tDecisions.data, function( index, decision ) {
 		switch(filterText) {
 	    case "current":
 	    	if (decision.dstty_type == 'PENDING'){
@@ -82,7 +84,7 @@ function setupDecision(tDecisions, filterText, tTbl){
 
 		    //create a row for each decision 
 		    row = $("<tr></tr>");
-		    $(row).attr("onclick","javascript: showDetail(this);");
+
 
 		    var c1 = $("<td>" + decision.dec_seq + "</td>");
 		    var c2 = $("<td>" + decision.adt_action_cd	 + "</td>");
@@ -99,6 +101,16 @@ function setupDecision(tDecisions, filterText, tTbl){
 		    $(row).append(c1);$(row).append(c2);$(row).append(c3);$(row).append(c4);
 		    $(row).append(c5);$(row).append(c6);$(row).append(c7); 
 		    //$(row).append(c8);
+
+		    if (filterText == 'mywork') {
+			    $(row).attr("onclick","javascript: window.location='productview';");
+		    }
+		    else {
+		    	$(row).attr("onclick","javascript: showDetail(this);");
+		    }
+
+
+
 
 		    $(tTbl).append(row);
 		    $(tTbl).append(detailPane);
@@ -117,6 +129,12 @@ function setupDecision(tDecisions, filterText, tTbl){
 	    }
 
   	});//end decision each loop
+  	//add a row for pagination
+
+
+	var pRow = $("<tr><td colspan='7'>Page " +  tDecisions.page + " <a class='pagination_link' id='next_page' onclick='javascript: loadPage(" + (parseInt(tDecisions.page) + 1) + ")'>Next Page</a><a class='pagination_link' id='prev_page' onclick='javascript: loadPage(" + (parseInt(tDecisions.page) - 1) + ")'>Previous Page</a></td></tr>");  	
+
+  	$(tTbl).append(pRow);
 
 } 
 

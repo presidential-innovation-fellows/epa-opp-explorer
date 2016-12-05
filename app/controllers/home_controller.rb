@@ -4,6 +4,8 @@ require 'json'
 class HomeController < ApplicationController
 
 	def productview
+		binding.pry
+		test = 1
 		  
 	end
 
