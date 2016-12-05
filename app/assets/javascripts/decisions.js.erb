@@ -1,4 +1,46 @@
 
+function fetch_decisions(searchOptions){
+	var searchType = null;
+	var url; 
+	if (searchOptions.ri_num) {
+		searchType = "by_reg_id";
+		url = api_url + ":3000/decisions/" + searchOptions.ri_num;
+	}
+	if (searchOptions.sm_uid) {
+		searchType = "by_sm_uid";
+		url = api_url + ":3000/mywork/" + searchOptions.sm_uid;
+	}	
+	//need to handle errors
+
+
+	$.ajax({
+	  type: "get",
+	  url: url,
+      crossDomain: true,
+      success: function (data){
+    	
+		var tmpDecisions = data.data;
+
+		if(searchOptions.ri_num){
+		 	//setup current Decision
+		 	setupDecision(tmpDecisions, "current", $(searchOptions.tables[0]));
+
+		 	//setup decision history
+		 	setupDecision(tmpDecisions, "past", searchOptions.tables[1]);
+		};
+
+		if(searchOptions.sm_uid){
+		 	//setup current Decision
+		 	setupDecision(tmpDecisions, "mywork", $(searchOptions.tables[0]));
+
+		};		
+ 	
+      }
+
+	});
+
+}
+
 
 function setupDecision(tDecisions, filterText, tTbl){
 	//sets up a whole decisions table for a particular filter, such as current
@@ -19,7 +61,13 @@ function setupDecision(tDecisions, filterText, tTbl){
  				buildTable();
 	    	}
 
-	        break;	        
+	        break;	
+	    case "mywork":
+
+ 				$("#my_decisions").css("display","inline-block");
+ 				buildTable();
+
+	        break;	                
 	    default:
 	        return;
 	    }
@@ -79,46 +127,6 @@ function showDetail(row){
 
 }
 
-function fetch_decisions(searchOptions){
-	var searchType = null;
-
-	if (searchOptions.ri_num) {
-		searchType = "by_reg_id";
-	}
-	//need to handle errors
-
-	var url = api_url + ":3000/decisions/" + searchOptions.ri_num;
-
-
-	$.ajax({
-	  type: "get",
-	  url: url,
-      crossDomain: true,
-      success: function (data){
-    	
-		var tmpDecisions = data.data;
-
-		if(searchOptions.ri_num){
-		 	//setup current Decision
-		 	setupDecision(tmpDecisions, "current", $(searchOptions.tables[0]));
-
-		 	//setup decision history
-		 	setupDecision(tmpDecisions, "past", searchOptions.tables[1]);
-		};
-
-		if(searchOptions.sm_uid){
-		 	//setup current Decision
-		 	setupDecision(tmpDecisions, "current", $(searchOptions.tables[0]));
-
-		 	//setup decision history
-		 	setupDecision(tmpDecisions, "past", searchOptions.tables[1]);
-		};		
- 	
-      }
-
-	});
-
-}
 
 function decisionGraph(dTable, decision){
 	//dTable is the decision table passed from the setup Decision function

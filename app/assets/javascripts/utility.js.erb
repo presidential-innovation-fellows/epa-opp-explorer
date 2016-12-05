@@ -50,7 +50,9 @@ function contactDialog(anchor) {
 
 function oracleDate(date){
 	//pass in date as Oracle formats it, return string mm/dd/yyyy
-
+	if (date == null) {
+		return;
+	}
 	var indexTime = date.indexOf("T");
 	var justDate = date.substring(0,indexTime);
 	var newString = justDate.split("-")[1] + "/" + justDate.split("-")[2] + "/" + justDate.split("-")[0]
