@@ -103,7 +103,7 @@ function setupDecision(tDecisions, filterText, tTbl,searchOptions){
 		    //$(row).append(c8);
 
 		    if (filterText == 'mywork') {
-			    $(row).attr("onclick","javascript: window.location='productview';");
+			    $(row).attr("onclick","javascript: window.location='productview/" + decision.ri_num + "';");
 		    }
 		    else {
 		    	$(row).attr("onclick","javascript: showDetail(this);");
