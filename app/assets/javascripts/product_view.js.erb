@@ -2,10 +2,10 @@
 
 
 
-function fetch_product() {
+function fetch_product(ri_num) {
 
-	var ri_num_value = $('#ri_num').val();
-	var url = api_url + ":3000/products/" + ri_num_value;
+	
+	var url = api_url + ":3000/products/" + ri_num;
 	//show div for spinner
 
 	$.ajax({
@@ -21,7 +21,7 @@ function fetch_product() {
     	
     	product_data = data[0];
     	loadProduct();
-    	fetch_documents(ri_num_value);
+    	fetch_documents(ri_num);
       }
 
 	});

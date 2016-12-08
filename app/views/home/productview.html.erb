@@ -15,18 +15,28 @@
 
     $( document ).ready(function() {
 
-        function loadSearch(){
+        function loadProductPage(ri_num){
 
-            fetch_product();
+            fetch_product(ri_num);
 
             fetch_decisions({
-                "ri_num" : $('#ri_num').val(),
+                "ri_num" : ri_num,
                 "tables" : ["#current_decision .decision_table","#past_decisions .decision_table"]
                 });
 
         };
 
-        $("#search_click").click(loadSearch);  
+        $("#search_click").click(loadProductPage($('#ri_num').val())); 
+
+        var url = window.location.toString(); 
+        if(url.substr(url.lastIndexOf('/') + 1,url.indexOf('?') > 0 ? url.indexOf('?') : url.length).length !=0){
+            //a reg_num has been passed in the URL /productview/xxxxxxx
+            var reg_num = url.substr(url.lastIndexOf('/') + 1,url.indexOf('?') > 0 ? url.indexOf('?') : url.length);
+            loadProductPage(reg_num);
+
+
+        }
+
 
 
     });
