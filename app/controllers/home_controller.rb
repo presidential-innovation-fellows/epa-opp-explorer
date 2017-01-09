@@ -6,7 +6,7 @@ class HomeController < ApplicationController
 	def productview
 
 		test = 1
-		
+
 		  
 	end
 
@@ -19,6 +19,9 @@ class HomeController < ApplicationController
 	end
 
 	def mywork
+		binding.pry
+		test = 1
+
 
 	end
 
