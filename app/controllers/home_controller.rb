@@ -6,6 +6,7 @@ class HomeController < ApplicationController
 	def productview
 
 		test = 1
+		
 		  
 	end
 

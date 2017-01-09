@@ -35,6 +35,7 @@
         </section>
     	<section id="prototypes">
            <ul>
+                <li><%= link_to("My Work",home_mywork_path, target: "_blank" )%> - (TEST environment of documentum)</li>           
                 <li><%= link_to("Document Library",home_documentlibrary_path, target: "_blank" )%> - (TEST environment of documentum)</li>
                 <li><%= link_to("Product View",home_productview_path, target: "_blank" )%> (TEST environment of OPPIN)</li>
 
@@ -42,7 +43,7 @@
            <h3>API Endpoints</h3>
            <ul>
                 <li>
-                    <div class="pcol1"><%= link_to("Decision API",ENV['OPP_API_URL'] + ":3000/decisions/4822-562", target: "_blank")%></div>
+                    <div class="pcol1"><%= link_to("Decision API","/decisions/4822-562", target: "_blank")%></div>
                     <div class="pcol2">Returns decisions and associated receipts</div>
                 </li>            
                 <li>
