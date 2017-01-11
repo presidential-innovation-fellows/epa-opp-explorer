@@ -19,7 +19,7 @@ class HomeController < ApplicationController
 	end
 
 	def mywork
-		binding.pry
+		config
 		test = 1
 
 
