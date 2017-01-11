@@ -1,7 +1,9 @@
 require 'pry'
 require 'json'
 
+
 class HomeController < ApplicationController
+
 
 	def productview
 
@@ -19,7 +21,7 @@ class HomeController < ApplicationController
 	end
 
 	def mywork
-		config
+
 		test = 1
 
 
