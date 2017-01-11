@@ -26,7 +26,10 @@
 
         };
 
-        $("#search_click").click(loadProductPage($('#ri_num').val())); 
+        $("#search_click").click(function(){
+            loadProductPage($('#ri_num').val())   
+            } 
+        );
 
         var url = window.location.toString(); 
         if(url.substr(url.lastIndexOf('/') + 1,url.indexOf('?') > 0 ? url.indexOf('?') : url.length).length !=0){
