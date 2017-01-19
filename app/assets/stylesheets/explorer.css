@@ -27,6 +27,7 @@ section {
 
 #document_library {
 	display: none;
+	margin-top: 10px;
 }
 
 #my_decisions {
@@ -39,6 +40,11 @@ section {
 	margin-top: 20px;
 	width: 500px;
 
+}
+
+.document-list-div {
+	max-height: 400px;
+	overflow: auto;
 }
 
 #document_list li {
@@ -90,4 +96,19 @@ section {
 
 .pagination_link {
 	margin-left: 10px;
+}
+
+.regreview_table {
+	width: 100%;
+
+}
+
+#reg_review .dci_table {
+	max-height: 200px;
+	overflow:auto;
+}
+
+.regreview_table td {
+	vertical-align: top;
+	padding-right: 10px;
 }

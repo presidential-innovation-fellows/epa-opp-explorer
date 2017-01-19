@@ -31,8 +31,13 @@
 	margin-top: 0px;
 }
 
-#product_header {
+#product_summary {
 	display:none;
+	/* border: 1px solid #000000; */
+}
+
+#product_summary .row {
+	display: none;
 }
 
 .field_label {
@@ -54,7 +59,11 @@
 	padding-top: 5px;
 }
 
+/* registration review */
 
+#reg_review {
+	display:none;
+}
 
 /*  Contact Table */
 
@@ -67,3 +76,20 @@
 	font-size: 10pt;
 }
 
+ /* The animation code */
+@keyframes loading_animation {
+    from {color: #cccccc;}
+    to {color: #ffffff;}
+}
+
+/* The element to apply the animation to */
+div.loading {
+
+    animation-name: loading_animation;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+} 
+
+.loading {
+	font-size: 14pt;
+}

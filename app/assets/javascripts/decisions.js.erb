@@ -19,21 +19,33 @@ function fetch_decisions(searchOptions){
 	  type: "get",
 	  url: url,
       crossDomain: true,
+      beforeSend: function(xhr) {
+
+		$("#current_decision").css("display","block"); //show current decision
+		$("#past_decisions").css("display","block"); //show current decision
+      	$("#current_decision").append("<div class='loading'>Loading Current Decisions...</div>");
+      	$("#past_decisions").append("<div class='loading'>Loading Past Decisions...</div>");
+
+      },
+
       success: function (data){
+
+		$("#current_decision .loading").remove();
+		$("#past_decisions .loading").remove();
     	
 		var tmpDecisions = data;
 
 		if(searchOptions.ri_num){
-		 	//setup current Decision
-		 	setupDecision(tmpDecisions, "current", searchOptions.tables[0],searchOptions);
+		 	//setup current Decisions
+		 	displayDecision(tmpDecisions, "current", searchOptions.tables[0],searchOptions);
 
 		 	//setup decision history
-		 	setupDecision(tmpDecisions, "past", searchOptions.tables[1],searchOptions);
+		 	displayDecision(tmpDecisions, "past", searchOptions.tables[1],searchOptions);
 		};
 
 		if(searchOptions.sm_uid){
 		 	//setup current Decision
-		 	setupDecision(tmpDecisions, "mywork", searchOptions.tables[0],searchOptions);
+		 	displayDecision(tmpDecisions, "mywork", searchOptions.tables[0],searchOptions);
 
 		};		
  	
@@ -44,7 +56,7 @@ function fetch_decisions(searchOptions){
 }
 
 
-function setupDecision(tDecisions, filterText, tTbl,searchOptions){
+function displayDecision(tDecisions, filterText, tTbl,searchOptions){
 	//sets up a whole decisions table for a particular filter, such as current
 	$(tTbl).empty();
 	$.each( tDecisions.data, function( index, decision ) {

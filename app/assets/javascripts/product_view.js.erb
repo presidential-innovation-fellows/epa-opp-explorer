@@ -13,15 +13,23 @@ function fetch_product(ri_num) {
 	  url: url,
       crossDomain: true,
       beforeSend: function(xhr) {
-      	$("#current_decision").css("display","block");
+
+		$("#product_summary").css("display","block"); //show product header  
+      	$("#product_summary").append("<div class='loading'>Loading Product Summary...</div>");
 
       }
       ,
       success: function (data){
-    	
-    	product_data = data[0];
-    	loadProduct();
+		$("#product_summary .loading").remove();
+		$("#product_summary .row").css("display","block");
+
+    	product_data = data[0];//
+    	displayProduct();
     	fetch_documents(ri_num);
+    	product_data.ingredients.forEach(function(active_ingredient,index){
+    		fetch_dci(active_ingredient.cuid);
+    	});
+    	
       }
 
 	});
@@ -30,10 +38,9 @@ function fetch_product(ri_num) {
 	
 
   
-function loadProduct() {
+function displayProduct() {
 
 	var tempData = product_data;
-	$("#product_header").css("display","block"); //show product header
 	//load summary fields
 	$('#ri_name').html(tempData.rin_name);
 	$('#ri_number').html(tempData.ri_num);

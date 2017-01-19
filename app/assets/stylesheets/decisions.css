@@ -39,7 +39,8 @@
 /* current decision <section>*/
 
 #current_decision {
-	display: none; 
+	display: none;
+	min-height: 150px;
 
 }
 

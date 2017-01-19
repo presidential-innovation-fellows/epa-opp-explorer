@@ -8,7 +8,13 @@ function fetch_documents(admin_num) {
 
 	var url = "<%= ENV['DOCUMENTUM_PROD_URL'] %>" + ".json";
 
+	$("#document_library").css("display","block"); //show product header  
+  	$("#document_library").append("<div class='loading'>Loading Document Library...</div>");
+
 	//var dql_string_1 = "select r_object_id,object_name,title,r_creator_name,r_object_type from opp_study WHERE r_object_type='opp_study' and ANY mrid in ('" + mrid_value + "')";
+
+	//need to refactor this code - there must be a more efficient way to pull all OPP document types, but currently
+	//having trouble getting it working. Documentum 7.3 should have better non-DQL REST search ability. 
 
 	var type_array = ["opp_doc","opp_assessment","opp_correspondence","opp_csf","opp_endspec","opp_form","opp_label","opp_miscellaneous","opp_regulatory","opp_study"]//all types of docs to searcy for in documentum
 
@@ -25,7 +31,14 @@ function fetch_documents(admin_num) {
 	      xhrFields: {
 	      	withCredentials: true
 	      },
+	      beforeSend: function(xhr) {
+
+
+	      }
+	      ,	      
 	      success: function (data, status, jqXHR){
+			$("#document_library .loading").remove();
+			$("#document_library .row").css("display","block");
 
 	    	loadTiles(data,doc_type);
 	    	}
