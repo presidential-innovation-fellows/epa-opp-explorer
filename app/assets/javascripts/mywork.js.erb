@@ -1,0 +1,8 @@
+function setupPage(){
+	$(".filter-tag").click(function(){
+		decisionFilter = $(this).attr("data-filter");
+		loadDecisions();
+
+	})
+}
+

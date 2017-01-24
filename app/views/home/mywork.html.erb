@@ -12,10 +12,12 @@
 
 <script type="text/javascript">
 
+    decisionFilter = "all";
 
     $( document ).ready(function() {
 
         loadDecisions();
+        setupPage();
 
     });
 
@@ -24,17 +26,19 @@
         fetch_decisions({
             "sm_uid" : "32574",
             "tables" : ["#my_decisions .decision_table"],
-            "page" : 1
+            "page" : 1,
+            "filter": decisionFilter
             });
 
     };
 
-    function loadPage(pageNumber) {
+    function loadPage(pageNumber) {//this is used for navigating through result set
 
         fetch_decisions({
             "sm_uid" : "32574",
             "tables" : ["#my_decisions .decision_table"],
-            "page" : pageNumber
+            "page" : pageNumber,
+            "filter": decisionFilter
             });            
     }    
 
@@ -63,6 +67,13 @@
          <div class="row">
              <div class="col-md-12">
                     <h3>Pending Decisions</h3>
+             </div>
+         </div>
+         <div class="row">
+             <div class="col-md-12">
+                
+                <a class="filter-tag" href="javascript:" data-filter="all">All Decisions</a>
+                <a class="filter-tag" href="javascript:" data-filter="PRIA">PRIA</a>
              </div>
          </div>
          <div class="row">

@@ -10,7 +10,7 @@ function fetch_decisions(searchOptions){
 	}
 	if (searchOptions.sm_uid) {
 		searchType = "by_sm_uid";
-		url = api_url + ":3000/mywork/" + searchOptions.sm_uid + "?page[offset]=" + searchOptions.page
+		url = api_url + ":3000/mywork/" + searchOptions.sm_uid + "?page[offset]=" + searchOptions.page + "&action_code=" + searchOptions.filter
 	}	
 	//need to handle errors
 

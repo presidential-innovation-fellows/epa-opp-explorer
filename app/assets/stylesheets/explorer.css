@@ -112,3 +112,14 @@ section {
 	vertical-align: top;
 	padding-right: 10px;
 }
+
+/*    My Work */
+
+.filter-tag {
+	border-radius: 5px;
+	border: 1px solid #cccccc;
+	display: inline-block;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-bottom: 5px;
+}
