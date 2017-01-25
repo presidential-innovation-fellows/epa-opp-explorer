@@ -2,6 +2,8 @@ function setupPage(){
 	$(".filter-tag").click(function(){
 		decisionFilter = $(this).attr("data-filter");
 		loadDecisions();
+		$(".filter-tag").removeClass("filter-tag-selected");
+		$(this).addClass("filter-tag-selected");
 
 	})
 }
