@@ -33,19 +33,19 @@ function fetch_decisions(searchOptions){
 		$("#current_decision .loading").remove();
 		$("#past_decisions .loading").remove();
     	
-		var tmpDecisions = data;
+		decisions_data = data;
 
 		if(searchOptions.ri_num){
 		 	//setup current Decisions
-		 	displayDecision(tmpDecisions, "current", searchOptions.tables[0],searchOptions);
+		 	displayDecision(decisions_data, "current", searchOptions.tables[0],searchOptions);
 
 		 	//setup decision history
-		 	displayDecision(tmpDecisions, "past", searchOptions.tables[1],searchOptions);
+		 	displayDecision(decisions_data, "past", searchOptions.tables[1],searchOptions);
 		};
 
 		if(searchOptions.sm_uid){
 		 	//setup current Decision
-		 	displayDecision(tmpDecisions, "mywork", searchOptions.tables[0],searchOptions);
+		 	displayDecision(decisions_data, "mywork", searchOptions.tables[0],searchOptions);
 
 		};		
  	
@@ -203,7 +203,7 @@ function decisionGraph(dTable, decision){
 			var dpEndX = getDateX(totalDays, ffsStartDt, dpEndDate);		
 			var dpWidth = dpEndX - dpStartX; 
 
-			var datapackageLine = $("<div class='datapackage_line'>Data Package: " + dp.dpkg_title + " - Sent to: <a>" + dp.sm_fname + " " + dp.sm_lname + "</a></div>").css("left",dpStartX).css("width",dpWidth);	
+			var datapackageLine = $("<div class='datapackage_line'>DP: " + dp.dpkg_title + " <br> " + dp.team_desc + " <a>" + dp.sm_fname + " " + dp.sm_lname + "</a></div>").css("left",dpStartX).css("width",dpWidth);	
 			$(graphContainer).find('.graph_div').append(datapackageLine);
 	    	var anchor = $(datapackageLine).find('a'); 
 	    	$(anchor).on('click',function(){

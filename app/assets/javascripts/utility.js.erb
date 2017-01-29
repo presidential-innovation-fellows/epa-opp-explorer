@@ -13,7 +13,7 @@ function contactDialog(anchor) {
 
 
 	//1. create content div, then bind it to dialog
-	var contactDiv = $("<div><div id='progressbar'></div><div>Loading...</div><table class='contact_table'><tr><td width='70px'>Name:</td><td 'class'='name1'></td></tr><tr><td>Phone:</td><td class='phone'></td></tr><tr><td>Mail Code:</td><td></td></tr><tr><td>Location:</td><td></td></tr><tr><td>Building:</td><td></td></tr><tr><td>Room:</td><td></td></tr></table></div>");
+	var contactDiv = $("<div><div id='progressbar'></div><div>Loading...</div><table class='contact_table'><tr><td width='70px'>Name:</td><td 'class'='name1'></td></tr><tr><td>Phone:</td><td class='phone'></td></tr><tr><td>Email:</td><td></td></tr><tr><td>Mail Code:</td><td></td></tr><tr><td>Location:</td><td></td></tr><tr><td>Building:</td><td></td></tr><tr><td>Room:</td><td></td></tr></table></div>");
 	$(contactDiv).dialog({"title":"Contact Information"});
 	$(contactDiv).dialog("open");//2. open the dialog
 	//2.5 start progress bar
@@ -39,13 +39,15 @@ function contactDialog(anchor) {
     	$(nameDiv).text(people_data.name);
     	var phoneDiv = $(contactDiv).find("td")[3];
     	$(phoneDiv).text(people_data.phone);
-    	var mailDiv = $(contactDiv).find("td")[5];
+    	var emailDiv = $(contactDiv).find("td")[5];
+    	$(emailDiv).text(people_data.email_address);    	
+    	var mailDiv = $(contactDiv).find("td")[7];
     	$(mailDiv).text(people_data.mail_code);
-    	var locationDiv = $(contactDiv).find("td")[7];
+    	var locationDiv = $(contactDiv).find("td")[9];
     	$(locationDiv).text(people_data.location);
-    	var buildingDiv = $(contactDiv).find("td")[9];
+    	var buildingDiv = $(contactDiv).find("td")[11];
     	$(buildingDiv).text(people_data.building);   
-    	var roomDiv = $(contactDiv).find("td")[11];
+    	var roomDiv = $(contactDiv).find("td")[13];
     	$(roomDiv).text(people_data.room);   
     	
       }
