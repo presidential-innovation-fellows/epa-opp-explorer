@@ -16,31 +16,31 @@
 
     $( document ).ready(function() {
 
-        loadDecisions();
-        setupPage();
+        $("#login_button").click(function(){
+            sessionStorage.setItem("oppin_user",$("#login-input").val());//set session storage of oppin username
+            $("#my_decisions").css("display","block");
+            $("#login_section").css("display","none");  
+
+            loadPage(1);
+            setupPage();     
+        })
+
+        if(sessionStorage.oppin_user){
+
+            loadPage(1);
+            setupPage();     
+        }
+        else{
+            $("#my_decisions").css("display","none");
+            $("#login_section").css("display","block");
+
+        }
+
 
     });
 
-    function loadDecisions(){
 
-        fetch_decisions({
-            "sm_uid" : "32574",
-            "tables" : ["#my_decisions .decision_table"],
-            "page" : 1,
-            "filter": decisionFilter
-            });
-
-    };
-
-    function loadPage(pageNumber) {//this is used for navigating through result set
-
-        fetch_decisions({
-            "sm_uid" : "32574",
-            "tables" : ["#my_decisions .decision_table"],
-            "page" : pageNumber,
-            "filter": decisionFilter
-            });            
-    }    
+  
 
 </script>
 
@@ -54,7 +54,7 @@
 
     <%= render "head" %>
     
-    <section id="reg_search">
+    <section id="mywork">
         <header>
             <h2>
             My Work
@@ -87,6 +87,20 @@
          </div>
 
      </section>   
+     <section id="login_section">
+        <div class="row">
+            <div class="col-md-12" id="login-instructions">
+                Please enter your OPPIN username
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 form-group">
+                <input type="input" id="login-input" class="form-control">
+                <input type="button" class="btn btn-default" value="login" id="login_button">
+
+            </div>
+        </div>        
+     </section>
 
     </div><!-- container -->
 

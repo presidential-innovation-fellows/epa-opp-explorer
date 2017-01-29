@@ -1,3 +1,19 @@
+
+
+
+
+function loadPage(pageNumber) {//this is used for navigating through result sets of mywork decisions
+
+	$("#user_header").html("Hi " + sessionStorage.oppin_user + " | <a onclick=\"javascript: sessionStorage.removeItem('oppin_user'); \">Logout</a>");
+
+    fetch_decisions({
+        "sm_uid" : "32574",
+        "tables" : ["#my_decisions .decision_table"],
+        "page" : pageNumber,
+        "filter": decisionFilter
+        });            
+}  
+
 function setupPage(){
 	$(".filter-tag").click(function(){
 		decisionFilter = $(this).attr("data-filter");

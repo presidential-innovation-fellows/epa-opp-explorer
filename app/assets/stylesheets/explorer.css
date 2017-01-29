@@ -128,3 +128,8 @@ section {
 	background-color: #cccccc;
 }
 
+/* page header */
+
+#login {
+	float: right;
+}
