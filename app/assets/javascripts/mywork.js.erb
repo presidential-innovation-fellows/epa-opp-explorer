@@ -7,7 +7,7 @@ function loadPage(pageNumber) {//this is used for navigating through result sets
 	$("#user_header").html("Hi " + sessionStorage.oppin_user + " | <a onclick=\"javascript: sessionStorage.removeItem('oppin_user'); \">Logout</a>");
 
     fetch_decisions({
-        "sm_uid" : "32574",
+        "sm_uid" : sessionStorage.oppin_user.toUpperCase(),
         "tables" : ["#my_decisions .decision_table"],
         "page" : pageNumber,
         "filter": decisionFilter
@@ -17,7 +17,7 @@ function loadPage(pageNumber) {//this is used for navigating through result sets
 function setupPage(){
 	$(".filter-tag").click(function(){
 		decisionFilter = $(this).attr("data-filter");
-		loadDecisions();
+		loadPage(1);
 		$(".filter-tag").removeClass("filter-tag-selected");
 		$(this).addClass("filter-tag-selected");
 

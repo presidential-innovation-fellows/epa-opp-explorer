@@ -16,7 +16,7 @@
 
     $( document ).ready(function() {
 
-        $("#login_button").click(function(){
+        $("#login_button").click(function(){//set the click function of the login button
             sessionStorage.setItem("oppin_user",$("#login-input").val());//set session storage of oppin username
             $("#my_decisions").css("display","block");
             $("#login_section").css("display","none");  
@@ -25,12 +25,12 @@
             setupPage();     
         })
 
-        if(sessionStorage.oppin_user){
+        if(sessionStorage.oppin_user){//if user is logged in
 
             loadPage(1);
             setupPage();     
         }
-        else{
+        else{//if user is not logged in
             $("#my_decisions").css("display","none");
             $("#login_section").css("display","block");
 
