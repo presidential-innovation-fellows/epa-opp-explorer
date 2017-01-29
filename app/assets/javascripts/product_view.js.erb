@@ -23,10 +23,10 @@ function fetch_product(ri_num) {
 		$("#product_summary .loading").remove();
 		$("#product_summary .row").css("display","block");
 
-    	product_data = data[0];//
-    	displayProduct();
-    	fetch_documents(ri_num);
-    	product_data.ingredients.forEach(function(active_ingredient,index){
+    	product_data = data[0];//1. store results of /product API call in a global variable
+    	displayProduct();//2. render the display of the product summary section
+    	fetch_documents(ri_num);//3. fetch from the documentum API the list of documents for this regulatory item
+    	product_data.ingredients.forEach(function(active_ingredient,index){//4. for each ingredient in the product, fetch any active DCI's from /dci API endpoint
     		fetch_dci(active_ingredient.cuid);
     	});
     	
@@ -40,21 +40,21 @@ function fetch_product(ri_num) {
   
 function displayProduct() {
 
-	var tempData = product_data;
+
 	//load summary fields
-	$('#ri_name').html(tempData.rin_name);
-	$('#ri_number').html(tempData.ri_num);
+	$('#ri_name').html(product_data.rin_name);
+	$('#ri_number').html(product_data.ri_num);
 	//$('#ri_type').html(tempData.rist_name);
-	$('#co_name').html(tempData.co_name);
-	$('#ri_status').html(tempData.rist_name);
+	$('#co_name').html(product_data.co_name);
+	$('#ri_status').html(product_data.rist_name);
 
 	//loop over ingredients array
 	$('#ingredients').empty();
-	$.each(tempData.ingredients,function(index,ingredient) {
-		tmp_ing = "<div>" + ingredient.ind_name + "</div>"
+	$.each(product_data.ingredients,function(index,ingredient) {
+		
+		tmp_ing = "<div><div id='ingredient_" + ingredient.cuid + "' class='prod_summary_ingredient'>" + ingredient.ind_name + "</div><div class='prod_sum_dci' id='dci_" + ingredient.cuid + "'></div></div>"
 		$("#ingredients").append(tmp_ing);
-		//populate the registration review activity section
-		//loadDCIs(in)
+
 
 	});
 

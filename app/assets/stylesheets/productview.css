@@ -59,6 +59,16 @@
 	padding-top: 5px;
 }
 
+.prod_summary_ingredient {
+	display: inline-block;
+	width: 150px;
+}
+
+.prod_sum_dci {
+  display: inline-block;
+  color: #00cc00;
+}
+
 /* registration review */
 
 #reg_review {
