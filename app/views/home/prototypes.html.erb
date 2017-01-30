@@ -43,9 +43,13 @@
            <h3>API Endpoints</h3>
            <ul>
                 <li>
-                    <div class="pcol1"><%= link_to("Decision API","/decisions/4822-562", target: "_blank")%></div>
-                    <div class="pcol2">Returns decisions and associated receipts</div>
-                </li>            
+                    <div class="pcol1"><%= link_to("Decision API - by ri_num",ENV['OPP_API_URL'] + ":3000/decisions?ri_num=4822-562", target: "_blank")%></div>
+                    <div class="pcol2">Returns decisions and associated receipts, by ri_num</div>
+                </li>  
+                <li>
+                    <div class="pcol1"><%= link_to("Decision API - by ingredient",ENV['OPP_API_URL'] + ":3000/decisions?ingredient=1735", target: "_blank")%></div>
+                    <div class="pcol2">Returns decisions and associated receipts, by ingredient</div>
+                </li>    
                 <li>
                     <div class="pcol1"><%= link_to("Product API",ENV['OPP_API_URL'] + ":3000/products/4822-562", target: "_blank")%></div>
                     <div class="pcol2">Returns product information</div>

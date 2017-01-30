@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<%= javascript_include_tag "application" %>
+<%= stylesheet_link_tag "application" %>
+
+<script type="text/javascript">
+
+
+    $( document ).ready(function() {
+
+        function loadIngredient(cuid){
+
+            fetch_ingredient(cuid);
+
+            fetch_decisions({
+                "cuid" : cuid,
+                "tables" : ["#current_decision .decision_table"]
+                });            
+
+        };
+
+        $("#search_click").click(function(){
+            loadIngredient($('#pc_code').val())   
+            } 
+        );
+
+        //if this page is loaded with a cuid passesd, then automatically load that product
+        var url = window.location.toString(); 
+        if(url.substr(url.lastIndexOf('/') + 1,url.indexOf('?') > 0 ? url.indexOf('?') : url.length).length !=0){
+            //a reg_num has been passed in the URL /productview/xxxxxxx
+            var cuid = url.substr(url.lastIndexOf('/') + 1,url.indexOf('?') > 0 ? url.indexOf('?') : url.length);
+            loadIngredient(cuid);
+
+
+        }
+
+    });
+  
+
+</script>
+
+
+</head>
+
+
+<body>
+
+    <div class="container">
+
+    <%= render "head" %>
+   
+    <section id="mywork">
+        <header>
+            <h2>
+            Ingredient View
+            </h2>
+        </header>
+        <div class="row">
+            <div class="col-md-12">
+                <form id="ai_search">
+                    <div class="form-group">
+                        <label for="mrid">Enter PC Code</label>
+                        <input type="text" class="form-control" id="pc_code">
+                        <input id="search_click" type="button" class="btn btn-default" value="search">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+     <section id="ingredient_summary">
+         <div class="row">
+             <div class="col-md-12 h3" id="ingredient_name">
+                     Blah, Blah Ingredient Name
+             </div>
+         </div>
+     <div class="row">
+        <div class="col-md-4 field_label product_summary_label">
+            PC Code:
+        </div>
+        <div class="col-md-8 product_summary_value">
+            <div id="pc_code">
+                 
+            </div>
+        </div>
+     </div>
+
+     <div class="row">
+        <div class="col-md-4 field_label product_summary_label">
+            Cas #:
+        </div>
+        <div class="col-md-8 product_summary_value">
+            <div id="cas_num">
+                 
+            </div>
+        </div>
+     </div>
+
+     <div class="row">
+        <div class="col-md-4 field_label  product_summary_label">
+            Class:
+        </div>
+        <div class="col-md-8">
+            <div id="ing_class">
+                 
+            </div>
+        </div>
+     </div>
+
+     <div class="row">
+        <div class="col-md-4 field_label product_summary_label">
+            First Registered:
+        </div>
+        <div class="col-md-8" id="first_reg">
+            <div>
+                 
+            </div>
+        </div>
+     </div>
+
+     </section>   
+     <section id="current_decision">
+         <div class="row">
+             <div class="col-md-12">
+                    <h3>Pending Decisions</h3>
+             </div>
+         </div>
+         <div class="row">
+            <div class="col-md-12">
+                <table class="decision_table">
+
+                </table>
+            </div>
+
+
+         </div>
+
+     </section>
+
+    </div><!-- container -->
+
+</body>

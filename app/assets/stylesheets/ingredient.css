@@ -1,0 +1,19 @@
+#ingredient_summary {
+	display:none;
+	/* border: 1px solid #000000; */
+}
+
+#ingredient_summary .row {
+	display: none;
+}
+
+#ai_search input {
+    display: inline-block;
+    width: 100px;
+}
+
+#ai_search label {
+    display: inline-block;
+    margin-top: 0px;
+    font-weight: 200;
+}

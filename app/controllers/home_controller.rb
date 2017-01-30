@@ -4,12 +4,16 @@ require 'json'
 
 class HomeController < ApplicationController
 
+	#this controller uses the default view names for each of the following actions
+	#TODO - break mywork, product and ingredients into own controllers
 
 	def productview
 
-		test = 1
-
 		  
+	end
+
+	def ingredient
+
 	end
 
 	def prototypes
@@ -21,8 +25,6 @@ class HomeController < ApplicationController
 	end
 
 	def mywork
-
-		test = 1
 
 
 	end

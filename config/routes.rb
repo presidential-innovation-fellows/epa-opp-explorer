@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get 'home' => 'home#prototypes'
   get 'home/productview' => 'home#productview'
   get 'home/productview/:ri_num' => 'home#productview'  
+  get 'home/ingredient/:cuid' => 'home#ingredient'   
+    get 'home/ingredient' => 'home#ingredient'   
   get 'home/mywork' => 'home#mywork'
   get 'home/documentlibrary' => 'home#documentlibrary'
 

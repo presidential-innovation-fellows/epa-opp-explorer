@@ -4,13 +4,23 @@
 function fetch_decisions(searchOptions){
 	var searchType = null;
 	var url; 
+	var ajax_data = {};
+
 	if (searchOptions.ri_num) {
 		searchType = "by_reg_id";
-		url = api_url + ":3000/decisions/" + searchOptions.ri_num;
+		url = api_url + ":3000/decisions";
+		ajax_data = {"ri_num" : searchOptions.ri_num };
+
 	}
+	if (searchOptions.cuid) {
+		searchType = "by_cuid";
+		url = api_url + ":3000/decisions";
+		ajax_data = {"ingredient" : searchOptions.cuid };
+
+	}	
 	if (searchOptions.sm_uid) {
 		searchType = "by_sm_uid";
-		url = api_url + ":3000/mywork/" + searchOptions.sm_uid + "?page[offset]=" + searchOptions.page + "&action_code=" + searchOptions.filter
+		url = api_url + ":3000/mywork/" + searchOptions.sm_uid + "?page[offset]=" + searchOptions.page + "&action_code=" + searchOptions.filter;
 	}	
 	//need to handle errors
 
@@ -19,6 +29,7 @@ function fetch_decisions(searchOptions){
 	  type: "get",
 	  url: url,
       crossDomain: true,
+      data: ajax_data, 
       beforeSend: function(xhr) {
 
 		$("#current_decision").css("display","block"); //show current decision
@@ -37,11 +48,17 @@ function fetch_decisions(searchOptions){
 
 		if(searchOptions.ri_num){
 		 	//setup current Decisions
-		 	displayDecision(decisions_data, "current", searchOptions.tables[0],searchOptions);
+		 	displayDecision(decisions_data, "prod_current", searchOptions.tables[0],searchOptions);
 
 		 	//setup decision history
-		 	displayDecision(decisions_data, "past", searchOptions.tables[1],searchOptions);
+		 	displayDecision(decisions_data, "prod_past", searchOptions.tables[1],searchOptions);
 		};
+
+		if(searchOptions.cuid){
+		 	//setup current Decisions
+		 	displayDecision(decisions_data, "ai_current", searchOptions.tables[0],searchOptions);
+
+		};		
 
 		if(searchOptions.sm_uid){
 		 	//setup current Decision
@@ -59,23 +76,39 @@ function fetch_decisions(searchOptions){
 function displayDecision(tDecisions, filterText, tTbl,searchOptions){
 	//sets up a whole decisions table for a particular filter, such as current
 	$(tTbl).empty();
+	var last_dec_seq = null;
 	$.each( tDecisions.data, function( index, decision ) {
+		//check for duplicate decision, and skip
+		//TODO: this assumes duplicates appear immediately after one another, need
+		//to handle more robustly
+		if(last_dec_seq == decision.dec_seq){
+				return; //skip this iteration
+		}
+		last_dec_seq = decision.dec_seq;
 		switch(filterText) {
-	    case "current":
+	    case "prod_current":
 	    	if (decision.dstty_type == 'PENDING'){
+	    		//TODO: need to filter by dstty_seq for types 1 - 4
  				$("#current_decision").css("display","inline-block");//show current div
  				buildTable();
  				decisionGraph(tTbl, decision);
 	    	}
 
 	        break;
-	    case "past":
+	    case "prod_past":
 	    	if (decision.dstty_type != 'PENDING'){
  				$("#past_decisions").css("display","inline-block");
  				buildTable();
 	    	}
 
 	        break;	
+	    case "ai_current":
+	    	if (decision.dstty_type == 'PENDING'){
+ 				$("#current_decision").css("display","inline-block");
+ 				buildTable();
+	    	}
+
+	        break;		        
 	    case "mywork":
 
  				$("#my_decisions").css("display","inline-block");
@@ -114,10 +147,10 @@ function displayDecision(tDecisions, filterText, tTbl,searchOptions){
 		    $(row).append(c5);$(row).append(c6);$(row).append(c7); 
 		    //$(row).append(c8);
 
-		    if (filterText == 'mywork') {
+		    if (filterText == 'mywork') {//click behavior is different depending on where this is
 			    $(row).attr("onclick","javascript: window.location='productview/" + decision.ri_num + "';");
 		    }
-		    else {
+		    else {//for product view or ingredient view
 		    	$(row).attr("onclick","javascript: showDetail(this);");
 		    }
 

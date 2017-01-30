@@ -60,6 +60,9 @@ function displayDCI(data){
 			if ($.inArray(rr_case_status[index],["Active","Scheduled"]) > -1) {
 					$("#dci_" + ai).html("Registration Review Case: " + rr_case_status[index]);
 			}
+			else {//make it visually clear that there is no case open
+					$("#dci_" + ai).html("There is no open Reg Review case");					
+			}
 
 		})
 

@@ -1,0 +1,47 @@
+function fetch_ingredient(cuid) {
+
+	
+	var url = api_url + ":3000/ingredients/" + cuid;
+	//show div for spinner
+
+	$.ajax({
+	  type: "get",
+	  url: url,
+      crossDomain: true,
+      beforeSend: function(xhr) {
+
+		    $("#ingredient_summary").css("display","block"); //show product header  
+      	   $("#ingredient_summary").append("<div class='loading'>Loading Ingredient Summary...</div>");
+
+          }
+      ,
+      success: function (data){
+		    $("#ingredient_summary .loading").remove();
+		    $("#ingredient_summary .row").css("display","block");
+
+    	ing_summary_data = data.data[0];//1. store results of /ingredient API call in a global variable
+    	displayIngredientSummary();//2. render the display of the product summary section
+    	//fetch_documents(ri_num);//3. fetch from the documentum API the list of documents for this regulatory item
+    	//product_data.ingredients.forEach(function(active_ingredient,index){//4. for each ingredient in the product, fetch any active DCI's from /dci API endpoint
+    		//fetch_dci(active_ingredient.cuid);
+    	//});
+    	
+      }
+
+	});
+
+};
+
+function displayIngredientSummary () {
+
+
+  //load summary fields
+  $('#ingredient_name').html(ing_summary_data.ind_name);
+  $('#pc_code').html(ing_summary_data.ioi_cd);
+  //$('#ri_type').html(tempData.rist_name);
+  $('#cas_num').html(ing_summary_data.cas_num);
+  $('#ing_class').html(ing_summary_data.class_desc);
+  $('#first_reg').html(oracleDate(ing_summary_data.first_registered_dt));
+
+  
+};

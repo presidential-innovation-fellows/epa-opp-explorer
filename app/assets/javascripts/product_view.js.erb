@@ -52,7 +52,7 @@ function displayProduct() {
 	$('#ingredients').empty();
 	$.each(product_data.ingredients,function(index,ingredient) {
 		
-		tmp_ing = "<div><div id='ingredient_" + ingredient.cuid + "' class='prod_summary_ingredient'>" + ingredient.ind_name + "</div><div class='prod_sum_dci' id='dci_" + ingredient.cuid + "'></div></div>"
+		tmp_ing = "<div><div id='ingredient_" + ingredient.cuid + "' class='prod_summary_ingredient'><a href='../ingredient/" + ingredient.cuid + "'>" + ingredient.ind_name + "</a></div><div class='prod_sum_dci' id='dci_" + ingredient.cuid + "'></div></div>"
 		$("#ingredients").append(tmp_ing);
 
 
