@@ -64,9 +64,14 @@
 	width: 150px;
 }
 
-.prod_sum_dci {
+.prod_sum_dci_open {
   display: inline-block;
   color: #00cc00;
+}
+
+.prod_sum_dci_none {
+  display: inline-block;
+  color: #0000cc;
 }
 
 /* registration review */

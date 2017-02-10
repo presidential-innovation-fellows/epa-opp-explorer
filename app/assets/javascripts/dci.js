@@ -59,9 +59,13 @@ function displayDCI(data){
 			
 			if ($.inArray(rr_case_status[index],["Active","Scheduled"]) > -1) {
 					$("#dci_" + ai).html("Registration Review Case: " + rr_case_status[index]);
+					$("#dci_" + ai).addClass("prod_sum_dci_open");
+					$("#dci_" + ai).removeClass("prod_sum_dci_none");					
 			}
 			else {//make it visually clear that there is no case open
-					$("#dci_" + ai).html("There is no open Reg Review case");					
+					$("#dci_" + ai).html("There are no open Reg Review cases");					
+					$("#dci_" + ai).addClass("prod_sum_dci_none");
+					$("#dci_" + ai).removeClass("prod_sum_dci_open");					
 			}
 
 		})
