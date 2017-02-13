@@ -1,14 +1,6 @@
 
-has_dci = false; //whether or not the ingredient has active DCI's
-dci_names =[]; //an array of unique DCI names (usually just 1) 
-dci_data = null; //the DCI data returned from API
 
-//The data in the following three arrays can be matched by index
-dci_case_status =[];//array of dci case statuses
-dci_seq = [];//array of unique dci (dci_seq) per chemical
-dci_ai =[]; //an array of ingredient CUID
-//TODO: delete the above 3 if I don't need them
-
+dci_data = []; //the DCI data returned from API
 
 /* File for registration review data call-ins */
 
@@ -30,8 +22,11 @@ function fetch_dci(cuid) {//gets data and sets up page for each ingredient
       ,
       success: function (data){
 		$("#reg_review .loading").remove();
-		dci_data = data.data;//set variable in global scope of DOM
-		displayDCI(data);
+		if(data.data.dci.length > 0){
+			dci_data.push(data.data);//set variable in global scope of DOM
+		}
+
+		displayDCI(data.data);
 
       }
 
@@ -42,10 +37,10 @@ function fetch_dci(cuid) {//gets data and sets up page for each ingredient
 function displayDCI(data){
 	//this function dynamically creates the DCI table in the DOM and injects it into the page. 
 
-	if (dci_data.dci.length > 0 ) {//if there are DCIs 
+	if (data.dci.length > 0 ) {//if there are DCIs 
 
 		//loop through records and build some objects
-		dci_data.dci.forEach(function(dci,index){
+		data.dci.forEach(function(dci,index){
 
 
 			//Generate a row for each new DCI_SEQ 
@@ -110,6 +105,31 @@ function displayDCI(data){
 		//TODO!!!!!! But, only the last status of a case/ per chemical is displayed - SO, if the order
 		//is wrong, it could mis-report, need to fix. 
 
+		
+		//1. loop over product_data.ingredients, check if 
+		product_data.ingredients.forEach(function(ingredient,index){
+			var has_case = false;
+			var case_status = "";
+			dci_data.forEach(function(dci,index){
+				if(dci.dci[0].cuid == ingredient.cuid ){
+					has_case = true;
+					case_status = dci.dci[0].case_status_name;
+				}
+			})
+			if(has_case == true){
+				$("#dci_" + ingredient.cuid).html("Registration Review Case: " + case_status);
+				$("#dci_" + ingredient.cuid).addClass("prod_sum_dci_open");
+				$("#dci_" + ingredient.cuid).removeClass("prod_sum_dci_none");					
+			}
+			else {
+				$("#dci_" + ingredient.cuid).html("There are no open Reg Review cases");					
+				$("#dci_" + ingredient.cuid).addClass("prod_sum_dci_none");
+				$("#dci_" + ingredient.cuid).removeClass("prod_sum_dci_open");	
+			}
+
+		});
+
+		/*
 		dci_seq.forEach(function(dci,index) {
 			
 			if ($.inArray(dci_case_status[index],["Active","Scheduled"]) > -1) {
@@ -124,6 +144,7 @@ function displayDCI(data){
 			}
 
 		})
+		*/
 
 
 	}
