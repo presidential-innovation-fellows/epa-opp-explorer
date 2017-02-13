@@ -9,3 +9,28 @@
 
 
 }
+
+.dci_head {
+	font-size: 16pt;
+	color: #aaaaaa;
+	margin-top: 10px;
+}
+
+.case_head {
+	font-weight: bold;
+	margin-top: 5px;
+}
+
+.dci_summ_label {
+	width: 150px;
+	vertical-align: top;
+
+}
+
+.dci_order_data_row {
+	display: none;
+}
+
+#reg_review .row {
+
+}

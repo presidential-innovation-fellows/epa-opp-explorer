@@ -7,7 +7,7 @@ dci_data = null; //the DCI data returned from API
 dci_case_status =[];//array of dci case statuses
 dci_seq = [];//array of unique dci (dci_seq) per chemical
 dci_ai =[]; //an array of ingredient CUID
-
+//TODO: delete the above 3 if I don't need them
 
 
 /* File for registration review data call-ins */
@@ -42,44 +42,66 @@ function fetch_dci(cuid) {//gets data and sets up page for each ingredient
 function displayDCI(data){
 	//this function dynamically creates the DCI table in the DOM and injects it into the page. 
 
-	if (dci_data.length > 0 ) {//if there are DCIs 
-		if (has_dci == false){// ...but the table header isn't already added, add it TODO: maybe we don't need this?
-			has_dci = true;
-			var tTbl = $(".regreview_table");
-			var row = "<tr class='headrow'><th>AI</th><th>DCI Name</th><th>Order Data</th><th>Form B</th><th>Status</th></tr>"
-			//$(tTbl).append(row);
+	if (dci_data.dci.length > 0 ) {//if there are DCIs 
 
-		}
-
-		var last_case_seq = null;
 		//loop through records and build some objects
-		dci_data.forEach(function(dci_order_data,index){
+		dci_data.dci.forEach(function(dci,index){
 
 
 			//Generate a row for each new DCI_SEQ 
-			if($.inArray(dci_order_data.dci_seq,dci_seq) == -1){//for each new DCI_seq
+			//if($.inArray(dci_order_data.dci_seq,dci_seq) == -1){//for each new DCI_seq
 				//populate some DCI level information in arrays to use later
-				dci_seq.push(dci_order_data.dci_seq);
-				dci_ai.push(dci_order_data.cuid);
-				dci_case_status.push(dci_order_data.case_status_name);
+				//dci_seq.push(dci_order_data.dci_seq);
+				//dci_ai.push(dci_order_data.cuid);
+				//dci_case_status.push(dci_order_data.case_status_name);
 
-				var dci_head = $("<div class='row'><div class='col-md-12'>[DCI_SEQ]:" + dci_order_data.dci_seq + "/" + dci_order_data.dci_name + " / " + dci_order_data.ind_name + "</div></div>");
+				var dci_head = $("<div class='row'><div class='col-md-12'><div class='dci_head'>Data Call In - " +  dci.ingredient_name + "</div><!-- dci_seq " + dci.dci_seq + " --></div></div>");
+				//There assumptions here: Issue Date, Due Date, etc, are stored at the DCI Order level - which is 
+				//one per company (1-1 rel. w/ case). We're assuming all DCI orders are the same dates for each DCI
+				//so using the values from the first DCI order per DCI for the summary info. If DCI orders ever
+				//differ between companies (orders) - then these summary data should be displayed per DCI Order/Case.
+				var tmpStaffHTML = "";
+				dci.staff.forEach(function(staff,index){
+					tmpStaffHTML = tmpStaffHTML + "<div><a data-sm_uid='" + staff.sm_uid + "'>" + staff.sm_fname + " " + staff.sm_lname + "</a></div>";
+				});
+
+				var dci_summary_tbl =$("<div class='row'><div class='col-md-12'><table class='dci_summary_table'><tr><td class='dci_summ_label'>Issue Date:</td><td>" + oracleDate(dci.issue_date) + "</td></tr><tr><td class='dci_summ_label'>Due Date:</td><td>" + oracleDate(dci.due_date) + "</td></tr><tr><td class='dci_summ_label'>Chem. Reviewer:</td><td>" + tmpStaffHTML + " </td></tr></table></div></div>");
+
+				var anchors = $(dci_summary_tbl).find('a'); 
+		    	$(anchors).on('click',function(){
+		    		contactDialog(anchors);
+		    	});
+
+				var case_headings = $("<div class='row'><div class='col-md-8 case_head'>RR Case Name</div><div class='col-md-2 case_head'>Case Status</div><div class='col-md-2'></div></div>");
+
 				$("#reg_review").append(dci_head);
-
-			}
-
-			//Generate a row for each CASE_NAME (which is per company) - keep track of last case_seq
-			if (dci_order_data.case_seq != last_case_seq){
-				var case_head = $("<div class='row'><div class='col-md-12'>- - [CASE_SEQ]:" + dci_order_data.case_seq + "/" + dci_order_data.case_name + "</div></div>");
-				$("#reg_review").append(case_head);				
-			}
-			last_case_seq = dci_order_data.case_seq;
-
-			//Generate a row for each DCI order data, as that is the most verbose
-			var order_data = $("<div class='row'><div class='col-md-12'>- - - - [DCI_ORDER_DATA_SEQ]:" + dci_order_data.dci_order_data_seq + "/" + dci_order_data.dci_order_data_name + "/" + dci_order_data.order_data_status_name + "</div></div>");
-			$("#reg_review").append(order_data);				
+				$("#reg_review").append(dci_summary_tbl);				
+				$("#reg_review").append(case_headings);
 
 			
+				dci.cases.forEach(function(rr_case, index){
+					//Generate a row for each CASE_NAME (which is per company) - keep track of last case_seq
+					//if (dci_order_data.case_seq != last_case_seq){
+
+
+					var case_detail = $("<div class='row'><div class='col-md-8'><!--" + rr_case.case_seq + "-->" + rr_case.case_name + "</div><div class='col-md-2'>" + rr_case.case_status_name + "</div><div class='col-md-2'><a class=''>Show Studies</a></div></div>");
+		
+					$("#reg_review").append(case_detail);			
+					//}
+					//last_case_seq = case.case_seq;
+
+					//Generate a row for each DCI order data, as that is the most verbose
+					
+					rr_case.dci_order_data.forEach(function(data_order,index){
+
+						var order_data = $("<div class='row dci_order_data_row'><div class='col-md-12'>- - - - [DCI_ORDER_DATA_SEQ]:" + data_order.dci_order_data_seq + "/" + data_order.dci_order_data_name + "/" + data_order.order_data_status_name + "</div></div>");
+						$("#reg_review").append(order_data);	
+
+						//Now, do the studies
+
+					});
+
+				});
 
 		});
 

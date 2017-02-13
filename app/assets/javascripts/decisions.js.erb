@@ -162,7 +162,7 @@ function displayDecision(tDecisions, filterText, tTbl,searchOptions){
 
 		    //Now, set up receipt rows and add to DOM
 		    $.each( decision.items, function(index,item){
-		    	var iRow = $("<tr><td>" + item.subt_desc + "</td><td>(" + item.pin_punch_dt2 + ")</td><td>S#: " + item.irec_seq + "</td><td> - <a>" + item.sm_fname + " " + item.sm_lname + "<a></td></tr>");
+		    	var iRow = $("<tr><td>" + item.subt_desc + "</td><td>(" + item.pin_punch_dt2 + ")</td><td>S#: " + item.irec_seq + "</td><td> - <a data-sm_uid='" + item.sm_uid + "'>" + item.sm_fname + " " + item.sm_lname + "<a></td></tr>");
 		    	$(detailPane).find(".receipt_table").append(iRow);
 		    	var anchor = $(iRow).find('a'); 
 		    	$(anchor).on('click',function(){

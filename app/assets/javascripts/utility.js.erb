@@ -1,10 +1,8 @@
 api_url = "<%= ENV['OPP_API_URL'] %>";
 product_data = null;
 decisions_data = null;
-has_dci = false;
-dci_data = null;
-dci_ai =[];
-rr_case_status =[];
+
+
 ing_summary_data = null;
 
 
@@ -14,19 +12,22 @@ function contactDialog(anchor) {
 
 
 	//1. create content div, then bind it to dialog
-	var contactDiv = $("<div><div id='progressbar'></div><div>Loading...</div><table class='contact_table'><tr><td width='70px'>Name:</td><td 'class'='name1'></td></tr><tr><td>Phone:</td><td class='phone'></td></tr><tr><td>Email:</td><td></td></tr><tr><td>Mail Code:</td><td></td></tr><tr><td>Location:</td><td></td></tr><tr><td>Building:</td><td></td></tr><tr><td>Room:</td><td></td></tr></table></div>");
-	$(contactDiv).dialog({"title":"Contact Information"});
+	var contactDiv = $("<div><div id='progressbar'></div><div>Loading...</div><table class='contact_table'><tr><td width='70px'>Name:</td><td 'class'='name1'></td></tr><tr><td>Phone:</td><td class='phone'></td></tr><tr><td>Email:</td><td></td></tr><tr><td>Mail Code:</td><td></td></tr><tr><td>Building:</td><td></td></tr><tr><td>Room:</td><td></td></tr><tr><td>Teams:</td><td><ul></ul></td></tr></table></div>");
+	$(contactDiv).dialog({"title":"Contact Information",minWidth: 400});
 	$(contactDiv).dialog("open");//2. open the dialog
+
 	//2.5 start progress bar
 	var progBar = $(contactDiv).find("#progressbar")[0];
 	$(progBar).progressbar({value: false});
+
 	var temp = 1;
 	//3. fetch the person's contact information
 	$.ajax({
 	  type: "get",
 	  url: api_url + ":3000/people/",
       crossDomain: true,
-      data: {"first": $(anchor).text().split(" ")[0],"last":$(anchor).text().split(" ")[1]},
+      //data: {"first": $(anchor).text().split(" ")[0],"last":$(anchor).text().split(" ")[1]},
+	  data: {"sm_uid": $(anchor).attr("data-sm_uid")},      
       beforeSend: function(xhr) {
 
       }
@@ -44,12 +45,15 @@ function contactDialog(anchor) {
     	$(emailDiv).text(people_data.email_address);    	
     	var mailDiv = $(contactDiv).find("td")[7];
     	$(mailDiv).text(people_data.mail_code);
-    	var locationDiv = $(contactDiv).find("td")[9];
-    	$(locationDiv).text(people_data.location);
-    	var buildingDiv = $(contactDiv).find("td")[11];
+    	var buildingDiv = $(contactDiv).find("td")[9];
     	$(buildingDiv).text(people_data.building);   
-    	var roomDiv = $(contactDiv).find("td")[13];
+    	var roomDiv = $(contactDiv).find("td")[11];
     	$(roomDiv).text(people_data.room);   
+    	var teamDiv = $(contactDiv).find("ul");
+    	people_data.teams.forEach(function(team,index){
+    		var tmp_team = $("<li><div>" + team.team_name + " - " + team.team_desc + "</div></li>");
+    		teamDiv.append(tmp_team[0]);
+    	})   
     	
       }
 
