@@ -43,13 +43,6 @@ function displayDCI(data){
 		data.dci.forEach(function(dci,index){
 
 
-			//Generate a row for each new DCI_SEQ 
-			//if($.inArray(dci_order_data.dci_seq,dci_seq) == -1){//for each new DCI_seq
-				//populate some DCI level information in arrays to use later
-				//dci_seq.push(dci_order_data.dci_seq);
-				//dci_ai.push(dci_order_data.cuid);
-				//dci_case_status.push(dci_order_data.case_status_name);
-
 				var dci_head = $("<div class='row'><div class='col-md-12'><div class='dci_head'>Data Call In - " +  dci.ingredient_name + "</div><!-- dci_seq " + dci.dci_seq + " --></div></div>");
 				//There assumptions here: Issue Date, Due Date, etc, are stored at the DCI Order level - which is 
 				//one per company (1-1 rel. w/ case). We're assuming all DCI orders are the same dates for each DCI
@@ -62,10 +55,13 @@ function displayDCI(data){
 
 				var dci_summary_tbl =$("<div class='row'><div class='col-md-12'><table class='dci_summary_table'><tr><td class='dci_summ_label'>Issue Date:</td><td>" + oracleDate(dci.issue_date) + "</td></tr><tr><td class='dci_summ_label'>Due Date:</td><td>" + oracleDate(dci.due_date) + "</td></tr><tr><td class='dci_summ_label'>Chem. Reviewer:</td><td>" + tmpStaffHTML + " </td></tr></table></div></div>");
 
-				var anchors = $(dci_summary_tbl).find('a'); 
-		    	$(anchors).on('click',function(){
-		    		contactDialog(anchors);
-		    	});
+				var anchors = $(dci_summary_tbl).find('a');
+				$(anchors).each(function(index,anchor){
+					$(anchor).on('click',function(){
+		    			contactDialog(anchor);
+		    		});
+				}) 
+		    	
 
 				var case_headings = $("<div class='row'><div class='col-md-8 case_head'>RR Case Name</div><div class='col-md-2 case_head'>Case Status</div><div class='col-md-2'></div></div>");
 
@@ -129,29 +125,9 @@ function displayDCI(data){
 
 		});
 
-		/*
-		dci_seq.forEach(function(dci,index) {
-			
-			if ($.inArray(dci_case_status[index],["Active","Scheduled"]) > -1) {
-					$("#dci_" + dci_ai[index]).html("Registration Review Case: " + dci_case_status[index]);
-					$("#dci_" + dci_ai[index]).addClass("prod_sum_dci_open");
-					$("#dci_" + dci_ai[index]).removeClass("prod_sum_dci_none");					
-			}
-			else {//make it visually clear that there is no case open
-					$("#dci_" + dci_ai[index]).html("There are no open Reg Review cases");					
-					$("#dci_" + dci_ai[index]).addClass("prod_sum_dci_none");
-					$("#dci_" + dci_ai[index]).removeClass("prod_sum_dci_open");					
-			}
-
-		})
-		*/
 
 
-	}
+	};
 
 
-
-
-
-
-}
+};
