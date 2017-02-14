@@ -72,25 +72,30 @@ function displayDCI(data){
 			
 				dci.cases.forEach(function(rr_case, index){
 					//Generate a row for each CASE_NAME (which is per company) - keep track of last case_seq
-					//if (dci_order_data.case_seq != last_case_seq){
-
 
 					var case_detail = $("<div class='row'><div class='col-md-8'><!--" + rr_case.case_seq + "-->" + rr_case.case_name + "</div><div class='col-md-2'>" + rr_case.case_status_name + "</div><div class='col-md-2'><a class=''>Show Studies</a></div></div>");
-		
+					var case_studies = $("<div class='row'><div class='col-md-12 case_studies'><table></table></div></div>");
+
+					$(case_detail).find("a").click(function(){ 
+						$(case_studies).find(".case_studies").toggle(400);
+						if($(this).text() == "Show Studies"){
+							$(this).text("Hide Studies");
+						}
+						else
+						{ $(this).text("Show Studies");}
+					});
+
 					$(".dci_content").append(case_detail);			
-					//}
-					//last_case_seq = case.case_seq;
 
 					//Generate a row for each DCI order data, as that is the most verbose
-					
 					rr_case.dci_order_data.forEach(function(data_order,index){
 
-						var order_data = $("<div class='row dci_order_data_row'><div class='col-md-12'>- - - - [DCI_ORDER_DATA_SEQ]:" + data_order.dci_order_data_seq + "/" + data_order.dci_order_data_name + "/" + data_order.order_data_status_name + "</div></div>");
-						$(".dci_content").append(order_data);	
+						var order_data = $("<tr><td class='case_study_data_number'>" + data_order.dci_order_data_number + "</td><td class='case_study_data_name'>" + data_order.dci_order_data_name + "</td><td>" + data_order.order_data_status_name + "</td></tr>");
 
-						//Now, do the studies
+						$(case_studies).find("table").append(order_data[0]);	
 
 					});
+					$(".dci_content").append(case_studies);						
 
 				});
 

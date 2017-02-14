@@ -27,10 +27,18 @@
 
 }
 
-.dci_order_data_row {
+.case_studies {
 	display: none;
 }
 
-#reg_review .row {
+ .case_study_data_number {
+ 	width: 100px;
+ 	padding-left: 15px;
+ }
+ .case_study_data_name {
+ 	width: 300px;
+ } 
 
-}
+ .case_studies {
+ 	color: #878787;
+ }
