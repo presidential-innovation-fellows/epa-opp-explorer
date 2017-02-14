@@ -5,7 +5,15 @@
 function loadPage(pageNumber) {//this is used for navigating through result sets of mywork decisions
 
 	$("#user_header").html("Hi " + sessionStorage.oppin_user + " | <a onclick=\"javascript: sessionStorage.removeItem('oppin_user'); \">Logout</a>");
-
+	//setup filter button display
+	$(".filter-tag").each(function(index,button){
+		//if localStorage filter is set, highlight the button
+		if($(button).attr("data-filter") == localStorage.getItem("mywork_filter")){
+			$(button).addClass("filter-tag-selected");
+			decisionFilter = localStorage.getItem("mywork_filter");
+		}
+	});
+	
     fetch_decisions({
         "sm_uid" : sessionStorage.oppin_user.toUpperCase(),
         "tables" : ["#my_decisions .decision_table"],
@@ -15,8 +23,11 @@ function loadPage(pageNumber) {//this is used for navigating through result sets
 }  
 
 function setupPage(){
+
+
 	$(".filter-tag").click(function(){
 		decisionFilter = $(this).attr("data-filter");
+		localStorage.setItem('mywork_filter',decisionFilter);
 		loadPage(1);
 		$(".filter-tag").removeClass("filter-tag-selected");
 		$(this).addClass("filter-tag-selected");
