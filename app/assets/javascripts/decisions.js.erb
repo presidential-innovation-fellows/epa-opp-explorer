@@ -31,9 +31,12 @@ function fetch_decisions(searchOptions){
       crossDomain: true,
       data: ajax_data, 
       beforeSend: function(xhr) {
-
-		$("#current_decision").css("display","block"); //show current decision
-		$("#past_decisions").css("display","block"); //show current decision
+		//clear decisions
+		//$("#current_decision").hide();
+		$(".decision_table").empty();
+		$('.graph_div').remove();
+		//$("#current_decision").css("display","block"); //show current decision
+		//$("#past_decisions").css("display","block"); //show current decision
       	$("#current_decision").append("<div class='loading'>Loading Current Decisions...</div>");
       	$("#past_decisions").append("<div class='loading'>Loading Past Decisions...</div>");
 
@@ -77,6 +80,7 @@ function displayDecision(tDecisions, filterText, tTbl,searchOptions){
 	//sets up a whole decisions table for a particular filter, such as current
 	$(tTbl).empty();
 	var last_dec_seq = null;
+
 	$.each( tDecisions.data, function( index, decision ) {
 		//check for duplicate decision, and skip
 		//TODO: this assumes duplicates appear immediately after one another, need
@@ -174,13 +178,12 @@ function displayDecision(tDecisions, filterText, tTbl,searchOptions){
 	    }
 
   	});//end decision each loop
-  	//add a row for pagination
 
+  	if(tDecisions.data.length > 0){  	//add a row for pagination if there are decisions
+		var pRow = $("<tr><td colspan='7'>Page " +  tDecisions.page + " <a class='pagination_link' id='next_page' onclick='javascript: loadPage(" + (parseInt(tDecisions.page) + 1) + ")'>Next Page</a><a class='pagination_link' id='prev_page' onclick='javascript: loadPage(" + (parseInt(tDecisions.page) - 1) + ")'>Previous Page</a></td></tr>");  	
 
-	var pRow = $("<tr><td colspan='7'>Page " +  tDecisions.page + " <a class='pagination_link' id='next_page' onclick='javascript: loadPage(" + (parseInt(tDecisions.page) + 1) + ")'>Next Page</a><a class='pagination_link' id='prev_page' onclick='javascript: loadPage(" + (parseInt(tDecisions.page) - 1) + ")'>Previous Page</a></td></tr>");  	
-
-  	$(tTbl).append(pRow);
-
+	  	$(tTbl).append(pRow);
+	}
 } 
 
 function showDetail(row){

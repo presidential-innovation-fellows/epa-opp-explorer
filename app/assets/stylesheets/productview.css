@@ -109,3 +109,8 @@ div.loading {
 .loading {
 	font-size: 14pt;
 }
+
+.product_not_found {
+	font-style: italic;
+	color: #55aa55 !important;
+}

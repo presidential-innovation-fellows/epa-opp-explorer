@@ -4,8 +4,7 @@ var docArray = [];//just keeping track of docs globally
 
 function fetch_documents(admin_num) {
 
-	//var admin_num_value = $('#admin_num').val();
-
+ 	docArray = []; //when fetching docs this way, there are duplicates. So we keep track in array...
 	var url = "<%= ENV['DOCUMENTUM_PROD_URL'] %>" + ".json";
 
 	$("#document_library").css("display","block"); //show product header  
@@ -41,6 +40,7 @@ function fetch_documents(admin_num) {
 			$("#document_library .row").css("display","block");
 
 	    	loadTiles(data,doc_type);
+
 	    	}
 
 		});
@@ -53,13 +53,14 @@ function fetch_documents(admin_num) {
   
 function loadTiles(data,doc_type) {
 
-	$("#document_library").css("display","inline-block");//show library div
+	//$("#document_library").css("display","inline-block");//show library div
 
 	$.each( data.entries, function( index, value ) {
 		if(docArray.indexOf(value.content.properties["r_object_id"]) == -1){//new document, add it to global array
 			docArray.push(value.content.properties["r_object_id"]);					
 		}
 		else{
+
 			return;//this doc is being returned for second time, skip it		
 		};
 

@@ -65,9 +65,9 @@ function displayDCI(data){
 
 				var case_headings = $("<div class='row'><div class='col-md-8 case_head'>RR Case Name</div><div class='col-md-2 case_head'>Case Status</div><div class='col-md-2'></div></div>");
 
-				$("#reg_review").append(dci_head);
-				$("#reg_review").append(dci_summary_tbl);				
-				$("#reg_review").append(case_headings);
+				$(".dci_content").append(dci_head);
+				$(".dci_content").append(dci_summary_tbl);				
+				$(".dci_content").append(case_headings);
 
 			
 				dci.cases.forEach(function(rr_case, index){
@@ -77,7 +77,7 @@ function displayDCI(data){
 
 					var case_detail = $("<div class='row'><div class='col-md-8'><!--" + rr_case.case_seq + "-->" + rr_case.case_name + "</div><div class='col-md-2'>" + rr_case.case_status_name + "</div><div class='col-md-2'><a class=''>Show Studies</a></div></div>");
 		
-					$("#reg_review").append(case_detail);			
+					$(".dci_content").append(case_detail);			
 					//}
 					//last_case_seq = case.case_seq;
 
@@ -86,7 +86,7 @@ function displayDCI(data){
 					rr_case.dci_order_data.forEach(function(data_order,index){
 
 						var order_data = $("<div class='row dci_order_data_row'><div class='col-md-12'>- - - - [DCI_ORDER_DATA_SEQ]:" + data_order.dci_order_data_seq + "/" + data_order.dci_order_data_name + "/" + data_order.order_data_status_name + "</div></div>");
-						$("#reg_review").append(order_data);	
+						$(".dci_content").append(order_data);	
 
 						//Now, do the studies
 

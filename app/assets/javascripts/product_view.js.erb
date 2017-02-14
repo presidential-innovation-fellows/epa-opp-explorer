@@ -23,12 +23,22 @@ function fetch_product(ri_num) {
 		$("#product_summary .loading").remove();
 		$("#product_summary .row").css("display","block");
 
-    	product_data = data[0];//1. store results of /product API call in a global variable
-    	displayProduct();//2. render the display of the product summary section
-    	fetch_documents(ri_num);//3. fetch from the documentum API the list of documents for this regulatory item
-    	product_data.ingredients.forEach(function(active_ingredient,index){//4. for each ingredient in the product, fetch any active DCI's from /dci API endpoint
-    		fetch_dci(active_ingredient.cuid);
-    	});
+		clearProductView();
+		
+		if(data.length > 0){
+			$('#ri_name').removeClass("product_not_found");			
+	    	product_data = data[0];//1. store results of /product API call in a global variable
+	    	displayProduct();//2. render the display of the product summary section
+	    	fetch_documents(ri_num);//3. fetch from the documentum API the list of documents for this regulatory item
+	    	product_data.ingredients.forEach(function(active_ingredient,index){//4. for each ingredient in the product, fetch any active DCI's from /dci API endpoint
+	    		fetch_dci(active_ingredient.cuid);
+	    	});
+		}
+		else {
+			$('#ri_name').html("No product found for Reg Num: " + $("#ri_num").val() );	
+			$('#ri_name').addClass("product_not_found");		
+		}
+
     	
       }
 
@@ -40,28 +50,50 @@ function fetch_product(ri_num) {
   
 function displayProduct() {
 
+		$("#product_summary").show();
+		//load summary fields
+		$('#ri_name').html(product_data.rin_name);
+		$('#ri_number').html(product_data.ri_num);
+		//$('#ri_type').html(tempData.rist_name);
+		$('#co_name').html(product_data.co_name);
+		$('#ri_status').html(product_data.rist_name);
 
-	//load summary fields
-	$('#ri_name').html(product_data.rin_name);
-	$('#ri_number').html(product_data.ri_num);
-	//$('#ri_type').html(tempData.rist_name);
-	$('#co_name').html(product_data.co_name);
-	$('#ri_status').html(product_data.rist_name);
-
-	//loop over ingredients array
-	$('#ingredients').empty();
-	$.each(product_data.ingredients,function(index,ingredient) {
+		//loop over ingredients array
 		
-		tmp_ing = "<div><div id='ingredient_" + ingredient.cuid + "' class='prod_summary_ingredient'><a href='../ingredient/" + ingredient.cuid + "'>" + ingredient.ind_name + "</a></div><div class='prod_sum_dci' id='dci_" + ingredient.cuid + "'></div></div>"
-		$("#ingredients").append(tmp_ing);
+		$.each(product_data.ingredients,function(index,ingredient) {
+			
+			tmp_ing = "<div><div id='ingredient_" + ingredient.cuid + "' class='prod_summary_ingredient'><a href='../ingredient/" + ingredient.cuid + "'>" + ingredient.ind_name + "</a></div><div class='prod_sum_dci' id='dci_" + ingredient.cuid + "'></div></div>"
+			$("#ingredients").append(tmp_ing);
 
 
-	});
+		}); 	
+	//}
 
-
-
- 	
 };
+
+function clearProductView() {
+
+	//clear product summary fields
+	//$("#product_summary").hide();
+	$('#ri_name').html("");
+	$('#ri_number').html("");
+	$('#co_name').html("");
+	$('#ri_status').html("");	
+
+	$('#ingredients').empty();	
+
+	//clear dcis
+	//$("#reg_review").hide();
+	$(".dci_content").empty();
+
+	//documents
+	//$("#document_library").hide();
+	$("#document_list").empty();
+
+	//decision history
+	//$("#past_decisions").hide();
+
+}
 
 
 
