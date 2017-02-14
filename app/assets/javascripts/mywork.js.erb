@@ -4,7 +4,8 @@
 
 function loadPage(pageNumber) {//this is used for navigating through result sets of mywork decisions
 
-	$("#user_header").html("Hi " + sessionStorage.oppin_user + " | <a onclick=\"javascript: sessionStorage.removeItem('oppin_user'); \">Logout</a>");
+	//temporary prototype of a user login
+	$("#user_header").html("Hi " + sessionStorage.oppin_user + " | <a onclick=\"javascript:logout()\">Logout</a><br>");
 	//setup filter button display
 	$(".filter-tag").each(function(index,button){
 		//if localStorage filter is set, highlight the button
@@ -24,7 +25,6 @@ function loadPage(pageNumber) {//this is used for navigating through result sets
 
 function setupPage(){
 
-
 	$(".filter-tag").click(function(){
 		decisionFilter = $(this).attr("data-filter");
 		localStorage.setItem('mywork_filter',decisionFilter);
@@ -35,3 +35,8 @@ function setupPage(){
 	})
 }
 
+function logout() {
+	sessionStorage.removeItem('oppin_user'); 
+	window.location.reload();
+	$("#user_header").append("<div class='logging-out loading'>Logging out</div>");
+}
