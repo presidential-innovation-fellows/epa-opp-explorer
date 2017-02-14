@@ -251,7 +251,7 @@ function decisionGraph(dTable, decision){
 			var dpEndX = getDateX(totalDays, ffsStartDt, dpEndDate);		
 			var dpWidth = dpEndX - dpStartX; 
 
-			var datapackageLine = $("<div class='datapackage_line'>DP: " + dp.dpkg_title + " <br> " + dp.team_desc + " <a>" + dp.sm_fname + " " + dp.sm_lname + "</a></div>").css("left",dpStartX).css("width",dpWidth);	
+			var datapackageLine = $("<div class='datapackage_line'>DP: " + dp.dpkg_title + " <br> " + dp.team_desc + " <a data-sm_uid='" + dp.sm_uid + "'>" + dp.sm_fname + " " + dp.sm_lname + "</a></div>").css("left",dpStartX).css("width",dpWidth);	
 			$(graphContainer).find('.graph_div').append(datapackageLine);
 	    	var anchor = $(datapackageLine).find('a'); 
 	    	$(anchor).on('click',function(){
