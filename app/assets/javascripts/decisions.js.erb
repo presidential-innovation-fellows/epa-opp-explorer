@@ -40,14 +40,26 @@ function fetch_decisions(searchOptions){
       	$("#current_decision").append("<div class='loading'>Loading Current Decisions...</div>");
       	$("#past_decisions").append("<div class='loading'>Loading Past Decisions...</div>");
 
+      	if(searchOptions.sm_uid){//its being invoked from myWork page
+      		$(searchOptions.tables).empty();
+	      	$("#my_decisions").append("<div class='loading'>Loading Current Decisions...</div>");     		
+      	}
+
       },
 
       success: function (data){
 
 		$("#current_decision .loading").remove();
 		$("#past_decisions .loading").remove();
+
+      	if(searchOptions.sm_uid){//its being invoked from myWork page
+	      	$("#my_decisions .loading").remove();     		
+      	}		
     	
 		decisions_data = data;
+
+		//TODO Re-examine whether or not it really makes sense to use the same decision setup for 
+		//multiple of pages - its getting complicated. 
 
 		if(searchOptions.ri_num){
 		 	//setup current Decisions
