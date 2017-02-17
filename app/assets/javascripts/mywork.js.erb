@@ -4,7 +4,7 @@
 
 function loadPage(pageNumber) {//this is used for navigating through result sets of mywork decisions
 
-	//temporary prototype of a user login
+	//set up the visual indicator that user is logged in
 	$("#user_header").html("Hi " + sessionStorage.oppin_user + " | <a onclick=\"javascript:logout()\">Logout</a><br>");
 	//setup filter button display
 	$(".filter-tag").each(function(index,button){
@@ -15,7 +15,7 @@ function loadPage(pageNumber) {//this is used for navigating through result sets
 		}
 	});
 	
-    fetch_decisions({
+    fetch_decisions({//this is defined in decisions.js
         "sm_uid" : sessionStorage.oppin_user.toUpperCase(),
         "tables" : ["#my_decisions .decision_table"],
         "page" : pageNumber,
