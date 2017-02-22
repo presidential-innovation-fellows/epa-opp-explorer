@@ -1,30 +1,41 @@
-function fetch_ingredient(cuid) {
+function fetch_ingredient(ing_id, ing_key_name) {
 
 	
-	var url = api_url + ":3000/ingredients/" + cuid;
+	var url = api_url + ":3000/ingredients/" + ing_id;
 	//show div for spinner
 
 	$.ajax({
 	  type: "get",
+    data: {key_name: ing_key_name},
 	  url: url,
       crossDomain: true,
       beforeSend: function(xhr) {
-
-		    $("#ingredient_summary").css("display","block"); //show product header  
+      clearIngredientView();
+		    $("#ingredient_summary").css("display","block"); //show ingredient header  
       	   $("#ingredient_summary").append("<div class='loading'>Loading Ingredient Summary...</div>");
-
           }
       ,
       success: function (data){
 		    $("#ingredient_summary .loading").remove();
 		    $("#ingredient_summary .row").css("display","block");
 
-    	ing_summary_data = data.data[0];//1. store results of /ingredient API call in a global variable
-    	displayIngredientSummary();//2. render the display of the product summary section
-    	//fetch_documents(ri_num);//3. fetch from the documentum API the list of documents for this regulatory item
-    	//product_data.ingredients.forEach(function(active_ingredient,index){//4. for each ingredient in the product, fetch any active DCI's from /dci API endpoint
-    		//fetch_dci(active_ingredient.cuid);
-    	//});
+
+      if(data.data[0]){
+          fetch_decisions({
+          "cuid" : data.data[0].cuid,
+          "tables" : ["#current_decision .decision_table"]
+          }); 
+        ing_summary_data = data.data[0];//1. store results of /ingredient API call in a global variable
+        displayIngredientSummary(); 
+
+      }
+      else {
+      $('#ingredient_name').html("No ingredient found for: " + $("#pc_code_search").val() ); 
+      $('#ingredient_name').addClass("ingredient_not_found");        
+      }
+      
+
+
     	
       }
 
@@ -45,3 +56,19 @@ function displayIngredientSummary () {
   $('#pt_type').html(ing_summary_data.pt_desc);
   
 };
+
+function clearIngredientView() {
+
+  //clear ingredient summary fields
+
+  $('#ingredient_name').html("");
+  $('#pc_code').html("");
+  //$('#ri_type').html(tempData.rist_name);
+  $('#cas_num').html("");
+  $('#ing_class').html("");
+  $('#first_reg').html("");
+  $('#pt_type').html("");
+ 
+    $(".decision_table").empty();
+
+}

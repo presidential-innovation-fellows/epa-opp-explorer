@@ -17,3 +17,13 @@
     margin-top: 0px;
     font-weight: 200;
 }
+
+#search_status {
+	color: red;
+	font-style: italic;
+}
+
+.ingredient_not_found {
+	font-style: italic;
+	color: #55aa55 !important;
+}
