@@ -1,0 +1,70 @@
+
+#home_head div {
+
+}
+
+#home_menu {
+	float: right;
+	display: inline;	
+	margin-top: 10px;
+	
+}
+
+#home_menu ul {
+	list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+}
+
+#home_menu li {
+	display: inline;
+	margin-right: 20px;
+	color: #545454;	
+}
+
+#explorer_title {
+	font-size: 16pt;
+	padding-left: 15px;
+}
+
+#home_head { /* section */
+	background: #cccccc;
+	padding-top: 10px;
+	padding-bottom: 20px;
+}
+
+#home_other {
+	background: #aaaaff;
+	padding-top: 10px;
+	padding-bottom: 20px;	
+}
+
+#explorer_montage {
+	width: 500px;
+}
+
+#home_about .feature_title {
+	font-size: 15pt;
+}
+
+#home_about .feature_text {
+	font-size: 12pt;
+}
+
+.pane {
+	margin-right: 30px;
+}
+
+.pane_title {
+	font-size: 13pt;
+	margin-bottom: 10px;
+}
+
+.pane_text {
+	font-size: 12pt;
+}
+
+.more_link {
+	margin-top: 10px;
+}

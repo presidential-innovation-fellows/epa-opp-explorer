@@ -5,13 +5,24 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
-  get 'home' => 'home#prototypes'
-  get 'home/productview' => 'home#productview'
-  get 'home/productview/:ri_num' => 'home#productview'  
-  get 'home/ingredient/:cuid' => 'home#ingredient'   
-    get 'home/ingredient' => 'home#ingredient'   
-  get 'home/mywork' => 'home#mywork'
-  get 'home/documentlibrary' => 'home#documentlibrary'
+  get 'explorer' => 'explorer#prototypes'
+  get 'explorer/productview' => 'explorer#productview'
+  get 'explorer/productview/:ri_num' => 'explorer#productview'  
+  get 'explorer/ingredient/:cuid' => 'explorer#ingredient'   
+    get 'explorer/ingredient' => 'explorer#ingredient'   
+  get 'explorer/mywork' => 'explorer#mywork'
+  get 'explorer/documentlibrary' => 'explorer#documentlibrary'
+
+  get 'home' => 'home#index'
+  get 'home/about' => 'home#about'
+  get 'home/oppteam' => 'home#oppteam'
+  get 'home/designteam' => 'home#designteam'
+  get 'home/methods' => 'home#methods'
+  get 'home/involded' => 'home#involved'
+  get 'home/technology' => 'home#technology'
+  get 'home/currentwork' => 'home#currentwork'
+  get 'home/archive' => 'home#archive'
+   
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
