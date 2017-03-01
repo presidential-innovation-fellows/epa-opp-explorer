@@ -1,4 +1,4 @@
-div {
+body {
 	font-size: 14pt;
 }
 
@@ -28,10 +28,11 @@ div {
 	display: inline;
 	margin-right: 20px;
 	color: #545454;	
+	font-size: 14pt;
 }
 
 #explorer_title {
-	font-size: 16pt;
+	font-size: 14pt;
 	padding-left: 15px;
 }
 
@@ -87,6 +88,7 @@ div {
 
 #oppteam {
 	line-height: 170%;
+	font-size: 14pt;
 }
 #oppteam .row {
 	background: rgb(160,209,93);	
@@ -99,14 +101,70 @@ div {
 	color: #ffffff;
 }
 
+.team_panel {
+	border-radius: 10px;
+	background: #ffffff;
+	width: 100%;
+	height: 450px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 15px;
+	padding: 5px;
 
+}
 
+#oppteam .team_panel .row {
+	background: transparent;
+}
+
+#oppteam .division_panel {
+	border: 1px solid #000000;
+}
+
+#oppteam .division_title {
+	font-weight: 600;
+	font-size: 12pt;
+	line-height: 110%;
+}
+
+#oppteam .division_names {
+	line-height: 110%;
+	font-size: 11pt;
+}
+
+/* How is it being built */
+
+#how_built {
+	font-size: 14pt;
+}
+
+#how_built .outer_row {
+	background-image: url("/assets/background_fade.jpg");
+}
+
+#how_built h1 {
+	margin-bottom: 30px;
+}
+
+#how_built .panel {
+	padding: 10px;
+}
+
+#how_built ul {
+	margin-top: 10px;
+}
+
+#how_built .pane_title {
+	color: rgb(65,147,227);
+}
 
 #home_other {
 	background: #aaaaff;
 	padding-top: 10px;
 	padding-bottom: 20px;	
 }
+
+
 
 .pane {
 	margin-right: 30px;
@@ -118,7 +176,7 @@ div {
 }
 
 .pane_text {
-	font-size: 12pt;
+	font-size: 11pt;
 }
 
 .more_link {
@@ -165,14 +223,14 @@ div {
 	background: rgb(160,209,93);	
 
 }
-#work_stream_1 .first-row {
+#currentwork .first-row {
 	
 	padding-top: 35px;
 	padding-bottom: 20px;
 
 }
 
-#work_stream_1 .last-row {
+#currentwork .last-row {
 	
 	padding-bottom: 35px;	
 }
