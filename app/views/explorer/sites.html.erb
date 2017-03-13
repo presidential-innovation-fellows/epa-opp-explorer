@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<%= javascript_include_tag "application" %>
+<%= stylesheet_link_tag "application" %>
+
+
+<script type="text/javascript">
+
+    $( document ).ready(function() {
+
+        //if this page is loaded with a reg_num passesd, then automatically load that product
+        var url = window.location.toString(); 
+        if(url.substr(url.lastIndexOf('/') + 1,url.indexOf('?') > 0 ? url.indexOf('?') : url.length).length !=0){
+            //a reg_num has been passed in the URL /productview/xxxxxxx
+            var puid = url.substr(url.lastIndexOf('/') + 1,url.indexOf('?') > 0 ? url.indexOf('?') : url.length);
+            console.log('puid: ' + puid);
+            
+            loadSites(puid);
+
+
+        }        
+
+    });
+
+    function loadSites(puid){
+        //alert("loadSites: " + puid);
+
+        fetchSites(puid);
+    }
+
+function fetchSites(puid) {
+
+    
+    var url = api_url + ":3000/sites/" + puid;
+    //show div for spinner
+
+    $.ajax({
+      type: "get",
+      url: url,
+      crossDomain: true, 
+      success: function(data){
+
+            $.each( data, function( key, site ) {
+            //alert( "site use:" + site.site_desc );
+                var siteDiv = $("<div>" + site.site_desc + "</div>");
+                $("#sites_div").append(siteDiv);
+            });
+
+
+      }
+
+    });
+
+};
+    
+
+</script>
+
+</head>
+
+
+<body>
+
+    <div class="container">
+        <section id="header">
+            <div>
+                <h1>
+                Sites Prototype</h1>
+            </div>
+        </section>
+        <section id="sites_div">
+        
+
+
+        </section>
+        
+    </div>
+
+</body>

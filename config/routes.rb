@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     get 'explorer/ingredient' => 'explorer#ingredient'   
   get 'explorer/mywork' => 'explorer#mywork'
   get 'explorer/documentlibrary' => 'explorer#documentlibrary'
+  get 'explorer/sites/:puid' => 'explorer#sites'
 
   get 'home' => 'home#index'
   get 'home/about' => 'home#about'

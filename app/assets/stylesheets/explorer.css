@@ -25,34 +25,12 @@ section {
 	
 }
 
-#document_library {
-	display: none;
-	margin-top: 10px;
-}
 
 #my_decisions {
 	display: none;
 }
 
-#document_list {
-	list-style-type: none;
-	padding-left: 0px;
-	margin-top: 20px;
-	width: 500px;
 
-}
-
-.document-list-div {
-	max-height: 400px;
-	overflow: auto;
-}
-
-#document_list li {
-	border-bottom: 1px solid #aaaaaa;
-	margin-left: 15px;
-	padding: 10px;
-
-}
 
 .reg_num {
 
@@ -64,35 +42,9 @@ section {
 	color: #cacaca;
 }
 
-.download {
-
-	font-size: 10pt;
-	color: #cccccc;
-	margin-left: 20px;
-	float: right;
 
 
-}
 
-.doc_name {
-	margin-left: 10px;
-	font-size: 9pt;
-	display: inline-block;
-}
-
-.doc_type {
-	font-size: 10pt;
-	color: #acacac;
-	display: inline-block;
-
-}
-
-#previewPane {
-	width: 600px;
-	height: 500px;
-
-	/* border: 1px solid #000000; */
-}
 
 .pagination_link {
 	margin-left: 10px;

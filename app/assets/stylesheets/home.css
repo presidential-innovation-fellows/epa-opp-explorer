@@ -2,11 +2,18 @@ body {
 	font-size: 14pt;
 }
 
+#home-container section {
+
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
 #home_head { 
 
 	padding-top: 10px;
+	padding-bottom: 20px;
 }
-#home_head div {
+#home_head div{
 
 }
 
@@ -89,6 +96,7 @@ body {
 #oppteam {
 	line-height: 170%;
 	font-size: 14pt;
+
 }
 #oppteam .row {
 	background: rgb(160,209,93);	
@@ -136,6 +144,7 @@ body {
 
 #how_built {
 	font-size: 14pt;
+	line-height: 120%;
 }
 
 #how_built .outer_row {
@@ -148,22 +157,49 @@ body {
 
 #how_built .panel {
 	padding: 10px;
+	min-height: 300px;
 }
 
 #how_built ul {
 	margin-top: 10px;
+
+}
+
+#how_built li {
+	margin-bottom: 12px;
 }
 
 #how_built .pane_title {
 	color: rgb(65,147,227);
 }
 
+/* get involved */ 
+
+#get_involved .outer_row {
+	background: rgb(247,130,83);
+}
+
+
+
+
+
+
+
+
+
+
+
+
 #home_other {
 	background: #aaaaff;
 	padding-top: 10px;
 	padding-bottom: 20px;	
+	display: none;
 }
 
+#home_other2 {
+	display: none;
+}
 
 
 .pane {
@@ -223,16 +259,15 @@ body {
 	background: rgb(160,209,93);	
 
 }
-#currentwork .first-row {
+.first-row {
 	
-	padding-top: 35px;
-	padding-bottom: 20px;
+	padding-top: 45px;
 
 }
 
-#currentwork .last-row {
+.last-row {
 	
-	padding-bottom: 35px;	
+	padding-bottom: 45px;	
 }
 
 #work_stream_1 h2 {

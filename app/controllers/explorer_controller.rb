@@ -29,6 +29,10 @@ class ExplorerController < ApplicationController
 
 	end
 
+	def sites
+
+	end
+
 
 
 
