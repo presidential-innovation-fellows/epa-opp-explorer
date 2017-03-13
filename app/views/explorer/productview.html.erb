@@ -15,21 +15,14 @@
 
     $( document ).ready(function() {
 
-        function loadProductPage(ri_num){
 
-            fetch_product(ri_num);
-
-            fetch_decisions({
-                "ri_num" : ri_num,
-                "tables" : ["#current_decision .decision_table","#past_decisions .decision_table"]
-                });
-
-        };
-
-        $("#search_click").click(function(){
+        //PAGE SETUP
+        $("#search_click").click(function(){//add search click envent
             loadProductPage($('#ri_num').val())   
             } 
         );
+
+
 
         //if this page is loaded with a reg_num passesd, then automatically load that product
         var url = window.location.toString(); 
@@ -41,7 +34,16 @@
 
         }
 
+        function loadProductPage(ri_num){
 
+            fetch_product(ri_num);
+
+            fetch_decisions({
+                "ri_num" : ri_num,
+                "tables" : ["#current_decision .decision_table","#past_decisions .decision_table"]
+                });
+
+        };
 
     });
 
@@ -178,10 +180,11 @@
         </div>     
         <div class="row document-list-div">
             <div class="col-md-4">
-                <ul id="document_list">
+                <div class="document_pane">
+                    <ul id="document_list">
 
-                </ul>
-
+                    </ul>
+                </div>
             </div>
             <div class="col-md-8">
                 <iframe src="" id="previewPane" frameborder="0">

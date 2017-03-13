@@ -69,6 +69,7 @@ function loadTiles(data,doc_type) {
 
 		var ul = document.getElementById("document_list");
 	    var li = document.createElement("li");
+	    $(li).addClass("doc_list_item");
 
 		var div = $("<div class='doc_type'>" + value.content.properties["r_object_type"] + "</div>");
 	   	$(li).append(div);
@@ -83,7 +84,11 @@ function loadTiles(data,doc_type) {
 	    //div = $("<div class='minor_text'>Object ID:" + value.content.properties["r_object_id"] + "</div>");
 	   	//$(li).append(div);	   	
 
-	    div = $("<a id='down_" + value.content.properties["r_object_id"] + "' class='download' target='_blank'>Preview</a>");
+	    div = $("<a id='down_" + value.content.properties["r_object_id"] + "' class='btn btn-default download' target='_blank'>Preview</a>");
+	    $(div).click(function(){ 
+	    	$(".download").parent().removeClass("doc_selected");
+	    	$(this).parent().addClass("doc_selected");
+	    });
 	   	$(li).append(div);	   	
 
 
