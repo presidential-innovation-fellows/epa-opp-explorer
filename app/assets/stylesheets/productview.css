@@ -145,7 +145,7 @@ div.loading {
 }
 
 #document_library {
-	display: none;
+	display: block;
 }
 
 #past_decisions {

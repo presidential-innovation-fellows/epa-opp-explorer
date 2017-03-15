@@ -8,6 +8,7 @@
 
 .decision_table .headrow {
 	background-color: #ffffff;
+
 }
 
 .decision_table tr:hover {
@@ -28,6 +29,7 @@
 	border-top-color: #cccccc;
 	border-top-style: solid;
 	padding: 5px;
+	color: #545454;
 
 }
 
