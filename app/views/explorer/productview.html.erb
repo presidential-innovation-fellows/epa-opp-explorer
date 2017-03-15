@@ -22,7 +22,12 @@
             } 
         );
 
+        //setup submenu links
+        $(".submenu_links").click(function(){ 
 
+            showSubMenu(this,this.id);
+
+        });
 
         //if this page is loaded with a reg_num passesd, then automatically load that product
         var url = window.location.toString(); 
@@ -42,6 +47,28 @@
                 "ri_num" : ri_num,
                 "tables" : ["#current_decision .decision_table","#past_decisions .decision_table"]
                 });
+
+        };
+
+        function showSubMenu(anchor,subSection) {
+            $("section.sub").css("display","none").css("font-weight","none");
+            $(".submenu_links").removeClass("sub_selected");           
+            $(anchor).addClass("sub_selected");
+            switch(subSection) {
+                case "sublnk_documents":
+                    $("#document_library").show();
+
+                    break;
+                case "sublnk_rr":
+                    $("#reg_review").show();
+                    break;
+                case "sublnk_past_decisions":
+                    $("#past_decisions").show();
+                    break;
+
+                default:
+                    break;
+            }            
 
         };
 
@@ -158,7 +185,19 @@
 
      </section>
 
-     <section id="reg_review">
+     <section id="sub_menu">
+        <div class="row">
+            <div class="col-md-12">
+                <ul>
+                    <li><a href="" onclick="javascript: return false;" id="sublnk_documents" class="submenu_links">Documents</a></li>
+                    <li><a href="" onclick="return false"  id="sublnk_rr" class="submenu_links">Reg Review</a></li>
+                    <li><a href=""  onclick="return false"  id="sublnk_past_decisions" class="submenu_links">Past Decisions</a></li>
+
+                </ul>
+            </div>
+        </div>
+     </section>
+     <section id="reg_review" class="sub">
          <div class="row">
              <div class="col-md-12">
                     <h3>Registration Review Activity</h3>
@@ -172,7 +211,7 @@
 
      </section>
 
-     <section id="document_library">
+     <section id="document_library" class="sub">
         <div class="row">
              <div class="col-md-12">
                     <h3>Documentum Documents</h3>
@@ -194,7 +233,7 @@
         </div>
      </section>
 
-     <section id="past_decisions">
+     <section id="past_decisions" class="sub">
          <div class="row">
              <div class="col-md-12">
                     <h3>Past Decisions</h3>

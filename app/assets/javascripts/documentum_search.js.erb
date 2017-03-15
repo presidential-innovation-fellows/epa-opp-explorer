@@ -7,7 +7,7 @@ function fetch_documents(admin_num) {
  	docArray = []; //when fetching docs this way, there are duplicates. So we keep track in array...
 	var url = "<%= ENV['DOCUMENTUM_PROD_URL'] %>" + ".json";
 
-	$("#document_library").css("display","block"); //show product header  
+	//$("#document_library").css("display","block"); //show product header  
   	$("#document_library").append("<div class='loading'>Loading Document Library...</div>");
 
 	//var dql_string_1 = "select r_object_id,object_name,title,r_creator_name,r_object_type from opp_study WHERE r_object_type='opp_study' and ANY mrid in ('" + mrid_value + "')";
@@ -71,15 +71,17 @@ function loadTiles(data,doc_type) {
 	    var li = document.createElement("li");
 	    $(li).addClass("doc_list_item");
 
-		var div = $("<div class='doc_type'>" + value.content.properties["r_object_type"] + "</div>");
-	   	$(li).append(div);
+	    var div = $("<div class='doc_rec_date'>" + oracleDate(value.content.properties["r_creation_date"]) + ": <div class='doc_type'>" + value.content.properties["r_object_type"] +"</div></div>");
+	   	$(li).append(div);	   	
+
+		//div = $("<div class='doc_type'>" + value.content.properties["r_object_type"] + "</div>");
+	   	//$(li).append(div);
 
 	    div = $("<div class='doc_name'>" + value.content.properties["object_name"] + "</div>");
 	   	$(li).append(div);
 
 	    
-	    //div = $("<div class='reg_num'>Reg #:" + value.content.properties["admin_num"] + "</div>");
-	   	//$(li).append(div);
+
 
 	    //div = $("<div class='minor_text'>Object ID:" + value.content.properties["r_object_id"] + "</div>");
 	   	//$(li).append(div);	   	

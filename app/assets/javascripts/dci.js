@@ -14,7 +14,7 @@ function fetch_dci(cuid) {//gets data and sets up page for each ingredient
 	  url: url,
       crossDomain: true,
       beforeSend: function(xhr) {
-      	$("#reg_review").css("display","block");
+      	//$("#reg_review").css("display","block");
       	$("#reg_review").append("<div class='loading'>Loading Registration Review Activity...</div>");
 
 

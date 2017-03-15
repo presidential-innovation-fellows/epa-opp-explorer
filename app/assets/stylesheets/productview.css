@@ -114,3 +114,44 @@ div.loading {
 	font-style: italic;
 	color: #55aa55 !important;
 }
+
+/* sub menu */
+
+#sub_menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#sub_menu li {
+	display: inline;
+	margin-right: 20px;
+
+}
+
+#sub_menu li a {
+	color: #cccccc;
+	font-size: 14pt;	
+}
+
+#sub_menu .sub_selected {
+	font-weight: bold;
+	color: #79a7f2;
+}
+/* sections */
+
+#reg_review {
+	display: none;
+}
+
+#document_library {
+	display: none;
+}
+
+#past_decisions {
+	display: none;
+}
+
+#sub_menu {
+	margin-top: 20px;
+}
