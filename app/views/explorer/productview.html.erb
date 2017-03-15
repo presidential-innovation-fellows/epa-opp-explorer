@@ -56,14 +56,14 @@
             $(anchor).addClass("sub_selected");
             switch(subSection) {
                 case "sublnk_documents":
-                    $("#document_library").show();
+                    $("#document_library").show(400);
 
                     break;
                 case "sublnk_rr":
-                    $("#reg_review").show();
+                    $("#reg_review").show(400);
                     break;
                 case "sublnk_past_decisions":
-                    $("#past_decisions").show();
+                    $("#past_decisions").show(400);
                     break;
 
                 default:
@@ -185,6 +185,8 @@
 
      </section>
 
+
+  <section id="sub_menu_sections">
      <section id="sub_menu">
         <div class="row">
             <div class="col-md-12">
@@ -220,6 +222,11 @@
         <div class="row document-list-div">
             <div class="col-md-4">
                 <div class="document_pane">
+                <div>
+                
+                    <a class="filter-tag" href="javascript:" data-filter="all">All</a>
+                    <a class="filter-tag filter-tag-selected" href="javascript:" data-filter="studies">Studies</a>
+                </div>
                     <ul id="document_list">
 
                     </ul>
@@ -260,7 +267,7 @@
          </div>
 
      </section>     
-
+</section>
     </div><!-- container -->
 
 </body>

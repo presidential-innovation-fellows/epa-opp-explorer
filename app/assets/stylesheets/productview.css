@@ -155,3 +155,7 @@ div.loading {
 #sub_menu {
 	margin-top: 20px;
 }
+
+#sub_menu_sections {
+	height: 800px;
+}
