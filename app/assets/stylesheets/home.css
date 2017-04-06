@@ -180,16 +180,6 @@ body {
 }
 
 
-
-
-
-
-
-
-
-
-
-
 #home_other {
 	background: #aaaaff;
 	padding-top: 10px;
@@ -220,7 +210,9 @@ body {
 	font-size: 12pt;
 }
 
-/* current work */
+
+
+/* current work page*/
 
 #currentwork{
 	line-height: 160%;
@@ -231,8 +223,8 @@ body {
 	padding-bottom: 35px;
 }
 
- h1 {
-	color: #ffffff;
+#currentwork  h1 {
+	color: #000000;
 }
 
 .sketch_pic {
@@ -272,4 +264,59 @@ body {
 
 #work_stream_1 h2 {
 	color: #ffffff;
+}
+
+/* How its being built page */
+
+#methods {
+	font-size: 14pt;
+}
+
+#methods_head {
+	padding-top: 35px;
+	padding-bottom: 35px;
+}
+
+#methods_overview .row {
+	background: rgb(160,209,93);	
+	padding-top: 35px;
+	padding-bottom: 35px;	
+
+}
+
+.method_box {
+	width: 300px;
+	min-height: 60px;
+	padding: 10px;
+	color: #ffffff;
+	margin-bottom: 10px;
+}
+
+.method_title {
+	font-size: 16pt;
+	margin-bottom: 10px;
+}
+
+.method_text {
+	font-size: 12pt;
+}
+
+.looking {
+	background: rgb(65,147,227);
+}
+
+.understanding {
+	background: rgb(247,130,83);
+}
+
+.making {
+	background: rgb(255,255,255);
+	color: #545454;
+}
+
+#methods_examples .row {
+	background: rgb(247,130,83);	
+	padding-top: 35px;
+	padding-bottom: 35px;	
+
 }
