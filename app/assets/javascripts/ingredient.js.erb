@@ -23,7 +23,7 @@ function fetch_ingredient(ing_id, ing_key_name) {
       if(data.data[0]){
           fetch_decisions({
           "cuid" : data.data[0].cuid,
-          "tables" : ["#current_decision .decision_table"]
+          "tables" : ["#ingredient_decision .decision_table"]
           }); 
         ing_summary_data = data.data[0];//1. store results of /ingredient API call in a global variable
         displayIngredientSummary(); 

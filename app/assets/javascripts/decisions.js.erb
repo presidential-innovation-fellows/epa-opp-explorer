@@ -45,6 +45,9 @@ function fetch_decisions(searchOptions){
 	      	$("#my_decisions").append("<div class='loading'>Loading Current Decisions...</div>");     		
       	}
     	
+      	if(searchOptions.cuid){//its being invoked from ingredient page
+      		$(searchOptions.tables).empty();
+      		$("#ingredient_decision").append("<div class='loading'>Loading Decisions...</div>");      	}
 
 
       },
@@ -56,6 +59,10 @@ function fetch_decisions(searchOptions){
 
       	if(searchOptions.sm_uid){//its being invoked from myWork page
 	      	$("#my_decisions .loading").remove();     		
+      	}		
+
+      	if(searchOptions.cuid){//its being invoked from myWork page
+	      	$("#ingredient_decision .loading").remove();     		
       	}		
     	
 		decisions_data = data;
@@ -241,8 +248,10 @@ function decisionGraph(detailPane, decision){
 		var subStartX = getDateX(totalDays, ffsStartDt, subStartDate); 	
 		var subEndX = getDateX(totalDays, ffsStartDt, subEndDate);		
 		var subWidth = subEndX - subStartX; 
+		var itemDesc = item.irec_desc || "(empty)";
 
-		var submissionLine = $("<div class='submission_line'>" + item.subt_desc + " - Sub #: " + item.irec_seq + " - " + item.irec_desc.substring(0,25) + "</div>").css("left",subStartX).css("width",subWidth);		
+		console.log ('itemDesc: ' + itemDesc);
+		var submissionLine = $("<div class='submission_line'>" + item.subt_desc + " - Sub #: " + item.irec_seq + " - " + itemDesc + "</div>").css("left",subStartX).css("width",subWidth);		
 			//BW 3-18-17 $(graphContainer).append(submissionLine);
 
 		//Do data packages
