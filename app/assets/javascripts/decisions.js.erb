@@ -137,19 +137,22 @@ function displayDecision(tDecisions, filterText, tTbl,searchOptions){
 	    case "mywork":
 
  				$("#my_decisions").css("display","inline-block");
- 				buildDecisionRow();
+ 				buildDecisionRow(filterText);
 
 	        break;	                
 	    default:
 	        return;
 	    }
 
-	    function buildDecisionRow(){
+	    function buildDecisionRow(pFilterText){
 
 	    	var row = null;
 
-		    var detailPane = $("<tr><td colspan='8' class='detail_pane'><table class='receipt_table'></table></td></tr>");
-		    if (index == 0){
+		    var detailPane = $("<tr><td colspan='8' class='detail_pane'><table class='receipt_table'></table></td></tr>");		
+		    //TODO
+		    
+		    //Decision Table Headers
+		    if (index == 0){//if its the first decision, create header row
 			        row = "<tr class='headrow'><th>Dec#</th><th>Action</th><th>Status</th><th>Division</th><th>Person</th><th>FFS Start</th><th>Due Date</th><th></th></tr>"
 			    $(tTbl).append(row);
 		    }
@@ -179,7 +182,7 @@ function displayDecision(tDecisions, filterText, tTbl,searchOptions){
 		    }
 		    else {//for product view or ingredient view
 		    	$(row).attr("onclick","javascript: showDetail(this);");
-		    }
+		    }	
 
 		    $(tTbl).append(row);
 		    $(tTbl).append(detailPane);
@@ -205,6 +208,12 @@ function displayDecision(tDecisions, filterText, tTbl,searchOptions){
 		var pRow = $("<tr><td colspan='7'>Page " +  tDecisions.page + " <a class='pagination_link' id='next_page' onclick='javascript: loadPage(" + (parseInt(tDecisions.page) + 1) + ")'>Next Page</a><a class='pagination_link' id='prev_page' onclick='javascript: loadPage(" + (parseInt(tDecisions.page) - 1) + ")'>Previous Page</a></td></tr>");  	
 
 	  	$(tTbl).append(pRow);
+	}
+
+	if (filterText == "mywork"){
+		$('.decision_row td:nth-child(4)').hide(); $('.headrow th:nth-child(4)').hide();
+		$('.decision_row td:nth-child(5)').hide(); $('.headrow th:nth-child(5)').hide();
+		$('.decision_row td:nth-child(6)').hide(); $('.headrow th:nth-child(6)').hide();		 		
 	}
 } 
 
