@@ -26,7 +26,8 @@ class ExplorerController < ApplicationController
 
 	def mywork
 
-
+		puts "HEEEEELLLLLOOOOO"
+		puts ENV["OPP_API_URL"]
 	end
 
 	def sites

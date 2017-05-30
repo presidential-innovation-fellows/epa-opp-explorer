@@ -7,7 +7,7 @@ dci_data = []; //the DCI data returned from API
 function fetch_dci(cuid) {//gets data and sets up page for each ingredient
 
 	
-	var url = api_url + ":3000/dci/" + cuid;
+	var url = api_url + "/dci/" + cuid;
 
 	$.ajax({
 	  type: "get",

@@ -22,7 +22,7 @@ function contactDialog(anchor) {
 	//3. fetch the person's contact information
 	$.ajax({
 	  type: "get",
-	  url: api_url + ":3000/people/",
+	  url: api_url + "/people/",
       crossDomain: true,
       //data: {"first": $(anchor).text().split(" ")[0],"last":$(anchor).text().split(" ")[1]},
 	  data: {"sm_uid": $(anchor).attr("data-sm_uid")},      
